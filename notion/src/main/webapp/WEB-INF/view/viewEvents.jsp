@@ -82,7 +82,7 @@
 						<div class="col-12">
 							<div class="box">
 								<div class="box-header">
-									<h4 class="box-title">List of Events</h4>
+									<h4 class="box-title">List of Technical Events</h4>
 								</div>
 								<div class="box-body">
 									<div class="table-responsive">
@@ -97,24 +97,24 @@
 												<tr>
 													<th>Name</th>
 													<th>Description</th>
-													<th>Type</th>
 													<th>Branch</th>
 													<th>Participation</th>
+													<th>Price</th>
 													<th>Edit</th>
 													<th>Status</th>
 													<th>Delete</th>
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${eventsList}" var="i">
+												<c:forEach items="${techeventslist}" var="i">
 													<tr>
 														<td>${i.eventName}</td>
 														<td>${i.eventDescription}</td>
-														<td>${i.eventType}</td>
 														<td>${i.eventBranch}</td>
 														<td>${i.participationType}</td>
+														<td>${i.eventPrice}</td>
 														<td><a href="editEvent?editEventId=${i.eventId}"><input type="button" class="btn btn-primary" value="Edit"/></a></td>
-														<td><a href="changeEventStatus?changeEventStatusId=${i.eventId}"><input type="button" class="btn btn-warning" value="Deactivate"/></a></td>
+														<td><a href="changeEventStatus?changeEventStatusId=${i.eventId}&eventStatus=active"><input type="button" class="btn btn-warning" value="Deactivate"/></a></td>
 														<td><a href="deleteEvent?deleteEventId=${i.eventId}"><input type="button" class="btn btn-danger" value="Delete" /></a></td>
 													</tr>
 												</c:forEach>
@@ -123,9 +123,9 @@
 												<tr>
 													<th>Name</th>
 													<th>Description</th>
-													<th>Type</th>
 													<th>Branch</th>
 													<th>Participation</th>
+													<th>Price</th>
 													<th>Edit</th>
 													<th>Status</th>
 													<th>Delete</th>
@@ -136,9 +136,126 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="col-12">
+							<div class="box">
+								<div class="box-header">
+									<h4 class="box-title">List of Non-Technical Events</h4>
+								</div>
+								<div class="box-body">
+									<div class="table-responsive">
+										<table id="example1"
+											class="table table-bordered table-hover display nowrap margin-top-10 w-p100"
+											style="width: 100%">
+											<thead>
+												<tr>
+													<th colspan="5">Information</th>
+													<th colspan="3">Action</th>
+												</tr>
+												<tr>
+													<th>Name</th>
+													<th>Description</th>
+													<th>Branch</th>
+													<th>Participation</th>
+													<th>Price</th>
+													<th>Edit</th>
+													<th>Status</th>
+													<th>Delete</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach items="${nontecheventslist}" var="i">
+													<tr>
+														<td>${i.eventName}</td>
+														<td>${i.eventDescription}</td>
+														<td>${i.eventBranch}</td>
+														<td>${i.participationType}</td>
+														<td>${i.eventPrice}</td>
+														<td><a href="editEvent?editEventId=${i.eventId}"><input type="button" class="btn btn-primary" value="Edit"/></a></td>
+														<td><a href="changeEventStatus?changeEventStatusId=${i.eventId}&eventStatus=active"><input type="button" class="btn btn-warning" value="Deactivate"/></a></td>
+														<td><a href="deleteEvent?deleteEventId=${i.eventId}"><input type="button" class="btn btn-danger" value="Delete" /></a></td>
+													</tr>
+												</c:forEach>
+											</tbody>
+											<tfoot>
+												<tr>
+													<th>Name</th>
+													<th>Description</th>
+													<th>Branch</th>
+													<th>Participation</th>
+													<th>Price</th>
+													<th>Edit</th>
+													<th>Status</th>
+													<th>Delete</th>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12">
+							<div class="box">
+								<div class="box-header">
+									<h4 class="box-title">List of Inactive Events</h4>
+								</div>
+								<div class="box-body">
+									<div class="table-responsive">
+										<table id="example3"
+											class="table table-bordered table-hover display nowrap margin-top-10 w-p100"
+											style="width: 100%">
+											<thead>
+												<tr>
+													<th colspan="5">Information</th>
+													<th colspan="3">Action</th>
+												</tr>
+												<tr>
+													<th>Name</th>
+													<th>Description</th>
+													<th>Branch</th>
+													<th>Participation</th>
+													<th>Price</th>
+													<th>Edit</th>
+													<th>Status</th>
+													<th>Delete</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach items="${inactiveeventslist}" var="i">
+													<tr>
+														<td>${i.eventName}</td>
+														<td>${i.eventDescription}</td>
+														<td>${i.eventBranch}</td>
+														<td>${i.participationType}</td>
+														<td>${i.eventPrice}</td>
+														<td><a href="editEvent?editEventId=${i.eventId}"><input type="button" class="btn btn-primary" value="Edit"/></a></td>
+														<td><a href="changeEventStatus?changeEventStatusId=${i.eventId}&eventStatus=inactive"><input type="button" class="btn btn-success" value="Activate"/></a></td>
+														<td><a href="deleteEvent?deleteEventId=${i.eventId}"><input type="button" class="btn btn-danger" value="Delete" /></a></td>
+													</tr>
+												</c:forEach>
+											</tbody>
+											<tfoot>
+												<tr>
+													<th>Name</th>
+													<th>Description</th>
+													<th>Branch</th>
+													<th>Participation</th>
+													<th>Price</th>
+													<th>Edit</th>
+													<th>Status</th>
+													<th>Delete</th>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+												
 					</div>
 					<!-- /.row -->
-				</section>
+				</section>				
 				<!-- /.content -->
 
 			</div>

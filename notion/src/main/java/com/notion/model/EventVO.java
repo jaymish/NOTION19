@@ -33,6 +33,9 @@ public class EventVO {
 	private int teamMax;
 	
 	@Column
+	private int eventPrice;
+	
+	@Column
 	private String status;
 
 	public int getEventId() {
@@ -97,6 +100,14 @@ public class EventVO {
 
 	public void setTeamMax(int teamMax) {
 		this.teamMax = teamMax;
+	}
+
+	public int getEventPrice() {
+		return eventPrice;
+	}
+
+	public void setEventPrice(int eventPrice) {
+		this.eventPrice = eventPrice;
 	}
 
 	public String getStatus() {

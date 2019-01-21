@@ -25,4 +25,25 @@ public class EventService {
 		List<EventVO> viewEventLs=eventDAO.viewEvents();
 		return viewEventLs;
 	}
+	
+	@Transactional
+	public List<EventVO> editEvent(EventVO eventVO1){
+		List<EventVO> editEventLs=eventDAO.editEvent(eventVO1);
+		return editEventLs;
+	}
+	
+	@Transactional
+	public void updateEvent(EventVO eventVO2){
+		eventDAO.updateEvent(eventVO2);
+	}
+	
+	@Transactional
+	public void changeEventStatus(EventVO eventVO3){
+		eventDAO.changeEventStatus(eventVO3);
+	}
+	
+	@Transactional
+	public void deleteEvent(EventVO eventVO4){
+		eventDAO.deleteEvent(eventVO4);
+	}
 }

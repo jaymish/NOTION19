@@ -12,7 +12,7 @@
 <meta name="author" content="">
 <!-- <link rel="icon" href="adminResources/images/favicon.ico"> -->
 
-<title>Notion - Add Event</title>
+<title>Notion - Edit Event</title>
 
 <!-- Bootstrap 4.0-->
 <link rel="stylesheet" href="adminResources/css/bootstrap.css">
@@ -82,7 +82,7 @@
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="index.jsp"><i
 												class="mdi mdi-home-outline"></i></a></li>
-										<li class="breadcrumb-item" aria-current="page">Event</li>
+										<li class="breadcrumb-item" aria-current="page">Edit Event</li>
 										<li class="breadcrumb-item active" aria-current="page">Enter
 											Details</li>
 									</ol>
@@ -105,8 +105,10 @@
 						<div class="box-body">
 							<div class="row">
 								<div class="col">
-									<form:form novalidate="novalidate" action="insertEvent"
-										modelAttribute="addEventData" method="POST">
+									<form:form novalidate="novalidate" action="updateEvent"
+										modelAttribute="editEventData" method="POST">
+										<form:hidden path="eventId"/>
+										<form:hidden path="status"/>
 										<div class="row">
 											<div class="col-12">
 												<div class="form-group">
@@ -212,7 +214,7 @@
 											</div>
 										</div>
 										<div class="text-xs-right">
-											<button type="submit" class="btn btn-info">Submit</button>
+											<button type="submit" class="btn btn-info">Update</button>
 											<button type="reset" class="btn btn-info">Reset</button>
 										</div>
 									</form:form>
