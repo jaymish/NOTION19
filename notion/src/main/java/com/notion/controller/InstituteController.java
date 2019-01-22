@@ -36,4 +36,27 @@ public class InstituteController {
 		List<InstituteVO> viewInstituteList=this.instituteService.viewInstitutes();
 		return new ModelAndView("viewInstitutes","viewinstitutelist",viewInstituteList);
 	}
+	
+	@RequestMapping(value="/editInstitute",method=RequestMethod.GET)
+	public ModelAndView loadeditInstitute(@RequestParam("editInstituteId") int editInstituteId,InstituteVO instituteVO1)
+	{
+		instituteVO1.setInstituteId(editInstituteId);
+		List<InstituteVO> editInstituteList=this.instituteService.editInstitute(instituteVO1);
+		return new ModelAndView("editInstitute","editInstituteData",editInstituteList.get(0));
+	}
+	
+	@RequestMapping(value="/updateInstitute",method=RequestMethod.POST)
+	public ModelAndView updateInstitute(@ModelAttribute("editInstituteData") InstituteVO instituteVO2)
+	{
+		this.instituteService.updateInstitute(instituteVO2);
+		return new ModelAndView("redirect:/viewInstitutes");
+	}
+	
+	@RequestMapping(value="/deleteInstitute",method=RequestMethod.GET)
+	public ModelAndView deleteInstitute(@RequestParam("deleteInstituteId") int deleteInstituteId,InstituteVO instituteVO3)
+	{
+		instituteVO3.setInstituteId(deleteInstituteId);
+		this.instituteService.deleteInstitute(instituteVO3);
+		return new ModelAndView("redirect:/viewInstitutes");
+	}
 }

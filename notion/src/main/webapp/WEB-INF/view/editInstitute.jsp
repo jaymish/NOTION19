@@ -11,7 +11,7 @@
 <meta name="author" content="">
 <!-- <link rel="icon" href="adminResources/images/favicon.ico"> -->
 
-<title>Notion Admin - Add Institute</title>
+<title>Notion Admin - Edit Institute</title>
 
 <!-- Bootstrap 4.0-->
 <link rel="stylesheet" href="adminResources/css/bootstrap.css">
@@ -54,13 +54,13 @@
 				<div class="content-header">
 					<div class="d-flex align-items-center">
 						<div class="mr-auto">
-							<h3 class="page-title">Add Institute</h3>
+							<h3 class="page-title">Edit Institute</h3>
 							<div class="d-inline-block align-items-center">
 								<nav>
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
 										<li class="breadcrumb-item" aria-current="page">Institute</li>
-										<li class="breadcrumb-item active" aria-current="page">Add Institute</li>
+										<li class="breadcrumb-item active" aria-current="page">Edit Institute</li>
 									</ol>
 								</nav>
 							</div>
@@ -81,13 +81,13 @@
 						<div class="box-body">
 							<div class="row">
 								<div class="col">
-									<form:form novalidate="novalidate" action="insertInstitute" method="post" modelAttribute="addInstituteData">
+									<form:form novalidate="novalidate" action="updateInstitute" method="post" modelAttribute="editInstituteData">
 										<div class="row">
 											<div class="col-12">
 												<div class="form-group">
 													<h5>Enter Institute Name <span class="text-danger">*</span></h5>
 													<div class="controls">
-														<form:input type="text" name="text" path="instituteName" class="form-control" placeholder="Institute Name" required="required" data-validation-required-message="This field is required" /> 
+														<form:input type="text" name="text" path="instituteName" class="form-control" placeholder="State Name" required="required" data-validation-required-message="This field is required" /> 
 													</div>
 												</div>
 												<div class="form-group">
@@ -98,8 +98,9 @@
 												</div>
 											</div>
 										</div>
+										<form:hidden path="instituteId"/>
 										<div class="text-xs-right">
-											<button type="submit" class="btn btn-info">Submit</button>
+											<button type="submit" class="btn btn-info">Update</button>
 					  					</div>
 									</form:form>
 								</div>
