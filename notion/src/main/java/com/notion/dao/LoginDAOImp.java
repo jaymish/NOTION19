@@ -1,5 +1,9 @@
 package com.notion.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,22 +18,45 @@ public class LoginDAOImp implements LoginDAO{
 	SessionFactory sessionFactory;
 	
 	public void insertToLogin(LoginVO loginVO)
+	{
+		try
+			{
+				 Session session=sessionFactory.openSession();
+				 
+				 Transaction transaction=session.beginTransaction();
+				 
+				 session.save(loginVO);
+				 
+				 transaction.commit();
+				 
+				 session.close();
+			}
+		catch(Exception ex)
+			{
+				ex.printStackTrace();
+			} 
+	}
+	public List<LoginVO> checkUser(LoginVO loginVO)
+	{
+		List<LoginVO> ls=new ArrayList<LoginVO>();
+		try
 		{
-			try
-				{
-					 Session session=sessionFactory.openSession();
-					 
-					 Transaction transaction=session.beginTransaction();
-					 
-					 session.save(loginVO);
-					 
-					 transaction.commit();
-					 
-					 session.close();
-				}
-			catch(Exception ex)
-				{
-					ex.printStackTrace();
-				} 
+			Session session=sessionFactory.openSession();
+			 
+			 Transaction transaction=session.beginTransaction();
+			 
+			 Query q=session.createQuery("from LoginVO where username='"+loginVO.getUsername()+"'");
+			 
+			 ls=q.list();
+			 
+			 transaction.commit();
+			 
+			 session.close();
 		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return ls;
+	}
 }

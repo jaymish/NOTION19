@@ -1,5 +1,7 @@
 package com.notion.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +18,11 @@ public class LoginService {
 	@Transactional
 	public void insertToLogin(LoginVO loginVO){
 		this.loginDAO.insertToLogin(loginVO);
+	}
+	
+	@Transactional
+	public List<LoginVO> checkUser(LoginVO loginVO){
+		List<LoginVO> checkUserList=this.loginDAO.checkUser(loginVO);
+		return checkUserList;
 	}
 }

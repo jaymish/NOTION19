@@ -55,6 +55,31 @@
 					subbtn.disabled=true
 				}
 		}
+		function checkusername(){
+			var username=document.getElementById("email")
+			var msg=document.getElementById("checkusername")
+			var htp=new XMLHttpRequest();
+			htp.onreadystatechange=function()
+			{
+				if(htp.readyState==4)
+				{
+					var x=htp.responseText
+					var check=x.trim()
+					if(check=="Username already exist")
+						{
+							msg.style.display=""
+							username.value=""
+							username.focus()
+						}
+					else
+						{
+							msg.style.display="none"
+						}
+				}
+			}
+			htp.open("POST","checkUser?username="+username.value,true)
+			htp.send();
+		}
 	</script>
 
 </head>
@@ -83,8 +108,9 @@
 							<span class="ion ion-person form-control-feedback "></span>
 					</div>
 					<div class="form-group has-feedback controls">
-						<form:input type="email" name="email" class="form-control" path="loginVO.username" placeholder="Email" required="required" data-validation-required-message="This field is required"/>
+						<form:input type="email" name="email" id="email" class="form-control" onblur="checkusername()" path="loginVO.username" placeholder="Email" required="required" data-validation-required-message="This field is required"/>
 						<span class="ion ion-email form-control-feedback "></span>
+						<span style="display:none; color:red" id="checkusername">Username Already Exist!!</span>
 					</div>
 					<div class="form-group has-feedback controls">
 						<form:input type="password" name="password" class="form-control" path="loginVO.password" id="pass" placeholder="Password" required="required" data-validation-required-message="This field is required"/>
@@ -94,7 +120,7 @@
 						<input type="password" name="password2" class="form-control" id="pass2" onkeyup="validatedata()"
 							placeholder="Retype password" required="required" data-validation-match-match="password" /> 
 							<span class="ion ion-log-in form-control-feedback "></span>
-							<span style="display:none;font-color:red" id="passmatch">Password doesn't match!!</span>
+							<span style="display:none; color:red" id="passmatch">Password doesn't match!!</span>
 					</div>
 					<div class="row">
 						<div class="col-12">
