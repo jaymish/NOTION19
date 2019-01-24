@@ -9,21 +9,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<!-- <link rel="icon" href="adminResources/images/favicon.ico"> -->
+<!-- <link rel="icon" href="../adminResources/images/favicon.ico"> -->
 
 <title>Notion Admin - Add Institute</title>
 
 <!-- Bootstrap 4.0-->
-<link rel="stylesheet" href="adminResources/css/bootstrap.css">
+<link rel="stylesheet" href="../adminResources/css/bootstrap.css">
 
 <!-- Bootstrap extend-->
-<link rel="stylesheet" href="adminResources/css/bootstrap-extend.css">
+<link rel="stylesheet" href="../adminResources/css/bootstrap-extend.css">
 
 <!-- theme style -->
-<link rel="stylesheet" href="adminResources/css/master_style.css">
+<link rel="stylesheet" href="../adminResources/css/master_style.css">
 
 <!-- UltimatePro Admin skins -->
-<link rel="stylesheet" href="adminResources/css/_all-skins.css">
+<link rel="stylesheet" href="../adminResources/css/_all-skins.css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,7 +44,7 @@
 		<aside class="main-sidebar">
 			<!-- sidebar-->
 			<section class="sidebar">
-				<jsp:include page="menu.jsp" />
+				<jsp:include page="adminMenu.jsp" />
 			</section>
 		</aside>
 
@@ -58,7 +58,7 @@
 							<div class="d-inline-block align-items-center">
 								<nav>
 									<ol class="breadcrumb">
-										<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
+										<li class="breadcrumb-item"><a href="Dashboard"><i class="mdi mdi-home-outline"></i></a></li>
 										<li class="breadcrumb-item" aria-current="page">Institute</li>
 										<li class="breadcrumb-item active" aria-current="page">Add Institute</li>
 									</ol>
@@ -116,29 +116,29 @@
 	<!-- ./wrapper -->
 
 	<!-- jQuery 3 -->
-	<script src="adminResources/js/jquery-3.3.1.js"></script>
+	<script src="../adminResources/js/jquery-3.3.1.js"></script>
 
 	<!-- popper -->
-	<script src="adminResources/js/popper.min.js"></script>
+	<script src="../adminResources/js/popper.min.js"></script>
 
 	<!-- Bootstrap 4.0-->
-	<script src="adminResources/js/bootstrap.js"></script>
+	<script src="../adminResources/js/bootstrap.js"></script>
 
 	<!-- Slimscroll -->
-	<script src="adminResources/js/jquery.slimscroll.js"></script>
+	<script src="../adminResources/js/jquery.slimscroll.js"></script>
 
 	<!-- FastClick -->
-	<script src="adminResources/js/fastclick.js"></script>
+	<script src="../adminResources/js/fastclick.js"></script>
 
 	<!-- UltimatePro Admin App -->
-	<script src="adminResources/js/template.js"></script>
+	<script src="../adminResources/js/template.js"></script>
 
 	<!-- UltimatePro Admin for demo purposes -->
-	<script src="adminResources/js/demo.js"></script>
+	<script src="../adminResources/js/demo.js"></script>
 
 	<!-- Form validator JavaScript -->
-	<script src="adminResources/js/validation.js"></script>
-	<script src="adminResources/js/form-validation.js"></script>
+	<script src="../adminResources/js/validation.js"></script>
+	<script src="../adminResources/js/form-validation.js"></script>
 
 </body>
 </html>

@@ -2,7 +2,7 @@
 <ul class="sidebar-menu" data-widget="tree">
 	<li class="header nav-small-cap">MENU</li>
 	<li>
-		<a href="index.html">
+		<a href="Dashboard">
 			<i class="ti-home"></i>
 			<span>Home</span> 
 		</a>

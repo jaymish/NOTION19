@@ -23,13 +23,4 @@ public class RegController {
 	{
 		return new ModelAndView("signup","regData",new RegVO());
 	}
-	
-	@RequestMapping(value="insertRegData",method=RequestMethod.POST)
-	public ModelAndView insertRegData(@ModelAttribute RegVO regVO)
-	{
-		this.loginService.insertToLogin(regVO.getLoginVO());
-		this.regService.insertToRegister(regVO);
-		
-		return new ModelAndView("redirect:/login");
-	}
 }

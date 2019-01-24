@@ -8,4 +8,4 @@
 		  </li>
 		</ul> -->
     </div>
-	  &copy; 2018 <a href="https://www.multipurposethemes.com/">Notion Admin</a>. All Rights Reserved.
+	  &copy; 2019 <a href="Dashboard">Notion Admin</a>. All Rights Reserved.

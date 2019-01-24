@@ -9,25 +9,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<!-- <link rel="icon" href="adminResources/images/favicon.ico"> -->
+<!-- <link rel="icon" href="../adminResources/images/favicon.ico"> -->
 
 <title>Notion Admin - View Events</title>
 
 <!-- Bootstrap 4.0-->
-<link rel="stylesheet" href="adminResources/css/bootstrap.css">
+<link rel="stylesheet" href="../adminResources/css/bootstrap.css">
 
 <!-- Bootstrap extend-->
-<link rel="stylesheet" href="adminResources/css/bootstrap-extend.css">
+<link rel="stylesheet" href="../adminResources/css/bootstrap-extend.css">
 
 <!-- theme style -->
-<link rel="stylesheet" href="adminResources/css/master_style.css">
+<link rel="stylesheet" href="../adminResources/css/master_style.css">
 
 <!-- UltimatePro Admin skins -->
-<link rel="stylesheet" href="adminResources/css/_all-skins.css">
+<link rel="stylesheet" href="../adminResources/css/_all-skins.css">
 
 <!-- Data Table-->
-<link rel="stylesheet" type="text/css"
-	href="adminResources/datatables.min.css" />
+<link rel="stylesheet" type="text/css" href="../adminResources/datatables.min.css" />
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -49,7 +48,7 @@
 		<aside class="main-sidebar">
 			<!-- sidebar-->
 			<section class="sidebar">
-				<jsp:include page="menu.jsp" />
+				<jsp:include page="adminMenu.jsp" />
 			</section>
 		</aside>
 
@@ -270,31 +269,31 @@
 	<!-- ./wrapper -->
 
 	<!-- jQuery 3 -->
-	<script src="adminResources/js/jquery-3.3.1.js"></script>
+	<script src="../adminResources/js/jquery-3.3.1.js"></script>
 
 	<!-- popper -->
-	<script src="adminResources/js/popper.min.js"></script>
+	<script src="../adminResources/js/popper.min.js"></script>
 
 	<!-- Bootstrap 4.0-->
-	<script src="adminResources/js/bootstrap.js"></script>
+	<script src="../adminResources/js/bootstrap.js"></script>
 
 	<!-- Slimscroll -->
-	<script src="adminResources/js/jquery.slimscroll.js"></script>
+	<script src="../adminResources/js/jquery.slimscroll.js"></script>
 
 	<!-- FastClick -->
-	<script src="adminResources/js/fastclick.js"></script>
+	<script src="../adminResources/js/fastclick.js"></script>
 
 	<!-- UltimatePro Admin App -->
-	<script src="adminResources/js/template.js"></script>
+	<script src="../adminResources/js/template.js"></script>
 
 	<!-- UltimatePro Admin for demo purposes -->
-	<script src="adminResources/js/demo.js"></script>
+	<script src="../adminResources/js/demo.js"></script>
 
 	<!-- This is data table -->
-	<script src="adminResources/js/datatables.min.js"></script>
+	<script src="../adminResources/js/datatables.min.js"></script>
 
 	<!-- UltimatePro Admin for Data Table -->
-	<script src="adminResources/js/data-table.js"></script>
+	<script src="../adminResources/js/data-table.js"></script>
 
 
 </body>

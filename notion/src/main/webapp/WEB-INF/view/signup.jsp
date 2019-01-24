@@ -65,7 +65,7 @@
 				{
 					var x=htp.responseText
 					var check=x.trim()
-					if(check=="Username already exist")
+					if(check=="false")
 						{
 							msg.style.display=""
 							username.value=""
@@ -90,7 +90,7 @@
 	<div class="auth-2-outer row align-items-center h-p100 m-0">
 		<div class="auth-2">
 			<div class="auth-logo font-size-30">
-				<a href="../index.html" class="text-dark"><b>Notion</b>Admin</a>
+				<a href="../index.html" class="text-dark"><b>Notion</b>2k19</a>
 			</div>
 			<!-- /.login-logo -->
 			<div class="auth-body">

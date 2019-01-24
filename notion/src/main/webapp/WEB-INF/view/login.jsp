@@ -39,19 +39,19 @@
 	<div class="auth-2-outer row align-items-center h-p100 m-0">
 		<div class="auth-2">
 			<div class="auth-logo font-size-30">
-				<a href="#" class="text-dark"><b>NOTION</b>Admin</a>
+				<a href="#" class="text-dark"><b>NOTION</b>2k19</a>
 			</div>
 			<!-- /.login-logo -->
 			<div class="auth-body">
-				<p class="auth-msg">Sign in to start your session</p>
+				<p class="auth-msg">Sign In to Register for Events</p>
 
-				<form action="loadHome.html" method="post" class="form-element">
+				<form action="j_spring_security_check" method="post" class="form-element">
 					<div class="form-group has-feedback">
-						<input type="email" class="form-control" placeholder="Email">
+						<input type="email" name="username" class="form-control" placeholder="Email">
 						<span class="ion ion-email form-control-feedback"></span>
 					</div>
 					<div class="form-group has-feedback">
-						<input type="password" class="form-control" placeholder="Password">
+						<input type="password" name="password" class="form-control" placeholder="Password">
 						<span class="ion ion-locked form-control-feedback"></span>
 					</div>
 					<div class="row">

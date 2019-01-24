@@ -22,21 +22,21 @@ public class EventController {
 	@Autowired
 	EventService eventService;
 	
-	@RequestMapping(value="/addEvent",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/addEvent",method=RequestMethod.GET)
 	public ModelAndView loadAddEvent()
 	{
-		return new ModelAndView("addEvent","addEventData",new EventVO());
+		return new ModelAndView("admin/addEvent","addEventData",new EventVO());
 	}
 	
-	@RequestMapping(value="/insertEvent",method=RequestMethod.POST)
+	@RequestMapping(value="/admin/insertEvent",method=RequestMethod.POST)
 	public ModelAndView insertEvent(EventVO eventVO)
 	{
 		eventVO.setStatus("active");
 		this.eventService.insertEvent(eventVO);
-		return new ModelAndView("redirect:viewEvents");
+		return new ModelAndView("redirect:/admin/viewEvents");
 	}
 	
-	@RequestMapping(value="/viewEvents",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/viewEvents",method=RequestMethod.GET)
 	public ModelAndView loadviewEvents()
 	{
 		List<EventVO> viewEventsList=this.eventService.viewEvents();
@@ -61,25 +61,25 @@ public class EventController {
 				inactiveEventsList.add(eventLS);
 			}
 		}
-		return new ModelAndView("viewEvents","techeventslist",techEventsList).addObject("nontecheventslist", nontechEventsList).addObject("inactiveeventslist",inactiveEventsList);
+		return new ModelAndView("admin/viewEvents","techeventslist",techEventsList).addObject("nontecheventslist", nontechEventsList).addObject("inactiveeventslist",inactiveEventsList);
 	}
 	
-	@RequestMapping(value="/editEvent",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/editEvent",method=RequestMethod.GET)
 	public ModelAndView loadeditEvent(@RequestParam("editEventId") int editEventId,EventVO eventVO1)
 	{
 		eventVO1.setEventId(editEventId);
 		List<EventVO> editEventList=this.eventService.editEvent(eventVO1);
-		return new ModelAndView("editEvent","editEventData",editEventList.get(0));
+		return new ModelAndView("admin/editEvent","editEventData",editEventList.get(0));
 	}
 	
-	@RequestMapping(value="/updateEvent",method=RequestMethod.POST)
+	@RequestMapping(value="/admin/updateEvent",method=RequestMethod.POST)
 	public ModelAndView updateEvent(@ModelAttribute("editEventData") EventVO eventVO2)
 	{
 		this.eventService.updateEvent(eventVO2);
-		return new ModelAndView("redirect:/viewEvents");
+		return new ModelAndView("redirect:/admin/viewEvents");
 	}
 	
-	@RequestMapping(value="/changeEventStatus",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/changeEventStatus",method=RequestMethod.GET)
 	public ModelAndView changeEventStatus(@RequestParam("changeEventStatusId") int changeEventStatusId,@RequestParam("eventStatus") String eventStatus,EventVO eventVO3)
 	{
 		eventVO3.setEventId(changeEventStatusId);
@@ -92,14 +92,14 @@ public class EventController {
 			eventVO3.setStatus("active");
 		}
 		this.eventService.changeEventStatus(eventVO3);
-		return new ModelAndView("redirect:/viewEvents");
+		return new ModelAndView("redirect:/admin/viewEvents");
 	}
 	
-	@RequestMapping(value="/deleteEvent",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/deleteEvent",method=RequestMethod.GET)
 	public ModelAndView deleteEvent(@RequestParam("deleteEventId") int deleteEventId,EventVO eventVO4)
 	{
 		eventVO4.setEventId(deleteEventId);
 		this.eventService.deleteEvent(eventVO4);
-		return new ModelAndView("redirect:/viewEvents");
+		return new ModelAndView("redirect:/admin/viewEvents");
 	}
 }
