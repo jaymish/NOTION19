@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.notion.model.LoginVO;
-import com.notion.model.RegVO;
+import com.notion.model.*;
 import com.notion.service.LoginService;
 import com.notion.service.RegService;
 
@@ -49,10 +48,9 @@ public class LoginController {
 	public ModelAndView checkUser(@RequestParam("username") String checkuser,LoginVO loginVO)
 	{
 		loginVO.setUsername(checkuser);
-		List<LoginVO> checkUserLs=new ArrayList<LoginVO>();
-		checkUserLs=this.loginService.checkUser(loginVO);
+		loginVO=this.loginService.getUser(loginVO);
 		Boolean reply;
-		if(checkUserLs.isEmpty())
+		if(loginVO==null)
 		{
 			reply=true;
 		}
@@ -64,15 +62,16 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="insertRegData",method=RequestMethod.POST)
-	public ModelAndView insertRegData(@ModelAttribute RegVO regVO,LoginVO loginVO)
+	public ModelAndView insertRegData(@ModelAttribute RegVO regVO,LoginVO loginVO1)
 	{
-		loginVO.setUsername(regVO.getLoginVO().getUsername());
-		loginVO.setPassword(regVO.getLoginVO().getPassword());
-		loginVO.setEnabled(1);
-		loginVO.setRole("ROLE_USER");
-		this.loginService.insertToLogin(loginVO);
+		loginVO1.setUsername(regVO.getLoginVO().getUsername());
+		loginVO1.setPassword(regVO.getLoginVO().getPassword());
+		loginVO1.setEnabled(1);
+		loginVO1.setRole("ROLE_USER");
+		this.loginService.insertToLogin(loginVO1);
 		
-		regVO.setLoginVO(loginVO);
+		regVO.setLoginVO(loginVO1);
+		regVO.setProfileStatus("empty");
 		this.regService.insertToRegister(regVO);
 		
 		return new ModelAndView("redirect:/login");
@@ -87,10 +86,24 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/user/Dashboard",method=RequestMethod.GET)
-	public ModelAndView loadUserDashboard() 
+	public ModelAndView loadUserDashboard(@ModelAttribute LoginVO loginVO4,RegVO regVO1) 
 	{		
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String userName = user.getUsername();
-		return new ModelAndView("user/userDashboard");
+		
+		loginVO4.setUsername(userName);
+		loginVO4=this.loginService.getUser(loginVO4);
+		
+		regVO1.setLoginVO(loginVO4);
+		regVO1=this.regService.getRegDetails(regVO1);
+		System.out.print(regVO1.getProfileStatus());
+		if(regVO1.getProfileStatus().equals("empty"))
+		{
+			return new ModelAndView("redirect:/userProfile","regUser",regVO1);
+		}
+		else
+		{
+			return new ModelAndView("user/userDashboard");
+		}
 	}
 }

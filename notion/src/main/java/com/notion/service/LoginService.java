@@ -21,8 +21,8 @@ public class LoginService {
 	}
 	
 	@Transactional
-	public List<LoginVO> checkUser(LoginVO loginVO){
-		List<LoginVO> checkUserList=this.loginDAO.checkUser(loginVO);
-		return checkUserList;
+	public LoginVO getUser(LoginVO loginVO){
+		LoginVO getUser=this.loginDAO.getUser(loginVO);
+		return getUser;
 	}
 }

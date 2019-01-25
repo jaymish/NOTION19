@@ -1,5 +1,6 @@
 package com.notion.dao;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,22 +15,46 @@ public class RegDAOImp implements RegDAO {
 	SessionFactory sessionFactory;
 	
 	public void insertToRegister(RegVO regVO)
+	{
+		try
+			{
+				 Session session=sessionFactory.openSession();
+				 
+				 Transaction transaction=session.beginTransaction();
+				 
+				 session.saveOrUpdate(regVO);
+				 
+				 transaction.commit();
+				 
+				 session.close();
+			}
+		catch(Exception ex)
+			{
+				ex.printStackTrace();
+			} 
+	}
+	
+	public RegVO getRegDetails(RegVO regVO1)
+	{
+		RegVO regVOObj=new RegVO();
+		try
 		{
-			try
-				{
-					 Session session=sessionFactory.openSession();
-					 
-					 Transaction transaction=session.beginTransaction();
-					 
-					 session.saveOrUpdate(regVO);
-					 
-					 transaction.commit();
-					 
-					 session.close();
-				}
-			catch(Exception ex)
-				{
-					ex.printStackTrace();
-				} 
+			Session session=sessionFactory.openSession();
+			 
+			 Transaction transaction=session.beginTransaction();
+			 
+			 Query q=session.createQuery("from RegVO where LoginVO='"+regVO1.getLoginVO()+"'");
+			 
+			 regVOObj=(RegVO)q.uniqueResult();
+			 
+			 transaction.commit();
+			 
+			 session.close();
 		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return regVOObj;
+	}
 }

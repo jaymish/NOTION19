@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Notion - User Dashboard</title>
+<title>Insert title here</title>
 </head>
 <body>
-	Welcome User
+	Dashboard
 </body>
 </html>

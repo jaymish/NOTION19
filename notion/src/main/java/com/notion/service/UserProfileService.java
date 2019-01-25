@@ -9,18 +9,12 @@ import com.notion.dao.*;
 import com.notion.model.*;
 
 @Service
-public class RegService {
+public class UserProfileService {
 	@Autowired
-	RegDAO regDAO;
+	UserProfileDAO userProfileDAO;
 	
 	@Transactional
-	public void insertToRegister(RegVO regVO){
-		regDAO.insertToRegister(regVO);
-	}
-	
-	@Transactional
-	public RegVO getRegDetails(RegVO regVO1){
-		RegVO getDetails=this.regDAO.getRegDetails(regVO1);
-		return getDetails;
+	public void insertUserProfile(UserProfileVO userProfileVO){
+		this.userProfileDAO.insertUserProfile(userProfileVO);
 	}
 }

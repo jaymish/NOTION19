@@ -1,7 +1,7 @@
 package com.notion.model;
 
 import javax.persistence.*;
-import com.notion.model.LoginVO;
+import com.notion.model.*;
 @Entity
 
 @Table(name="registration")
@@ -17,6 +17,9 @@ public class RegVO {
 	
 	@Column
 	private String lastname;
+	
+	@Column
+	private String profileStatus;
 	
 	@ManyToOne
 	LoginVO loginVO;
@@ -43,6 +46,14 @@ public class RegVO {
 
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
+	}
+
+	public String getProfileStatus() {
+		return profileStatus;
+	}
+
+	public void setProfileStatus(String profileStatus) {
+		this.profileStatus = profileStatus;
 	}
 
 	public LoginVO getLoginVO() {
