@@ -10,7 +10,7 @@
 <meta name="author" content="">
 <!-- <link rel="icon" href="adminResources/images/favicon.ico"> -->
 
-<title>Notion Admin - Log in</title>
+<title>Notion - Log in</title>
 
 <!-- Bootstrap 4.0-->
 <link rel="stylesheet" href="adminResources/css/bootstrap.css">
@@ -47,20 +47,20 @@
 
 				<form action="j_spring_security_check" method="post" class="form-element">
 					<div class="form-group has-feedback">
-						<input type="email" name="username" class="form-control" placeholder="Email">
+						<input type="email" name="username" class="form-control" placeholder="Email" required="required">
 						<span class="ion ion-email form-control-feedback"></span>
 					</div>
 					<div class="form-group has-feedback">
-						<input type="password" name="password" class="form-control" placeholder="Password">
+						<input type="password" name="password" class="form-control" placeholder="Password" required="required">
 						<span class="ion ion-locked form-control-feedback"></span>
 					</div>
 					<div class="row">
-						<div class="col-6">
+						<!-- <div class="col-6">
 							<div class="checkbox">
 								<input type="checkbox" id="basic_checkbox_1"> <label
 									for="basic_checkbox_1">Remember Me</label>
 							</div>
-						</div>
+						</div> -->
 						<!-- /.col -->
 						<div class="col-6">
 							<div class="fog-pwd">

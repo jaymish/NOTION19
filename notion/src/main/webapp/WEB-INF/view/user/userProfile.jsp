@@ -83,6 +83,7 @@
 										modelAttribute="userProfileData" method="POST">
 										<div class="row">
 											<div class="col-12">
+												<form:hidden path="regVO.registrationId"/>
 												<div class="form-group">
 													<h5>
 														First Name <span class="text-danger">*</span>
@@ -111,7 +112,7 @@
 													</h5>
 													<div class="controls">
 														<form:input type="text" name="enrollment" class="form-control" placeholder="Enter Enrollment"
-															path="enrollment" required data-validation-containsnumber-regex="(\d)+"
+															path="enrollment" required="required" data-validation-containsnumber-regex="(\d)+"
 															minlength="12" maxlength="12"
 															data-validation-containsnumber-message="No Characters Allowed, Only Numbers" />
 													</div>
@@ -140,7 +141,7 @@
 															class="form-control" required="required"
 															data-validation-required-message="This field is required">
 															<option>Select Institute</option>
-															<c:forEach items="instituteLs" var="j">
+															<c:forEach items="${instituteLs}" var="j">
 																<form:option value="${j.instituteId}">${j.instituteName}</form:option>
 															</c:forEach>
 														</form:select>
@@ -152,7 +153,7 @@
 													</h5>
 													<div class="controls">
 														<form:input type="text" name="contact" class="form-control" placeholder="Contact"
-															path="contact" required data-validation-containsnumber-regex="(\d)+"
+															path="contact" required="required" data-validation-containsnumber-regex="(\d)+"
 															minlength="10" maxlength="10"
 															data-validation-containsnumber-message="No Characters Allowed, Only Numbers" />
 													</div>

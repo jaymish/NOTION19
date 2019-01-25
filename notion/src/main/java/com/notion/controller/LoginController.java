@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.notion.model.*;
+import com.notion.service.InstituteService;
 import com.notion.service.LoginService;
 import com.notion.service.RegService;
 
@@ -25,6 +26,9 @@ public class LoginController {
 	
 	@Autowired
 	RegService regService;
+	
+	@Autowired
+	InstituteService instituteService;
 	
 	@RequestMapping(value="/", method = RequestMethod.GET, headers = "Accept=application/json")
 	public ModelAndView redirectLogin()
@@ -38,10 +42,10 @@ public class LoginController {
 		return new ModelAndView("login");
 	}
 	
-	@RequestMapping(value="/logout",method=RequestMethod.GET)
+	@RequestMapping(value="/user/logout",method=RequestMethod.GET)
 	public ModelAndView loadLogout()
 	{
-		return new ModelAndView("login");
+		return new ModelAndView("redirect:/login");
 	}
 	
 	@RequestMapping(value="checkUser",method=RequestMethod.POST)
@@ -86,20 +90,20 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/user/Dashboard",method=RequestMethod.GET)
-	public ModelAndView loadUserDashboard(@ModelAttribute LoginVO loginVO4,RegVO regVO1) 
+	public ModelAndView loadUserDashboard(@ModelAttribute LoginVO loginVO4,RegVO regVO1,UserProfileVO userProfileVO) 
 	{		
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String userName = user.getUsername();
 		
 		loginVO4.setUsername(userName);
 		loginVO4=this.loginService.getUser(loginVO4);
-		
 		regVO1.setLoginVO(loginVO4);
 		regVO1=this.regService.getRegDetails(regVO1);
-		System.out.print(regVO1.getProfileStatus());
 		if(regVO1.getProfileStatus().equals("empty"))
 		{
-			return new ModelAndView("redirect:/userProfile","regUser",regVO1);
+			userProfileVO.setRegVO(regVO1);
+			List<InstituteVO> instituteList=this.instituteService.viewInstitutes();
+			return new ModelAndView("/user/userProfile","userProfileData",userProfileVO).addObject("instituteLs", instituteList);
 		}
 		else
 		{

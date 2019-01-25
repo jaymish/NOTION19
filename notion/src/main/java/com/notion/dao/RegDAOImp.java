@@ -43,7 +43,7 @@ public class RegDAOImp implements RegDAO {
 			 
 			 Transaction transaction=session.beginTransaction();
 			 
-			 Query q=session.createQuery("from RegVO where LoginVO='"+regVO1.getLoginVO()+"'");
+			 Query q=session.createQuery("from RegVO where loginVO='"+regVO1.getLoginVO().getLoginId()+"'");
 			 
 			 regVOObj=(RegVO)q.uniqueResult();
 			 
