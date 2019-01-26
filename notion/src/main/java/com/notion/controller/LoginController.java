@@ -99,15 +99,13 @@ public class LoginController {
 		loginVO4=this.loginService.getUser(loginVO4);
 		regVO1.setLoginVO(loginVO4);
 		regVO1=this.regService.getRegDetails(regVO1);
-		if(regVO1.getProfileStatus().equals("empty"))
+		if(regVO1.getProfileStatus().equals("complete"))
 		{
-			userProfileVO.setRegVO(regVO1);
-			List<InstituteVO> instituteList=this.instituteService.viewInstitutes();
-			return new ModelAndView("/user/userProfile","userProfileData",userProfileVO).addObject("instituteLs", instituteList);
+			return new ModelAndView("user/userDashboard","userData",regVO1);
 		}
 		else
 		{
-			return new ModelAndView("user/userDashboard");
+			return new ModelAndView("redirect:/user/profile");
 		}
 	}
 }

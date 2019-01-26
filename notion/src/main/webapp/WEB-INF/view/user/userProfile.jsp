@@ -83,7 +83,7 @@
 										modelAttribute="userProfileData" method="POST">
 										<div class="row">
 											<div class="col-12">
-												<form:hidden path="regVO.registrationId"/>
+												<%-- <form:hidden path="regVO.registrationId"/>
 												<div class="form-group">
 													<h5>
 														First Name <span class="text-danger">*</span>
@@ -105,7 +105,7 @@
 															placeholder="Enter Last Name" required="required"
 															data-validation-required-message="This field is required" />
 													</div>
-												</div>
+												</div> --%>
 												<div class="form-group">
 													<h5>
 														Enrollment <span class="text-danger">*</span>
