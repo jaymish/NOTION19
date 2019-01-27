@@ -106,7 +106,7 @@
 												<tbody>
 													<c:forEach items="${individualEvents}" var="i">
 														<tr>
-															<td><a href="selectEvent?selectEventId=${i.eventId}"><input type="button" class="btn btn-primary" value="Select"/></a></td>
+															<td><a href="selectedEvent?selectedEventId=${i.eventId}"><input type="button" class="btn btn-primary" value="Select"/></a></td>
 															<td>${i.eventName}</td>
 															<td>${i.eventDescription}</td>
 															<td>${i.eventBranch}</td>
@@ -154,7 +154,7 @@
 												<tbody>
 													<c:forEach items="${teamEvents}" var="i">
 														<tr>
-															<td><input type="checkbox" /></td>
+															<td><a href="selectedEvent?selectedEventId=${i.eventId}"><input type="button" class="btn btn-primary" value="Select"/></a></td>
 															<td>${i.eventName}</td>
 															<td>${i.eventDescription}</td>
 															<td>${i.eventBranch}</td>

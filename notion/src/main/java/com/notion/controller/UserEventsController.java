@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,18 @@ public class UserEventsController {
 	
 	@Autowired
 	EventService eventService;
+	
+	@Autowired
+	UserEventsService userEventsService;
+	
+	@Autowired
+	LoginService loginService;
+	
+	@Autowired
+	RegService regService;
+	
+	User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	String userName = user.getUsername();
 	
 	@RequestMapping(value="/user/selectEvents",method=RequestMethod.GET)
 	public ModelAndView loadSelectEvents()
@@ -43,5 +57,24 @@ public class UserEventsController {
 			}
 		}
 		return new ModelAndView("/user/selectEvents").addObject("individualEvents", individualEventsList).addObject("teamEvents", teamEventsList);
+	}
+	
+	@RequestMapping(value="/user/selectedEvent",method=RequestMethod.GET)
+	public ModelAndView insertUserEvents(@RequestParam("selectedEventId") int selectedEventId,UserEventsVO userEventsVO,LoginVO loginVO4,RegVO regVO1,EventVO eventVO)
+	{
+		
+		loginVO4.setUsername(userName);
+		loginVO4=this.loginService.getUser(loginVO4);
+		regVO1.setLoginVO(loginVO4);
+		regVO1=this.regService.getRegDetails(regVO1);
+		
+		userEventsVO.setRegVO1(regVO1);
+		eventVO.setEventId(selectedEventId);
+		userEventsVO.setEventVO1(eventVO);
+		userEventsVO.setPaymentStatus("pending");
+		
+		this.userEventsService.insertUserEvent(userEventsVO);
+		
+		return new ModelAndView("redirect:/user/selectEvents");
 	}
 }
