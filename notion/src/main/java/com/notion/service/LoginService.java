@@ -1,5 +1,6 @@
 package com.notion.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -7,8 +8,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.notion.dao.*;
-import com.notion.model.*;
+import com.notion.dao.LoginDAO;
+import com.notion.model.LoginVO;
 
 @Service
 public class LoginService {
@@ -21,8 +22,9 @@ public class LoginService {
 	}
 	
 	@Transactional
-	public LoginVO getUser(LoginVO loginVO){
-		LoginVO getUser=this.loginDAO.getUser(loginVO);
+	public List<LoginVO> getUser(LoginVO loginVO){
+		List<LoginVO> getUser=new ArrayList<LoginVO>();
+		getUser=this.loginDAO.getUser(loginVO);
 		return getUser;
 	}
 }

@@ -1,5 +1,8 @@
 package com.notion.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -7,7 +10,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.notion.model.*;
+import com.notion.model.RegVO;
 
 @Repository
 public class RegDAOImp implements RegDAO {
@@ -34,9 +37,9 @@ public class RegDAOImp implements RegDAO {
 			} 
 	}
 	
-	public RegVO getRegDetails(RegVO regVO1)
+	public List<RegVO> getRegDetails(RegVO regVO1)
 	{
-		RegVO regVOObj=new RegVO();
+		List<RegVO> regList=new ArrayList<RegVO>();
 		try
 		{
 			Session session=sessionFactory.openSession();
@@ -45,7 +48,7 @@ public class RegDAOImp implements RegDAO {
 			 
 			 Query q=session.createQuery("from RegVO where loginVO='"+regVO1.getLoginVO().getLoginId()+"'");
 			 
-			 regVOObj=(RegVO)q.uniqueResult();
+			 regList=q.list();
 			 
 			 transaction.commit();
 			 
@@ -55,6 +58,6 @@ public class RegDAOImp implements RegDAO {
 		{
 			ex.printStackTrace();
 		}
-		return regVOObj;
+		return regList;
 	}
 }

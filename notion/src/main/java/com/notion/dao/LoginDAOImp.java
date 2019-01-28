@@ -36,9 +36,9 @@ public class LoginDAOImp implements LoginDAO{
 				ex.printStackTrace();
 			} 
 	}
-	public LoginVO getUser(LoginVO loginVO)
+	public List<LoginVO> getUser(LoginVO loginVO)
 	{
-		LoginVO loginVOObj=new LoginVO();
+		List<LoginVO> loginList=new ArrayList<LoginVO>();
 		try
 		{
 			Session session=sessionFactory.openSession();
@@ -47,7 +47,7 @@ public class LoginDAOImp implements LoginDAO{
 			 
 			 Query q=session.createQuery("from LoginVO where username='"+loginVO.getUsername()+"'");
 			 
-			 loginVOObj=(LoginVO)q.uniqueResult();
+			 loginList=q.list();
 			 
 			 transaction.commit();
 			 
@@ -57,6 +57,6 @@ public class LoginDAOImp implements LoginDAO{
 		{
 			ex.printStackTrace();
 		}
-		return loginVOObj;
+		return loginList;
 	}
 }

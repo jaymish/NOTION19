@@ -1,5 +1,6 @@
 package com.notion.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +30,19 @@ public class UserProfileController {
 	InstituteService instituteService;
 	
 	@RequestMapping(value="/user/profile",method=RequestMethod.GET)
-	public ModelAndView loadUserProfile(@ModelAttribute LoginVO loginVO,RegVO regVO,UserProfileVO userProfileVO)
+	public ModelAndView loadUserProfile(@ModelAttribute LoginVO loginVO4,RegVO regVO1,UserProfileVO userProfileVO)
 	{
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String userName = user.getUsername();
 		
-		loginVO.setUsername(userName);
-		loginVO=this.loginService.getUser(loginVO);
-		regVO.setLoginVO(loginVO);
-		regVO=this.regService.getRegDetails(regVO);
-		userProfileVO.setRegVO(regVO);
+		loginVO4.setUsername(userName);
+		List<LoginVO> loginDetailsList=new ArrayList<LoginVO>();
+		loginDetailsList=this.loginService.getUser(loginVO4);
+		loginVO4=loginDetailsList.get(0);
+		regVO1.setLoginVO(loginVO4);
+		List<RegVO> regDetailsList=new ArrayList<RegVO>();
+		regDetailsList=this.regService.getRegDetails(regVO1);
+		regVO1=regDetailsList.get(0);
 		List<InstituteVO> instituteList=this.instituteService.viewInstitutes();
 		return new ModelAndView("/user/userProfile","userProfileData",userProfileVO).addObject("instituteLs", instituteList);
 	}

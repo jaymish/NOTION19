@@ -6,5 +6,5 @@ import com.notion.model.LoginVO;
 
 public interface LoginDAO {
 	public void insertToLogin(LoginVO loginVO);
-	public LoginVO getUser(LoginVO loginVO);
+	public List<LoginVO> getUser(LoginVO loginVO);
 }

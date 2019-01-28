@@ -33,9 +33,6 @@ public class UserEventsController {
 	@Autowired
 	RegService regService;
 	
-	User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	String userName = user.getUsername();
-	
 	@RequestMapping(value="/user/selectEvents",method=RequestMethod.GET)
 	public ModelAndView loadSelectEvents()
 	{
@@ -62,11 +59,16 @@ public class UserEventsController {
 	@RequestMapping(value="/user/selectedEvent",method=RequestMethod.GET)
 	public ModelAndView insertUserEvents(@RequestParam("selectedEventId") int selectedEventId,UserEventsVO userEventsVO,LoginVO loginVO4,RegVO regVO1,EventVO eventVO)
 	{
-		
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String userName = user.getUsername();
 		loginVO4.setUsername(userName);
-		loginVO4=this.loginService.getUser(loginVO4);
+		List<LoginVO> loginDetailsList=new ArrayList<LoginVO>();
+		loginDetailsList=this.loginService.getUser(loginVO4);
+		loginVO4=loginDetailsList.get(0);
 		regVO1.setLoginVO(loginVO4);
-		regVO1=this.regService.getRegDetails(regVO1);
+		List<RegVO> regDetailsList=new ArrayList<RegVO>();
+		regDetailsList=this.regService.getRegDetails(regVO1);
+		regVO1=regDetailsList.get(0);
 		
 		userEventsVO.setRegVO1(regVO1);
 		eventVO.setEventId(selectedEventId);
@@ -76,5 +78,16 @@ public class UserEventsController {
 		this.userEventsService.insertUserEvent(userEventsVO);
 		
 		return new ModelAndView("redirect:/user/selectEvents");
+	}
+	
+	@RequestMapping(value="/user/selectTeam",method=RequestMethod.GET)
+	public ModelAndView selectTeam(@RequestParam("selectedEventId") int selectedEventId,EventVO eventVO1)
+	{
+		eventVO1.setEventId(selectedEventId);
+		List<EventVO> eventList=this.eventService.editEvent(eventVO1);
+		int maxMembers=eventList.get(0).getTeamMax();
+		int minMembers=eventList.get(0).getTeamMin();
+		
+		return new ModelAndView("/user/selectTeam","selectTeamData",new UserEventsVO()).addObject("selectedEventId",selectedEventId).addObject("maxMembers",maxMembers).addObject("minMembers",minMembers);
 	}
 }

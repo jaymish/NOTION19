@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.notion.model.*;
+import com.notion.model.LoginVO;
+import com.notion.model.RegVO;
+import com.notion.model.UserProfileVO;
 import com.notion.service.InstituteService;
 import com.notion.service.LoginService;
 import com.notion.service.RegService;
@@ -52,7 +54,9 @@ public class LoginController {
 	public ModelAndView checkUser(@RequestParam("username") String checkuser,LoginVO loginVO)
 	{
 		loginVO.setUsername(checkuser);
-		loginVO=this.loginService.getUser(loginVO);
+		List<LoginVO> emailCheck=new ArrayList<LoginVO>();
+		emailCheck=this.loginService.getUser(loginVO);
+		loginVO=emailCheck.get(0);
 		Boolean reply;
 		if(loginVO==null)
 		{
@@ -96,9 +100,13 @@ public class LoginController {
 		String userName = user.getUsername();
 		
 		loginVO4.setUsername(userName);
-		loginVO4=this.loginService.getUser(loginVO4);
+		List<LoginVO> loginDetailsList=new ArrayList<LoginVO>();
+		loginDetailsList=this.loginService.getUser(loginVO4);
+		loginVO4=loginDetailsList.get(0);
 		regVO1.setLoginVO(loginVO4);
-		regVO1=this.regService.getRegDetails(regVO1);
+		List<RegVO> regDetailsList=new ArrayList<RegVO>();
+		regDetailsList=this.regService.getRegDetails(regVO1);
+		regVO1=regDetailsList.get(0);
 		if(regVO1.getProfileStatus().equals("complete"))
 		{
 			return new ModelAndView("user/userDashboard","userData",regVO1);
