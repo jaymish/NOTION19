@@ -38,7 +38,7 @@ public class UserProfileController {
 	HttpSession session;
 	
 	@RequestMapping(value="/user/profile",method=RequestMethod.GET)
-	public ModelAndView loadUserProfile(HttpServletRequest request,@ModelAttribute LoginVO loginVO,RegVO regVO1,UserProfileVO userProfileVO)
+	public ModelAndView loadUserProfile(HttpServletRequest request,@ModelAttribute UserProfileVO userProfileVO,RegVO regVO1)
 	{
 		session=request.getSession();
 		regVO1=(RegVO)session.getAttribute("regDetails");
@@ -48,7 +48,7 @@ public class UserProfileController {
 	}
 	
 	@RequestMapping(value="/user/insertUserProfile",method=RequestMethod.POST)
-	public ModelAndView insertUserProfile(HttpServletRequest request,@ModelAttribute("userProfileData")@Valid UserProfileVO userProfileVO1,BindingResult result,RegVO regVO2)
+	public ModelAndView insertUserProfile(HttpServletRequest request,@ModelAttribute("userProfileData") UserProfileVO userProfileVO1,RegVO regVO2)
 	{
 		session=request.getSession();
 		regVO2=(RegVO)session.getAttribute("regDetails");
@@ -59,5 +59,30 @@ public class UserProfileController {
 		this.regService.insertToRegister(regVO2);
 		
 		return new ModelAndView("/user/userDashboard");
+	}
+	
+	@RequestMapping(value="/user/editProfile",method=RequestMethod.GET)
+	public ModelAndView loadEditUserProfile(HttpServletRequest request,@ModelAttribute UserProfileVO userProfileVO2,RegVO regVO3)
+	{
+		session=request.getSession();
+		regVO3=(RegVO)session.getAttribute("regDetails");
+		userProfileVO2.setRegVO(regVO3);
+		List<UserProfileVO> profileData=new ArrayList<UserProfileVO>();
+		profileData=this.userProfileService.getUserProfile(userProfileVO2);
+		List<InstituteVO> instituteList=this.instituteService.viewInstitutes();
+		
+		return new ModelAndView("/user/editProfile","editProfileData",profileData.get(0)).addObject("instituteLs", instituteList);
+	}
+	
+	@RequestMapping(value="/user/updateUserProfile",method=RequestMethod.POST)
+	public ModelAndView updateUserProfile(@ModelAttribute("editProfileData")@Valid UserProfileVO userProfileVO3,BindingResult result,RegVO regVO4)
+	{
+		/*regVO4.setFirstname(userProfileVO3.getRegVO().getFirstname());
+		regVO4.setLastname(userProfileVO3.getRegVO().getLastname());*/
+		
+		this.regService.insertToRegister(userProfileVO3.getRegVO());
+		this.userProfileService.insertUserProfile(userProfileVO3);
+		
+		return new ModelAndView("redirect:/user/Dashboard");
 	}
 }

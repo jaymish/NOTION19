@@ -64,21 +64,19 @@
 						</div>
 					</li>
 					<!-- Menu Body -->
-					<li class="user-body"><a class="dropdown-item"
-						href="javascript:void(0)"><i class="ion ion-person"></i> My
-							Profile</a>
-						<div class="dropdown-divider"></div> <a class="dropdown-item"
-						href="javascript:void(0)"><i class="ion ion-settings"></i>
-							Account Setting</a>
-						<div class="dropdown-divider"></div> <a class="dropdown-item"
-						href="logout"><i class="ion-log-out"></i> Logout</a>
+					<li class="user-body">
+						<a class="dropdown-item" href="editProfile">
+							<i class="ion ion-person"></i> Edit Profile
+						</a>
 						<div class="dropdown-divider"></div>
 						<div class="p-10">
-							<a href="javascript:void(0)"
-								class="btn btn-sm btn-rounded btn-success">View Profile</a>
-						</div></li>
-				</ul></li>
+							<a href="logout" class="btn btn-sm btn-rounded btn-success">
+								<i class="ion-log-out"></i> Logout
+							</a>
+						</div>
+					</li>
+				</ul>
+			</li>
 		</ul>
 	</div>
 </nav>
-<% response.sendRedirect("adminDashboard"); %>

@@ -1,5 +1,8 @@
 package com.notion.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +19,12 @@ public class UserProfileService {
 	@Transactional
 	public void insertUserProfile(UserProfileVO userProfileVO){
 		this.userProfileDAO.insertUserProfile(userProfileVO);
+	}
+	
+	@Transactional
+	public List<UserProfileVO> getUserProfile(UserProfileVO userProfileVO1){
+		List<UserProfileVO> profileData=new ArrayList<UserProfileVO>();
+		profileData=this.userProfileDAO.getUserProfile(userProfileVO1);
+		return profileData;
 	}
 }

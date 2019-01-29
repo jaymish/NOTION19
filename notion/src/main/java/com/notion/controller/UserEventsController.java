@@ -62,7 +62,7 @@ public class UserEventsController {
 	}
 	
 	@RequestMapping(value="/user/selectedEvent",method=RequestMethod.GET)
-	public ModelAndView insertUserEvents(HttpServletRequest request,@RequestParam("selectedEventId") int selectedEventId,UserEventsVO userEventsVO,LoginVO loginVO4,RegVO regVO1,EventVO eventVO)
+	public ModelAndView insertUserEvents(HttpServletRequest request,@RequestParam("selectedEventId") int selectedEventId,UserEventsVO userEventsVO,RegVO regVO1,EventVO eventVO)
 	{
 		session=request.getSession();
 		regVO1=(RegVO)session.getAttribute("regDetails");
@@ -87,7 +87,7 @@ public class UserEventsController {
 		int maxMembers=eventList.get(0).getTeamMax();
 		int minMembers=eventList.get(0).getTeamMin();
 		
-		return new ModelAndView("/user/selectTeam","selectTeamData",new UserEventsVO()).addObject("selectedEventId",selectedEventId).addObject("maxMembers",maxMembers).addObject("minMembers",minMembers);
+		return new ModelAndView("/user/selectTeam","selectTeamData",new UserEventsVO()).addObject("maxMembers",maxMembers).addObject("minMembers",minMembers);
 	}
 	
 	@RequestMapping(value="/user/insertTeamData",method=RequestMethod.POST)

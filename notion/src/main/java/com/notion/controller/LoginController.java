@@ -116,7 +116,7 @@ public class LoginController {
 		
 		if(regVO1.getProfileStatus().equals("complete"))
 		{
-			return new ModelAndView("user/userDashboard");
+			return new ModelAndView("/user/userDashboard");
 		}
 		else
 		{

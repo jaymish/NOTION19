@@ -12,7 +12,7 @@
 <meta name="author" content="">
 <!-- <link rel="icon" href="../adminResources/images/favicon.ico"> -->
 
-<title>Notion - User Profile</title>
+<title>Notion User - Edit Profile</title>
 
 <!-- Bootstrap 4.0-->
 <link rel="stylesheet" href="../adminResources/css/bootstrap.css">
@@ -40,6 +40,18 @@
 <body class="hold-transition skin-light light-sidebar sidebar-mini">
 	<div class="wrapper">
 
+		<header class="main-header">
+			<jsp:include page="header.jsp" />
+		</header>
+		
+		<!-- Left side column. contains the logo and sidebar -->
+		<aside class="main-sidebar">
+			<!-- sidebar-->
+			<section class="sidebar">
+				<jsp:include page="userMenu.jsp" />
+			</section>
+		</aside>
+
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<div class="container">
@@ -47,7 +59,7 @@
 				<div class="content-header">
 					<div class="d-flex align-items-center">
 						<div class="mr-auto">
-							<h3 class="page-title">Complete Profile</h3>
+							<h3 class="page-title">Edit Profile</h3>
 							<div class="d-inline-block align-items-center">
 								<nav>
 									<ol class="breadcrumb">
@@ -68,18 +80,21 @@
 					<!-- Basic Forms -->
 					<div class="box">
 						<div class="box-header with-border">
-							<h4 class="box-title">Enter Remaining Details</h4>
+							<h4 class="box-title">Enter Details</h4>
 							<!-- <h6 class="box-subtitle">Bootstrap Form Validation check the <a class="text-warning" href="#">official website </a></h6> -->
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body">
 							<div class="row">
 								<div class="col">
-									<form:form novalidate="novalidate" action="insertUserProfile"
-										modelAttribute="userProfileData" method="POST">
+									<form:form novalidate="novalidate" action="updateUserProfile"
+										modelAttribute="editProfileData" method="POST">
 										<div class="row">
 											<div class="col-12">
 												<form:hidden path="regVO.registrationId"/>
+												<form:hidden path="regVO.loginVO.loginId"/>
+												<form:hidden path="regVO.profileStatus"/>
+												<form:hidden path="profileId"/>
 												<div class="form-group">
 													<h5>
 														First Name <span class="text-danger">*</span>
@@ -88,7 +103,7 @@
 														<form:input type="text" name="firstname"
 															path="regVO.firstname" class="form-control"
 															placeholder="Enter First Name" required="required"
-															data-validation-required-message="This field is required" disabled="true"/>
+															data-validation-required-message="This field is required"/>
 													</div>
 												</div>
 												<div class="form-group">
@@ -99,7 +114,7 @@
 														<form:input type="text" name="lasttname"
 															path="regVO.lastname" class="form-control"
 															placeholder="Enter Last Name" required="required"
-															data-validation-required-message="This field is required" disabled="true"/>
+															data-validation-required-message="This field is required"/>
 													</div>
 												</div>
 												<div class="form-group">
