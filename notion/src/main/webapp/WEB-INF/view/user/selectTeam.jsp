@@ -38,10 +38,10 @@
 	{
 		var i=0;
 		i=parseInt(num.value)
-		var inputs=document.getElementById("membernames")
 		for(var k=1;k<=i;k++)
 		{
-			inputs.innerHTML="<div class='form-group'><h5>Name of Member "k" <span class='text-danger'>*</span></h5><div class='controls'><form:input type='text' name='member "k"' path='teamMember"k"' class='form-control' placeholder='Enter First Name' required='required' data-validation-required-message='This field is required' /></div></div>";
+			var inputs=document.getElementById("member"+k)
+			inputs.style.display=""
 		}
 	}
 </script>
@@ -100,7 +100,6 @@
 										modelAttribute="selectTeamData" method="POST">
 										<div class="row">
 											<div class="col-12">
-												<form:hidden path="eventVO1.eventId" value="selectedEventId"/>
 												<div class="form-group">
 													<h5>
 														Select No. of Members Other than You<span class="text-danger">*</span>
@@ -116,7 +115,41 @@
 														</select>
 													</div>
 												</div>
-												<div id="membernames"></div>
+												<div class="form-group" id="member1" style="display:none">
+													<h5>Name of Member 1 </h5>
+													<div class="controls">
+														<form:input type="text" name="member 1" path="teamMember1" class="form-control"
+														placeholder="Enter Name(Firstname + Lastname)" />
+													</div>
+												</div>
+												<div class="form-group" id="member2" style="display:none">
+													<h5>Name of Member 2 </h5>
+													<div class="controls">
+														<form:input type="text" name="member 2" path="teamMember2" class="form-control"
+														placeholder="Enter Name(Firstname + Lastname)" />
+													</div>
+												</div>
+												<div class="form-group" id="member3" style="display:none">
+													<h5>Name of Member 3 </h5>
+													<div class="controls">
+														<form:input type="text" name="member 3" path="teamMember3" class="form-control"
+														placeholder="Enter Name(Firstname + Lastname)" />
+													</div>
+												</div>
+												<div class="form-group" id="member4" style="display:none">
+													<h5>Name of Member 4 </h5>
+													<div class="controls">
+														<form:input type="text" name="member 4" path="teamMember4" class="form-control"
+														placeholder="Enter Name(Firstname + Lastname)" />
+													</div>
+												</div>
+												<div class="form-group" id="member5" style="display:none">
+													<h5>Name of Member 5 </h5>
+													<div class="controls">
+														<form:input type="text" name="member 5" path="teamMember5" class="form-control"
+														placeholder="Enter Name(Firstname + Lastname)" />
+													</div>
+												</div>
 											</div>
 										</div>
 										<div class="text-xs-right">

@@ -75,6 +75,7 @@
 						</div>
 						<!-- /.col -->
 					</div>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				</form>
 
 				<!-- <div class="text-center text-dark">

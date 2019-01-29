@@ -83,7 +83,7 @@
 										modelAttribute="userProfileData" method="POST">
 										<div class="row">
 											<div class="col-12">
-												<%-- <form:hidden path="regVO.registrationId"/>
+												<form:hidden path="regVO.registrationId"/>
 												<div class="form-group">
 													<h5>
 														First Name <span class="text-danger">*</span>
@@ -92,7 +92,7 @@
 														<form:input type="text" name="firstname"
 															path="regVO.firstname" class="form-control"
 															placeholder="Enter First Name" required="required"
-															data-validation-required-message="This field is required" />
+															data-validation-required-message="This field is required" disabled="true"/>
 													</div>
 												</div>
 												<div class="form-group">
@@ -103,9 +103,9 @@
 														<form:input type="text" name="lasttname"
 															path="regVO.lastname" class="form-control"
 															placeholder="Enter Last Name" required="required"
-															data-validation-required-message="This field is required" />
+															data-validation-required-message="This field is required" disabled="true"/>
 													</div>
-												</div> --%>
+												</div>
 												<div class="form-group">
 													<h5>
 														Enrollment <span class="text-danger">*</span>
@@ -137,7 +137,7 @@
 														Institute <span class="text-danger">*</span>
 													</h5>
 													<div class="controls">
-														<form:select name="institute" path="instituteVO"
+														<form:select name="institute" path="instituteVO.instituteId"
 															class="form-control" required="required"
 															data-validation-required-message="This field is required">
 															<option>Select Institute</option>

@@ -2,6 +2,8 @@ package com.notion.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,6 +34,8 @@ public class LoginController {
 	@Autowired
 	InstituteService instituteService;
 	
+	HttpSession session;
+	
 	@RequestMapping(value="/", method = RequestMethod.GET, headers = "Accept=application/json")
 	public ModelAndView redirectLogin()
 	{
@@ -56,9 +60,8 @@ public class LoginController {
 		loginVO.setUsername(checkuser);
 		List<LoginVO> emailCheck=new ArrayList<LoginVO>();
 		emailCheck=this.loginService.getUser(loginVO);
-		loginVO=emailCheck.get(0);
 		Boolean reply;
-		if(loginVO==null)
+		if(emailCheck.isEmpty())
 		{
 			reply=true;
 		}
@@ -86,30 +89,34 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/admin/Dashboard",method=RequestMethod.GET)
-	public ModelAndView loadAdminDashboard()
+	public ModelAndView loadAdminDashboard(HttpServletRequest request)
 	{
+		session=request.getSession();
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String userName = user.getUsername();
+		session.setAttribute("adminMail", userName);
 		return new ModelAndView("admin/adminDashboard");
 	}
 	
 	@RequestMapping(value="/user/Dashboard",method=RequestMethod.GET)
-	public ModelAndView loadUserDashboard(@ModelAttribute LoginVO loginVO4,RegVO regVO1,UserProfileVO userProfileVO) 
-	{		
+	public ModelAndView loadUserDashboard(HttpServletRequest request,@ModelAttribute LoginVO loginVO3,RegVO regVO1) 
+	{	
+		session=request.getSession();
+		
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String userName = user.getUsername();
+		session.setAttribute("userMail", userName);
 		
-		loginVO4.setUsername(userName);
-		List<LoginVO> loginDetailsList=new ArrayList<LoginVO>();
-		loginDetailsList=this.loginService.getUser(loginVO4);
-		loginVO4=loginDetailsList.get(0);
-		regVO1.setLoginVO(loginVO4);
+		loginVO3.setUsername(userName);
+		regVO1.setLoginVO(loginVO3);
 		List<RegVO> regDetailsList=new ArrayList<RegVO>();
 		regDetailsList=this.regService.getRegDetails(regVO1);
 		regVO1=regDetailsList.get(0);
+		session.setAttribute("regDetails", regVO1);
+		
 		if(regVO1.getProfileStatus().equals("complete"))
 		{
-			return new ModelAndView("user/userDashboard","userData",regVO1);
+			return new ModelAndView("user/userDashboard");
 		}
 		else
 		{

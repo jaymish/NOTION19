@@ -59,17 +59,14 @@
 							<img src="../adminResources/images/7.jpg"
 								class="float-left rounded-circle" alt="User Image">
 							<h4 class="user-name align-self-center">
-								<span>Samuel Brus</span> <small>${userName}</small>
+								<span>${regDetails.getFirstname()} ${regDetails.getLastname()}</span> <small>${userMail}</small>
 							</h4>
 						</div>
 					</li>
 					<!-- Menu Body -->
 					<li class="user-body"><a class="dropdown-item"
 						href="javascript:void(0)"><i class="ion ion-person"></i> My
-							Profile</a> <a class="dropdown-item" href="javascript:void(0)"><i
-							class="ion ion-bag"></i> My Balance</a> <a class="dropdown-item"
-						href="javascript:void(0)"><i class="ion ion-email-unread"></i>
-							Inbox</a>
+							Profile</a>
 						<div class="dropdown-divider"></div> <a class="dropdown-item"
 						href="javascript:void(0)"><i class="ion ion-settings"></i>
 							Account Setting</a>

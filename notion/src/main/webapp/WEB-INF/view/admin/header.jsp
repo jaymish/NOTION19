@@ -59,7 +59,7 @@
 							<img src="../adminResources/images/7.jpg"
 								class="float-left rounded-circle" alt="User Image">
 							<h4 class="user-name align-self-center">
-								<span>Samuel Brus</span> <small>${userName}</small>
+								<span>Samuel Brus</span> <small>${adminMail}</small>
 							</h4>
 						</div>
 					</li>
