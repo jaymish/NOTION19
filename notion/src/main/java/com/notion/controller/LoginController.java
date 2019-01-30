@@ -2,13 +2,18 @@ package com.notion.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.http.HttpSession;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.notion.model.LoginVO;
 import com.notion.model.RegVO;
-import com.notion.model.UserProfileVO;
 import com.notion.service.InstituteService;
 import com.notion.service.LoginService;
 import com.notion.service.RegService;
@@ -43,15 +47,35 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.GET)
-	public ModelAndView loadLogin()
+	public String loadLogin()
 	{
-		return new ModelAndView("login");
+		return "login";
+	}
+	
+	@RequestMapping(value="/logout",method=RequestMethod.GET)
+	public ModelAndView loadLogout(ModelMap model,HttpServletResponse response,HttpServletRequest request)
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null)
+        {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+            request.getSession().invalidate();
+            request.getSession().setAttribute("tempStatus", "success");
+            request.getSession().setAttribute("statusText", "Logout Successfully!");
+        }
+		return new ModelAndView("redirect:/login");
 	}
 	
 	@RequestMapping(value="/user/logout",method=RequestMethod.GET)
-	public ModelAndView loadLogout()
+	public String userLogout()
 	{
-		return new ModelAndView("redirect:/login");
+		return "redirect:/logout";
+	}
+	
+	@RequestMapping(value="/admin/logout",method=RequestMethod.GET)
+	public String adminLogout()
+	{
+		return "redirect:/logout";
 	}
 	
 	@RequestMapping(value="checkUser",method=RequestMethod.POST)

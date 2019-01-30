@@ -75,7 +75,7 @@ public class EventController {
 	@RequestMapping(value="/admin/updateEvent",method=RequestMethod.POST)
 	public ModelAndView updateEvent(@ModelAttribute("editEventData") EventVO eventVO2)
 	{
-		this.eventService.updateEvent(eventVO2);
+		this.eventService.insertEvent(eventVO2);
 		return new ModelAndView("redirect:/admin/viewEvents");
 	}
 	

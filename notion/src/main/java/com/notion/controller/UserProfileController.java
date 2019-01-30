@@ -58,7 +58,7 @@ public class UserProfileController {
 		regVO2.setProfileStatus("complete");
 		this.regService.insertToRegister(regVO2);
 		
-		return new ModelAndView("/user/userDashboard");
+		return new ModelAndView("redirect:/user/Dashboard");
 	}
 	
 	@RequestMapping(value="/user/editProfile",method=RequestMethod.GET)
@@ -76,10 +76,7 @@ public class UserProfileController {
 	
 	@RequestMapping(value="/user/updateUserProfile",method=RequestMethod.POST)
 	public ModelAndView updateUserProfile(@ModelAttribute("editProfileData")@Valid UserProfileVO userProfileVO3,BindingResult result,RegVO regVO4)
-	{
-		/*regVO4.setFirstname(userProfileVO3.getRegVO().getFirstname());
-		regVO4.setLastname(userProfileVO3.getRegVO().getLastname());*/
-		
+	{	
 		this.regService.insertToRegister(userProfileVO3.getRegVO());
 		this.userProfileService.insertUserProfile(userProfileVO3);
 		

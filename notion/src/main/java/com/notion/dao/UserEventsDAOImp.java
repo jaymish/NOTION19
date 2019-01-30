@@ -16,7 +16,8 @@ public class UserEventsDAOImp implements UserEventsDAO{
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	public void insertUserEvent(UserEventsVO userEventsVO){
+	public void insertUserEvent(UserEventsVO userEventsVO)
+	{
 		try
 		{
 			 Session session=sessionFactory.openSession();
@@ -24,6 +25,74 @@ public class UserEventsDAOImp implements UserEventsDAO{
 			 Transaction transaction=session.beginTransaction();
 			 
 			 session.saveOrUpdate(userEventsVO);
+			 
+			 transaction.commit();
+			 
+			 session.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+	
+	public List<UserEventsVO> viewUserEvents(UserEventsVO userEventsVO1)
+	{
+		List<UserEventsVO> userEventsList=new ArrayList<UserEventsVO>();
+		try
+		{
+			 Session session=sessionFactory.openSession();
+			 
+			 Transaction transaction=session.beginTransaction();
+			 
+			 Query q=session.createQuery("from UserEventsVO where regVO1='"+userEventsVO1.getRegVO1().getRegistrationId()+"'");
+			 
+			 userEventsList=q.list();
+			 
+			 transaction.commit();
+			 
+			 session.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return userEventsList;
+	}
+	
+	public List<UserEventsVO> viewUserEvents()
+	{
+		List<UserEventsVO> userEventsList=new ArrayList<UserEventsVO>();
+		try
+		{
+			 Session session=sessionFactory.openSession();
+			 
+			 Transaction transaction=session.beginTransaction();
+			 
+			 Query q=session.createQuery("from UserEventsVO");
+			 
+			 userEventsList=q.list();
+			 
+			 transaction.commit();
+			 
+			 session.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return userEventsList;
+	}
+	
+	public void removeUserEvent(UserEventsVO userEventsVO3)
+	{
+		try
+		{
+			 Session session=sessionFactory.openSession();
+			 
+			 Transaction transaction=session.beginTransaction();
+			 
+			 session.delete(userEventsVO3);
 			 
 			 transaction.commit();
 			 

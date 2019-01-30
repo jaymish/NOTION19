@@ -11,7 +11,7 @@
 <meta name="author" content="">
 <!-- <link rel="icon" href="../adminResources/images/favicon.ico"> -->
 
-<title>Notion User - Select Events</title>
+<title>Notion User - View Selected Events</title>
 
 <!-- Bootstrap 4.0-->
 <link rel="stylesheet" href="../adminResources/css/bootstrap.css">
@@ -82,7 +82,7 @@
 							<div class="col-12">
 								<div class="box">
 									<div class="box-header">
-										<h4 class="box-title">List of Individual Events</h4>
+										<h4 class="box-title">List of Selected Events</h4>
 									</div>
 									<div class="box-body">
 										<div class="table-responsive">
@@ -91,95 +91,38 @@
 												style="width: 100%">
 												<thead>
 													<tr>
+														<th colspan="4">Information</th>
 														<th>Action</th>
-														<th colspan="5">Information</th>
 													</tr>
 													<tr>
-														<th>Select</th>
 														<th>Name</th>
-														<th>Description</th>
 														<th>Type</th>
-														<th>Branch</th>
+														<th>Payment</th>
 														<th>Price</th>
+														<th>Remove</th>
 													</tr>
 												</thead>
 												<tbody>
-													<c:forEach items="${individualEvents}" var="i">
+													<c:forEach items="${selectedEventsLs}" var="i">
 														<tr>
-															<td><a href="selectedEvent?selectedEventId=${i.eventId}"><input type="button" class="btn btn-primary" value="Select"/></a></td>
-															<td>${i.eventName}</td>
-															<td>${i.eventDescription}</td>
-															<th>${i.eventType}</th>
-															<td>${i.eventBranch}</td>
-															<td>${i.eventPrice}</td>
+															<td>${i.eventVO1.eventName}</td>
+															<th>${i.eventVO1.eventType}</th>
+															<td style="color:red">${i.paymentStatus}</td>
+															<td>${i.eventVO1.eventPrice}</td>
+															<td><a href="removeSelectedEvent?selectedEventId=${i.userEventId}"><input type="button" class="btn btn-danger" value="X Remove"/></a></td>
 														</tr>
 													</c:forEach>
 												</tbody>
 												<tfoot>
 													<tr>
-														<th>Select</th>
-														<th>Name</th>
-														<th>Description</th>
-														<th>Type</th>
-														<th>Branch</th>
-														<th>Price</th>
+														<td colspan="3">Total</td>
+														<td colspan="2"><b>${totalPrice}</b></td>
 													</tr>
 												</tfoot>
 											</table>
 										</div>
 									</div>
-								</div>
-							</div>
-
-							<div class="col-12">
-								<div class="box">
-									<div class="box-header">
-										<h4 class="box-title">List of Team Events</h4>
-									</div>
-									<div class="box-body">
-										<div class="table-responsive">
-											<table id="example1"
-												class="table table-bordered table-hover display nowrap margin-top-10 w-p100"
-												style="width: 100%">
-												<thead>
-													<tr>
-														<th>Action</th>
-														<th colspan="5">Information</th>
-													</tr>
-													<tr>
-														<th>Select</th>
-														<th>Name</th>
-														<th>Description</th>
-														<th>Type</th>
-														<th>Branch</th>
-														<th>Price</th>
-													</tr>
-												</thead>
-												<tbody>
-													<c:forEach items="${teamEvents}" var="i">
-														<tr>
-															<td><a href="selectTeam?selectedEventId=${i.eventId}"><input type="button" class="btn btn-primary" value="Select"/></a></td>
-															<td>${i.eventName}</td>
-															<td>${i.eventDescription}</td>
-															<th>${i.eventType}</th>
-															<td>${i.eventBranch}</td>
-															<td>${i.eventPrice}</td>
-														</tr>
-													</c:forEach>
-												</tbody>
-												<tfoot>
-													<tr>
-														<th>Select</th>
-														<th>Name</th>
-														<th>Description</th>
-														<th>Type</th>
-														<th>Branch</th>
-														<th>Price</th>
-													</tr>
-												</tfoot>
-											</table>
-										</div>
-									</div>
+									<a href="selectEvents"><input type="button" class="btn btn-primary" value="+ Add More"/></a>
 								</div>
 							</div>
 						</div>

@@ -1,4 +1,5 @@
 package com.notion.service;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -17,5 +18,24 @@ public class UserEventsService {
 	@Transactional
 	public void insertUserEvent(UserEventsVO userEventsVO){
 		this.userEventsDAO.insertUserEvent(userEventsVO);
+	}
+	
+	@Transactional
+	public List<UserEventsVO> viewUserEvents(UserEventsVO userEventsVO1){
+		List<UserEventsVO> userEventsList=new ArrayList<UserEventsVO>();
+		userEventsList=this.userEventsDAO.viewUserEvents(userEventsVO1);
+		return userEventsList;
+	}
+	
+	@Transactional
+	public List<UserEventsVO> viewUserEvents(){
+		List<UserEventsVO> userEventsList=new ArrayList<UserEventsVO>();
+		userEventsList=this.userEventsDAO.viewUserEvents();
+		return userEventsList;
+	}
+	
+	@Transactional
+	public void removeUserEvent(UserEventsVO userEventsVO3){
+		this.userEventsDAO.removeUserEvent(userEventsVO3);
 	}
 }

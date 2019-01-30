@@ -39,12 +39,16 @@ public class UserEventsController {
 	HttpSession session;
 	
 	@RequestMapping(value="/user/selectEvents",method=RequestMethod.GET)
-	public ModelAndView loadSelectEvents()
+	public ModelAndView loadSelectEvents(HttpServletRequest request,UserEventsVO userEventsVO,RegVO regVO)
 	{
-		List<EventVO> viewEventsList=this.eventService.viewEvents();
+		session=request.getSession();
+		regVO=(RegVO)session.getAttribute("regDetails");
+		userEventsVO.setRegVO1(regVO);
+		
+		List<EventVO> unselectedEventsList=this.eventService.unselectedEvents(userEventsVO);
 		List<EventVO> individualEventsList=new ArrayList<EventVO>();
 		List<EventVO> teamEventsList=new ArrayList<EventVO>();
-		for(EventVO eventLS : viewEventsList)
+		for(EventVO eventLS : unselectedEventsList)
 		{
 			if(eventLS.getStatus().equals("active"))
 			{
@@ -62,19 +66,19 @@ public class UserEventsController {
 	}
 	
 	@RequestMapping(value="/user/selectedEvent",method=RequestMethod.GET)
-	public ModelAndView insertUserEvents(HttpServletRequest request,@RequestParam("selectedEventId") int selectedEventId,UserEventsVO userEventsVO,RegVO regVO1,EventVO eventVO)
+	public String insertUserEvents(HttpServletRequest request,@RequestParam("selectedEventId") int selectedEventId,UserEventsVO userEventsVO1,RegVO regVO1,EventVO eventVO)
 	{
 		session=request.getSession();
 		regVO1=(RegVO)session.getAttribute("regDetails");
 		
-		userEventsVO.setRegVO1(regVO1);
+		userEventsVO1.setRegVO1(regVO1);
 		eventVO.setEventId(selectedEventId);
-		userEventsVO.setEventVO1(eventVO);
-		userEventsVO.setPaymentStatus("pending");
+		userEventsVO1.setEventVO1(eventVO);
+		userEventsVO1.setPaymentStatus("pending");
 		
-		this.userEventsService.insertUserEvent(userEventsVO);
+		this.userEventsService.insertUserEvent(userEventsVO1);
 		
-		return new ModelAndView("redirect:/user/selectEvents");
+		return "redirect:/user/viewEvents";
 	}
 	
 	@RequestMapping(value="/user/selectTeam",method=RequestMethod.GET)
@@ -91,20 +95,47 @@ public class UserEventsController {
 	}
 	
 	@RequestMapping(value="/user/insertTeamData",method=RequestMethod.POST)
-	public ModelAndView insertTeam(HttpServletRequest request,@ModelAttribute("selectTeamData")@Valid UserEventsVO userEventsVO1,BindingResult result,RegVO regVO2,EventVO eventVO2)
+	public String insertTeam(HttpServletRequest request,@ModelAttribute("selectTeamData")@Valid UserEventsVO userEventsVO2,BindingResult result,RegVO regVO2,EventVO eventVO2)
 	{
 		session=request.getSession();
 		regVO2=(RegVO)session.getAttribute("regDetails");
-		userEventsVO1.setRegVO1(regVO2);
+		userEventsVO2.setRegVO1(regVO2);
 		int selectedEventId=(Integer)session.getAttribute("selectedEventId");
 		eventVO2.setEventId(selectedEventId);
-		userEventsVO1.setEventVO1(eventVO2);
-		userEventsVO1.setPaymentStatus("pending");
+		userEventsVO2.setEventVO1(eventVO2);
+		userEventsVO2.setPaymentStatus("pending");
 		
-		this.userEventsService.insertUserEvent(userEventsVO1);
+		this.userEventsService.insertUserEvent(userEventsVO2);
 		
 		session.removeAttribute("selectedEventId");
 		
-		return new ModelAndView("redirect:/user/selectEvents");
+		return "redirect:/user/viewEvents";
+	}
+	
+	@RequestMapping(value="/user/viewEvents",method=RequestMethod.GET)
+	public ModelAndView viewSelectedEvents(HttpServletRequest request,UserEventsVO userEventsVO3,RegVO regVO3)
+	{
+		session=request.getSession();
+		regVO3=(RegVO)session.getAttribute("regDetails");
+		userEventsVO3.setRegVO1(regVO3);
+		
+		List<UserEventsVO> selectedEventsLs=this.userEventsService.viewUserEvents(userEventsVO3);
+		int totalPrice=0;
+		for(UserEventsVO calcTotal : selectedEventsLs)
+		{
+			totalPrice+=calcTotal.getEventVO1().getEventPrice();
+		}
+		
+		return new ModelAndView("/user/viewSelectedEvents","selectedEventsLs",selectedEventsLs).addObject("totalPrice", totalPrice);
+	}
+	
+	@RequestMapping(value="/user/removeSelectedEvent",method=RequestMethod.GET)
+	public String removeSelectedEvent(@RequestParam("selectedEventId") int selectedEventId,UserEventsVO userEventsVO4)
+	{
+		userEventsVO4.setUserEventId(selectedEventId);
+		
+		this.userEventsService.removeUserEvent(userEventsVO4);
+		
+		return "redirect:/user/viewEvents";
 	}
 }

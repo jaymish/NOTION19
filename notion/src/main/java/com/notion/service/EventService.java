@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.notion.dao.EventDAO;
 import com.notion.model.EventVO;
+import com.notion.model.UserEventsVO;
 
 @Service
 public class EventService {
@@ -33,11 +34,6 @@ public class EventService {
 	}
 	
 	@Transactional
-	public void updateEvent(EventVO eventVO2){
-		eventDAO.updateEvent(eventVO2);
-	}
-	
-	@Transactional
 	public void changeEventStatus(EventVO eventVO3){
 		eventDAO.changeEventStatus(eventVO3);
 	}
@@ -45,5 +41,11 @@ public class EventService {
 	@Transactional
 	public void deleteEvent(EventVO eventVO4){
 		eventDAO.deleteEvent(eventVO4);
+	}
+	
+	@Transactional
+	public List<EventVO> unselectedEvents(UserEventsVO userEventsVO){
+		List<EventVO> unselectedEventsLs=this.eventDAO.unselectedEvents(userEventsVO);
+		return unselectedEventsLs;
 	}
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.notion.model.EventVO;
+import com.notion.model.UserEventsVO;
 
 @Repository
 public class EventDAOImp implements EventDAO {
@@ -80,25 +81,7 @@ public class EventDAOImp implements EventDAO {
 		}
 		return ls;
 	}
-	public void updateEvent(EventVO eventVO2)
-	{
-		try
-		{	
-			Session session=sessionFactory.openSession();
-			
-			Transaction transaction=session.beginTransaction();
-			
-			session.update(eventVO2);
-			
-			transaction.commit();
-			
-			session.close();
-		}
-		catch(Exception ex)
-		{
-			ex.printStackTrace();
-		}
-	}
+	
 	public void changeEventStatus(EventVO eventVO3)
 	{
 		try
@@ -136,5 +119,28 @@ public class EventDAOImp implements EventDAO {
 		{
 			ex.printStackTrace();
 		}
+	}
+	public List<EventVO> unselectedEvents(UserEventsVO userEventsVO)
+	{
+		List<EventVO> unselectedEventsLs=new ArrayList<EventVO>();
+		try
+		{
+			Session session=sessionFactory.openSession();
+			
+			Transaction transaction=session.beginTransaction();
+			
+			Query q=session.createQuery("from EventVO where eventId NOT IN (select eventVO1.eventId from UserEventsVO where regVO1='"+userEventsVO.getRegVO1().getRegistrationId()+"')");
+			
+			unselectedEventsLs=q.list();
+			
+			transaction.commit();
+			
+			session.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return unselectedEventsLs;
 	}
 }
