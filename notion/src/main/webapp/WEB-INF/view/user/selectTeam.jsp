@@ -38,9 +38,17 @@
 	{
 		var i=0;
 		i=parseInt(num.value)
+		var l=5
+		while(l>0)
+		{
+			var inputs=document.getElementById("member"+l)
+			inputs.style.display="none"
+			l--
+		}
 		for(var k=1;k<=i;k++)
 		{
 			var inputs=document.getElementById("member"+k)
+			
 			inputs.style.display=""
 		}
 	}
