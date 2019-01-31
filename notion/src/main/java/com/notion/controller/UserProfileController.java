@@ -48,7 +48,7 @@ public class UserProfileController {
 	}
 	
 	@RequestMapping(value="/user/insertUserProfile",method=RequestMethod.POST)
-	public ModelAndView insertUserProfile(HttpServletRequest request,@ModelAttribute("userProfileData") UserProfileVO userProfileVO1,RegVO regVO2)
+	public String insertUserProfile(HttpServletRequest request,@ModelAttribute("userProfileData") UserProfileVO userProfileVO1,RegVO regVO2)
 	{
 		session=request.getSession();
 		regVO2=(RegVO)session.getAttribute("regDetails");
@@ -58,7 +58,7 @@ public class UserProfileController {
 		regVO2.setProfileStatus("complete");
 		this.regService.insertToRegister(regVO2);
 		
-		return new ModelAndView("redirect:/user/Dashboard");
+		return "redirect:/user/Dashboard";
 	}
 	
 	@RequestMapping(value="/user/editProfile",method=RequestMethod.GET)
@@ -75,11 +75,11 @@ public class UserProfileController {
 	}
 	
 	@RequestMapping(value="/user/updateUserProfile",method=RequestMethod.POST)
-	public ModelAndView updateUserProfile(@ModelAttribute("editProfileData")@Valid UserProfileVO userProfileVO3,BindingResult result,RegVO regVO4)
+	public String updateUserProfile(@ModelAttribute("editProfileData")@Valid UserProfileVO userProfileVO3,BindingResult result,RegVO regVO4)
 	{	
 		this.regService.insertToRegister(userProfileVO3.getRegVO());
 		this.userProfileService.insertUserProfile(userProfileVO3);
 		
-		return new ModelAndView("redirect:/user/Dashboard");
+		return "redirect:/user/Dashboard";
 	}
 }

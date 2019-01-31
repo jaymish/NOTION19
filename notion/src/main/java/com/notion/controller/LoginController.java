@@ -22,9 +22,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.notion.model.LoginVO;
 import com.notion.model.RegVO;
+import com.notion.model.UserProfileVO;
 import com.notion.service.InstituteService;
 import com.notion.service.LoginService;
 import com.notion.service.RegService;
+import com.notion.service.UserProfileService;
 
 @Controller
 public class LoginController {
@@ -37,6 +39,9 @@ public class LoginController {
 	
 	@Autowired
 	InstituteService instituteService;
+	
+	@Autowired
+	UserProfileService userProfileService;
 	
 	HttpSession session;
 	
@@ -62,6 +67,8 @@ public class LoginController {
             request.getSession().invalidate();
             request.getSession().setAttribute("tempStatus", "success");
             request.getSession().setAttribute("statusText", "Logout Successfully!");
+            request.getSession().removeAttribute("regDetails");
+            request.getSession().removeAttribute("profileDetails");
         }
 		return new ModelAndView("redirect:/login");
 	}
@@ -123,7 +130,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/user/Dashboard",method=RequestMethod.GET)
-	public ModelAndView loadUserDashboard(HttpServletRequest request,@ModelAttribute LoginVO loginVO3,RegVO regVO1) 
+	public ModelAndView loadUserDashboard(HttpServletRequest request,@ModelAttribute LoginVO loginVO3,RegVO regVO1,UserProfileVO userProfileVO1) 
 	{	
 		session=request.getSession();
 		
@@ -136,10 +143,14 @@ public class LoginController {
 		List<RegVO> regDetailsList=new ArrayList<RegVO>();
 		regDetailsList=this.regService.getRegDetails(regVO1);
 		regVO1=regDetailsList.get(0);
+		userProfileVO1.setRegVO(regVO1);
 		session.setAttribute("regDetails", regVO1);
 		
 		if(regVO1.getProfileStatus().equals("complete"))
 		{
+			List<UserProfileVO> profileDetailsList=this.userProfileService.getUserProfile(userProfileVO1);
+			userProfileVO1=profileDetailsList.get(0);
+			session.setAttribute("profileDetails", userProfileVO1);
 			return new ModelAndView("/user/userDashboard");
 		}
 		else

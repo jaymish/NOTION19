@@ -11,7 +11,7 @@
 <meta name="author" content="">
 <!-- <link rel="icon" href="../adminResources/images/favicon.ico"> -->
 
-<title>Notion User - View Selected Events</title>
+<title>Notion Admin - Event Registrations</title>
 
 <!-- Bootstrap 4.0-->
 <link rel="stylesheet" href="../adminResources/css/bootstrap.css">
@@ -48,7 +48,7 @@
 		<aside class="main-sidebar">
 			<!-- sidebar-->
 			<section class="sidebar">
-				<jsp:include page="userMenu.jsp" />
+				<jsp:include page="adminMenu.jsp" />
 			</section>
 		</aside>
 
@@ -66,9 +66,8 @@
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="index.jsp"><i
 												class="mdi mdi-home-outline"></i></a></li>
-										<li class="breadcrumb-item" aria-current="page">Events</li>
-										<li class="breadcrumb-item active" aria-current="page">Select
-											Events</li>
+										<li class="breadcrumb-item" aria-current="page">Event</li>
+										<li class="breadcrumb-item active" aria-current="page">Registrations</li>
 									</ol>
 								</nav>
 							</div>
@@ -82,41 +81,97 @@
 							<div class="col-12">
 								<div class="box">
 									<div class="box-header">
-										<h4 class="box-title">List of Selected Events</h4>
+										<h4 class="box-title">Payment Completed</h4>
 									</div>
 									<div class="box-body">
 										<div class="table-responsive">
-											<table id="complex_header"
+											<table id="example"
 												class="table table-bordered table-hover display nowrap margin-top-10 w-p100"
 												style="width: 100%">
 												<thead>
 													<tr>
-														<th colspan="4">Information</th>
-														<th>Action</th>
+														<th colspan="6">Information</th>
 													</tr>
 													<tr>
+														<th>Event</th>
 														<th>Name</th>
-														<th>Type</th>
-														<th>Payment</th>
-														<th>Price</th>
-														<th>Remove</th>
+														<th>Enrollment</th>
+														<th>Semester</th>
+														<th>Institute</th>
+														<th>Contact</th>
 													</tr>
 												</thead>
 												<tbody>
-													<c:forEach items="${selectedEventsLs}" var="i">
+													<c:forEach items="${paymentComplete}" var="i">
 														<tr>
 															<td>${i.eventVO1.eventName}</td>
-															<th>${i.eventVO1.eventType}</th>
-															<td>${i.paymentStatus}</td>
-															<td>${i.eventVO1.eventPrice}</td>
-															<td><a href="removeSelectedEvent?selectedEventId=${i.userEventId}"><input type="button" class="btn btn-danger" value="X Remove"/></a></td>
+															<td>${i.userProfileVO.regVO.firstname} ${i.userProfileVO.regVO.lastname}</td>
+															<th>${i.userProfileVO.enrollment}</th>
+															<td>${i.userProfileVO.semester}</td>
+															<td>${i.userProfileVO.instituteVO.instituteName}</td>
+															<td>${i.userProfileVO.contact}</td>
 														</tr>
 													</c:forEach>
 												</tbody>
 												<tfoot>
 													<tr>
-														<td colspan="3">Total</td>
-														<td colspan="2"><b>${totalPrice}</b></td>
+														<th>Event</th>
+														<th>Name</th>
+														<th>Enrollment</th>
+														<th>Semester</th>
+														<th>Institute</th>
+														<th>Contact</th>
+													</tr>
+												</tfoot>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-12">
+								<div class="box">
+									<div class="box-header">
+										<h4 class="box-title">Payment Pending</h4>
+									</div>
+									<div class="box-body">
+										<div class="table-responsive">
+											<table id="example1"
+												class="table table-bordered table-hover display nowrap margin-top-10 w-p100"
+												style="width: 100%">
+												<thead>
+													<tr>
+														<th colspan="6">Information</th>
+													</tr>
+													<tr>
+														<th>Event</th>
+														<th>Name</th>
+														<th>Enrollment</th>
+														<th>Semester</th>
+														<th>Institute</th>
+														<th>Contact</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach items="${paymentPending}" var="i">
+														<tr>
+															<td>${i.eventVO1.eventName}</td>
+															<td>${i.userProfileVO.regVO.firstname} ${i.userProfileVO.regVO.lastname}</td>
+															<th>${i.userProfileVO.enrollment}</th>
+															<td>${i.userProfileVO.semester}</td>
+															<td>${i.userProfileVO.instituteVO.instituteName}</td>
+															<td>${i.userProfileVO.contact}</td>
+														</tr>
+													</c:forEach>
+												</tbody>
+												<tfoot>
+													<tr>
+														<th>Event</th>
+														<th>Name</th>
+														<th>Enrollment</th>
+														<th>Semester</th>
+														<th>Institute</th>
+														<th>Contact</th>
 													</tr>
 												</tfoot>
 											</table>
@@ -128,7 +183,7 @@
 						<!-- /.row -->
 				</section>
 				<!-- /.content -->
-				<a href="selectEvents"><input type="button" class="btn btn-primary" value="+ Add More"/></a>
+
 			</div>
 		</div>
 		<!-- /.content-wrapper -->

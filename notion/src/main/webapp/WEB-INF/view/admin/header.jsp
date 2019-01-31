@@ -59,12 +59,12 @@
 							<img src="../adminResources/images/7.jpg"
 								class="float-left rounded-circle" alt="User Image">
 							<h4 class="user-name align-self-center">
-								<span>Samuel Brus</span> <small>${adminMail}</small>
+								<span>Admin</span> <small>${adminMail}</small>
 							</h4>
 						</div>
 					</li>
 					<!-- Menu Body -->
-					<li class="user-body"><a class="dropdown-item"
+					<li class="user-body"><!-- <a class="dropdown-item"
 						href="javascript:void(0)"><i class="ion ion-person"></i> My
 							Profile</a> <a class="dropdown-item" href="javascript:void(0)"><i
 							class="ion ion-bag"></i> My Balance</a> <a class="dropdown-item"
@@ -74,14 +74,13 @@
 						href="javascript:void(0)"><i class="ion ion-settings"></i>
 							Account Setting</a>
 						<div class="dropdown-divider"></div> <a class="dropdown-item"
-						href="logout"><i class="ion-log-out"></i> Logout</a>
+						href="logout"><i class="ion-log-out"></i> Logout</a> -->
 						<div class="dropdown-divider"></div>
 						<div class="p-10">
-							<a href="javascript:void(0)"
-								class="btn btn-sm btn-rounded btn-success">View Profile</a>
+							<a href="logout"
+								class="btn btn-sm btn-rounded btn-success ion-log-out"> Logout</a>
 						</div></li>
 				</ul></li>
 		</ul>
 	</div>
 </nav>
-<% response.sendRedirect("adminDashboard"); %>

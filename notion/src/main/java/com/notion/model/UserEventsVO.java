@@ -13,7 +13,7 @@ public class UserEventsVO {
 	private int userEventId;
 	
 	@ManyToOne
-	RegVO regVO1;
+	UserProfileVO userProfileVO;
 	
 	@ManyToOne
 	EventVO eventVO1;
@@ -50,12 +50,12 @@ public class UserEventsVO {
 		this.userEventId = userEventId;
 	}
 
-	public RegVO getRegVO1() {
-		return regVO1;
+	public UserProfileVO getUserProfileVO() {
+		return userProfileVO;
 	}
 
-	public void setRegVO1(RegVO regVO1) {
-		this.regVO1 = regVO1;
+	public void setUserProfileVO(UserProfileVO userProfileVO) {
+		this.userProfileVO = userProfileVO;
 	}
 
 	public EventVO getEventVO1() {

@@ -129,7 +129,7 @@ public class EventDAOImp implements EventDAO {
 			
 			Transaction transaction=session.beginTransaction();
 			
-			Query q=session.createQuery("from EventVO where eventId NOT IN (select eventVO1.eventId from UserEventsVO where regVO1='"+userEventsVO.getRegVO1().getRegistrationId()+"')");
+			Query q=session.createQuery("from EventVO where eventId NOT IN (select eventVO1.eventId from UserEventsVO where userProfileVO='"+userEventsVO.getUserProfileVO().getProfileId()+"')");
 			
 			unselectedEventsLs=q.list();
 			

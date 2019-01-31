@@ -45,7 +45,7 @@ public class UserEventsDAOImp implements UserEventsDAO{
 			 
 			 Transaction transaction=session.beginTransaction();
 			 
-			 Query q=session.createQuery("from UserEventsVO where regVO1='"+userEventsVO1.getRegVO1().getRegistrationId()+"'");
+			 Query q=session.createQuery("from UserEventsVO where userProfileVO='"+userEventsVO1.getUserProfileVO().getProfileId()+"'");
 			 
 			 userEventsList=q.list();
 			 

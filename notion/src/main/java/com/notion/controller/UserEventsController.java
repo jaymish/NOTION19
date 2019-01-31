@@ -39,11 +39,11 @@ public class UserEventsController {
 	HttpSession session;
 	
 	@RequestMapping(value="/user/selectEvents",method=RequestMethod.GET)
-	public ModelAndView loadSelectEvents(HttpServletRequest request,UserEventsVO userEventsVO,RegVO regVO)
+	public ModelAndView loadSelectEvents(HttpServletRequest request,UserEventsVO userEventsVO,UserProfileVO userProfileVO)
 	{
 		session=request.getSession();
-		regVO=(RegVO)session.getAttribute("regDetails");
-		userEventsVO.setRegVO1(regVO);
+		userProfileVO=(UserProfileVO)session.getAttribute("profileDetails");
+		userEventsVO.setUserProfileVO(userProfileVO);
 		
 		List<EventVO> unselectedEventsList=this.eventService.unselectedEvents(userEventsVO);
 		List<EventVO> individualEventsList=new ArrayList<EventVO>();
@@ -66,12 +66,11 @@ public class UserEventsController {
 	}
 	
 	@RequestMapping(value="/user/selectedEvent",method=RequestMethod.GET)
-	public String insertUserEvents(HttpServletRequest request,@RequestParam("selectedEventId") int selectedEventId,UserEventsVO userEventsVO1,RegVO regVO1,EventVO eventVO)
+	public String insertUserEvents(HttpServletRequest request,@RequestParam("selectedEventId") int selectedEventId,UserEventsVO userEventsVO1,UserProfileVO userProfileVO1,EventVO eventVO)
 	{
 		session=request.getSession();
-		regVO1=(RegVO)session.getAttribute("regDetails");
-		
-		userEventsVO1.setRegVO1(regVO1);
+		userProfileVO1=(UserProfileVO)session.getAttribute("profileDetails");
+		userEventsVO1.setUserProfileVO(userProfileVO1);
 		eventVO.setEventId(selectedEventId);
 		userEventsVO1.setEventVO1(eventVO);
 		userEventsVO1.setPaymentStatus("pending");
@@ -95,11 +94,11 @@ public class UserEventsController {
 	}
 	
 	@RequestMapping(value="/user/insertTeamData",method=RequestMethod.POST)
-	public String insertTeam(HttpServletRequest request,@ModelAttribute("selectTeamData")@Valid UserEventsVO userEventsVO2,BindingResult result,RegVO regVO2,EventVO eventVO2)
+	public String insertTeam(HttpServletRequest request,@ModelAttribute("selectTeamData")@Valid UserEventsVO userEventsVO2,BindingResult result,UserProfileVO userProfileVO2,EventVO eventVO2)
 	{
 		session=request.getSession();
-		regVO2=(RegVO)session.getAttribute("regDetails");
-		userEventsVO2.setRegVO1(regVO2);
+		userProfileVO2=(UserProfileVO)session.getAttribute("profileDetails");
+		userEventsVO2.setUserProfileVO(userProfileVO2);
 		int selectedEventId=(Integer)session.getAttribute("selectedEventId");
 		eventVO2.setEventId(selectedEventId);
 		userEventsVO2.setEventVO1(eventVO2);
@@ -113,11 +112,11 @@ public class UserEventsController {
 	}
 	
 	@RequestMapping(value="/user/viewEvents",method=RequestMethod.GET)
-	public ModelAndView viewSelectedEvents(HttpServletRequest request,UserEventsVO userEventsVO3,RegVO regVO3)
+	public ModelAndView viewSelectedEvents(HttpServletRequest request,UserEventsVO userEventsVO3,UserProfileVO userProfileVO3)
 	{
 		session=request.getSession();
-		regVO3=(RegVO)session.getAttribute("regDetails");
-		userEventsVO3.setRegVO1(regVO3);
+		userProfileVO3=(UserProfileVO)session.getAttribute("profileDetails");
+		userEventsVO3.setUserProfileVO(userProfileVO3);
 		
 		List<UserEventsVO> selectedEventsLs=this.userEventsService.viewUserEvents(userEventsVO3);
 		int totalPrice=0;
@@ -138,4 +137,32 @@ public class UserEventsController {
 		
 		return "redirect:/user/viewEvents";
 	}
+	
+	@RequestMapping(value="/admin/registeredEvents",method=RequestMethod.GET)
+	public ModelAndView viewEventRegistrations()
+	{
+		List<UserEventsVO> registeredEventsLs=this.userEventsService.viewUserEvents();
+		List<UserEventsVO> pendingPaymentLs=new ArrayList<UserEventsVO>();
+		List<UserEventsVO> completePaymentLs=new ArrayList<UserEventsVO>();
+		
+		for(UserEventsVO regEvent : registeredEventsLs)
+		{
+			if(regEvent.getPaymentStatus().equals("complete"))
+			{
+				completePaymentLs.add(regEvent);
+			}
+			else
+			{
+				pendingPaymentLs.add(regEvent);
+			}
+		}
+		
+		return new ModelAndView("/admin/viewEventRegistrations","paymentComplete",completePaymentLs).addObject("paymentPending", pendingPaymentLs);
+	}
+	
+	/*@RequestMapping(value="/admin/collectPayment",method=RequestMethod.GET)
+	public ModelAndView loadCollectPayment()
+	{
+		
+	}*/
 }

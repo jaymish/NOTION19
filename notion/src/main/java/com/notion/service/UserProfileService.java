@@ -22,6 +22,13 @@ public class UserProfileService {
 	}
 	
 	@Transactional
+	public List<UserProfileVO> getUserProfile(){
+		List<UserProfileVO> profileData=new ArrayList<UserProfileVO>();
+		profileData=this.userProfileDAO.getUserProfile();
+		return profileData;
+	}
+	
+	@Transactional
 	public List<UserProfileVO> getUserProfile(UserProfileVO userProfileVO1){
 		List<UserProfileVO> profileData=new ArrayList<UserProfileVO>();
 		profileData=this.userProfileDAO.getUserProfile(userProfileVO1);

@@ -37,6 +37,30 @@ public class UserProfileDAOImp implements UserProfileDAO {
 		}
 	}
 	
+	public List<UserProfileVO> getUserProfile()
+	{
+		List<UserProfileVO> profileData=new ArrayList<UserProfileVO>();
+		try
+		{
+			Session session=sessionFactory.openSession();
+			 
+			Transaction transaction=session.beginTransaction();
+			
+			Query q=session.createQuery("from UserProfileVO");
+			
+			profileData=q.list();
+			
+			transaction.commit();
+			 
+			 session.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return profileData;
+	}
+	
 	public List<UserProfileVO> getUserProfile(UserProfileVO userProfileVO1)
 	{
 		List<UserProfileVO> profileData=new ArrayList<UserProfileVO>();

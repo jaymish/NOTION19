@@ -33,4 +33,23 @@
 			<li><a href="viewInstitutes"><i class="ti-more"></i>View Institutes</a></li>
 		</ul>
 	</li>
+	<li class="treeview">
+		<a href="#">
+		<i class="ti-files"></i>
+		<span>Registrations</span>
+		<span class="pull-right-container">
+		<i class="fa fa-angle-right pull-right"></i>
+		</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="registeredUsers"><i class="ti-more"></i>Users</a></li>
+			<li><a href="registeredEvents"><i class="ti-more"></i>Events</a></li>
+		</ul>
+	</li>
+	<li>
+		<a href="collectPayment">
+			<i class="ti-money"></i>
+			<span>Collect Payment</span> 
+		</a>
+	</li>
 </ul>
