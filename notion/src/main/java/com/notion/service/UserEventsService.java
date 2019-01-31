@@ -28,14 +28,26 @@ public class UserEventsService {
 	}
 	
 	@Transactional
-	public List<UserEventsVO> viewUserEvents(){
+	public List<UserEventsVO> paymentComplete(){
 		List<UserEventsVO> userEventsList=new ArrayList<UserEventsVO>();
-		userEventsList=this.userEventsDAO.viewUserEvents();
+		userEventsList=this.userEventsDAO.paymentComplete();
 		return userEventsList;
 	}
 	
 	@Transactional
 	public void removeUserEvent(UserEventsVO userEventsVO3){
 		this.userEventsDAO.removeUserEvent(userEventsVO3);
+	}
+	
+	@Transactional
+	public List<UserEventsVO> paymentPending(){
+		List<UserEventsVO> paymentPendingList=new ArrayList<UserEventsVO>();
+		paymentPendingList=this.userEventsDAO.paymentPending();
+		return paymentPendingList;
+	}
+	
+	@Transactional
+	public void completePayment(UserEventsVO userEventsVO4){
+		this.userEventsDAO.completePayment(userEventsVO4);
 	}
 }

@@ -47,7 +47,7 @@
 		</ul>
 	</li>
 	<li>
-		<a href="collectPayment">
+		<a href="collectPayments">
 			<i class="ti-money"></i>
 			<span>Collect Payment</span> 
 		</a>

@@ -138,31 +138,47 @@ public class UserEventsController {
 		return "redirect:/user/viewEvents";
 	}
 	
+	@RequestMapping(value="/admin/removeSelectedEvent",method=RequestMethod.GET)
+	public String removeSelectedEvent2(@RequestParam("selectedEventId") int selectedEventId,UserEventsVO userEventsVO5)
+	{
+		userEventsVO5.setUserEventId(selectedEventId);
+		
+		this.userEventsService.removeUserEvent(userEventsVO5);
+		
+		return "redirect:/admin/collectPayment";
+	}
+	
 	@RequestMapping(value="/admin/registeredEvents",method=RequestMethod.GET)
 	public ModelAndView viewEventRegistrations()
 	{
-		List<UserEventsVO> registeredEventsLs=this.userEventsService.viewUserEvents();
-		List<UserEventsVO> pendingPaymentLs=new ArrayList<UserEventsVO>();
-		List<UserEventsVO> completePaymentLs=new ArrayList<UserEventsVO>();
+		List<UserEventsVO> registeredEventsLs=this.userEventsService.paymentComplete();
+		List<UserEventsVO> teamMembersLs=new ArrayList<UserEventsVO>();
 		
 		for(UserEventsVO regEvent : registeredEventsLs)
 		{
-			if(regEvent.getPaymentStatus().equals("complete"))
+			if(regEvent.getEventVO1().getParticipationType().equals("team"))
 			{
-				completePaymentLs.add(regEvent);
-			}
-			else
-			{
-				pendingPaymentLs.add(regEvent);
+				teamMembersLs.add(regEvent);
 			}
 		}
 		
-		return new ModelAndView("/admin/viewEventRegistrations","paymentComplete",completePaymentLs).addObject("paymentPending", pendingPaymentLs);
+		return new ModelAndView("/admin/viewEventRegistrations","paymentComplete",registeredEventsLs).addObject("teamMembersLs", teamMembersLs);
 	}
 	
-	/*@RequestMapping(value="/admin/collectPayment",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/collectPayments",method=RequestMethod.GET)
 	public ModelAndView loadCollectPayment()
 	{
+		List<UserEventsVO> collectPaymentLs=this.userEventsService.paymentPending();
+		return new ModelAndView("/admin/collectPayments","pendingPaymentsLs",collectPaymentLs);
+	}
+	
+	@RequestMapping(value="/admin/collect",method=RequestMethod.GET)
+	public String updatePaymentStatus(@RequestParam("selectedEventId") int selectedEventId,UserEventsVO userEventsVO6)
+	{
+		userEventsVO6.setUserEventId(selectedEventId);
 		
-	}*/
+		this.userEventsService.completePayment(userEventsVO6);
+		
+		return "redirect:/admin/collectPayments";
+	}
 }

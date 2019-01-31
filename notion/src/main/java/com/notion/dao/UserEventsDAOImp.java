@@ -60,7 +60,27 @@ public class UserEventsDAOImp implements UserEventsDAO{
 		return userEventsList;
 	}
 	
-	public List<UserEventsVO> viewUserEvents()
+	public void removeUserEvent(UserEventsVO userEventsVO3)
+	{
+		try
+		{
+			 Session session=sessionFactory.openSession();
+			 
+			 Transaction transaction=session.beginTransaction();
+			 
+			 session.delete(userEventsVO3);
+			 
+			 transaction.commit();
+			 
+			 session.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+	
+	public List<UserEventsVO> paymentComplete()
 	{
 		List<UserEventsVO> userEventsList=new ArrayList<UserEventsVO>();
 		try
@@ -69,7 +89,7 @@ public class UserEventsDAOImp implements UserEventsDAO{
 			 
 			 Transaction transaction=session.beginTransaction();
 			 
-			 Query q=session.createQuery("from UserEventsVO");
+			 Query q=session.createQuery("from UserEventsVO where paymentStatus = 'complete'");
 			 
 			 userEventsList=q.list();
 			 
@@ -84,19 +104,42 @@ public class UserEventsDAOImp implements UserEventsDAO{
 		return userEventsList;
 	}
 	
-	public void removeUserEvent(UserEventsVO userEventsVO3)
+	public List<UserEventsVO> paymentPending()
 	{
+		List<UserEventsVO> paymentPendingList=new ArrayList<UserEventsVO>();
 		try
 		{
 			 Session session=sessionFactory.openSession();
 			 
 			 Transaction transaction=session.beginTransaction();
 			 
-			 session.delete(userEventsVO3);
+			 Query q=session.createQuery("from UserEventsVO where paymentStatus = 'pending'");
+			 
+			 paymentPendingList=q.list();
 			 
 			 transaction.commit();
 			 
 			 session.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return paymentPendingList;
+	}
+	public void completePayment(UserEventsVO userEventsVO4)
+	{
+		try
+		{
+			Session session=sessionFactory.openSession();
+			 
+			Transaction transaction=session.beginTransaction();
+			
+			session.createQuery("update UserEventsVO set paymentStatus = 'complete' where userEventId='"+userEventsVO4.getUserEventId()+"'").executeUpdate();
+			
+			transaction.commit();
+			 
+			session.close();
 		}
 		catch(Exception ex)
 		{

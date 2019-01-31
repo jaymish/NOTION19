@@ -11,7 +11,7 @@
 <meta name="author" content="">
 <!-- <link rel="icon" href="../adminResources/images/favicon.ico"> -->
 
-<title>Notion Admin - Event Registrations</title>
+<title>Notion Admin - Collect Payments</title>
 
 <!-- Bootstrap 4.0-->
 <link rel="stylesheet" href="../adminResources/css/bootstrap.css">
@@ -67,7 +67,7 @@
 										<li class="breadcrumb-item"><a href="index.jsp"><i
 												class="mdi mdi-home-outline"></i></a></li>
 										<li class="breadcrumb-item" aria-current="page">Event</li>
-										<li class="breadcrumb-item active" aria-current="page">Registrations</li>
+										<li class="breadcrumb-item active" aria-current="page">Payments</li>
 									</ol>
 								</nav>
 							</div>
@@ -81,7 +81,7 @@
 							<div class="col-12">
 								<div class="box">
 									<div class="box-header">
-										<h4 class="box-title">Payment Completed</h4>
+										<h4 class="box-title">Payment Pending</h4>
 									</div>
 									<div class="box-body">
 										<div class="table-responsive">
@@ -90,26 +90,27 @@
 												style="width: 100%">
 												<thead>
 													<tr>
-														<th colspan="6">Information</th>
+														<th colspan="4">Information</th>
+														<th colspan="2">Action</th>
 													</tr>
 													<tr>
 														<th>Event</th>
 														<th>Name</th>
-														<th>Enrollment</th>
-														<th>Semester</th>
-														<th>Institute</th>
-														<th>Contact</th>
+														<th>Email</th>
+														<th>Price</th>
+														<th>Collect</th>
+														<th>Remove</th>
 													</tr>
 												</thead>
 												<tbody>
-													<c:forEach items="${paymentComplete}" var="i">
+													<c:forEach items="${pendingPaymentsLs}" var="i">
 														<tr>
 															<td>${i.eventVO1.eventName}</td>
 															<td>${i.userProfileVO.regVO.firstname} ${i.userProfileVO.regVO.lastname}</td>
-															<th>${i.userProfileVO.enrollment}</th>
-															<td>${i.userProfileVO.semester}</td>
-															<td>${i.userProfileVO.instituteVO.instituteName}</td>
-															<td>${i.userProfileVO.contact}</td>
+															<th>${i.userProfileVO.regVO.loginVO.username}</th>
+															<td>${i.eventVO1.eventPrice}</td>
+															<td><a href="collect?selectedEventId=${i.userEventId}"><input type="button" class="btn btn-success" value="Collect"/></a></td>
+															<td><a href="removeSelectedEvent?selectedEventId=${i.userEventId}"><input type="button" class="btn btn-danger" value="X Remove"/></a></td>
 														</tr>
 													</c:forEach>
 												</tbody>
@@ -117,61 +118,10 @@
 													<tr>
 														<th>Event</th>
 														<th>Name</th>
-														<th>Enrollment</th>
-														<th>Semester</th>
-														<th>Institute</th>
-														<th>Contact</th>
-													</tr>
-												</tfoot>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="col-12">
-								<div class="box">
-									<div class="box-header">
-										<h4 class="box-title">Teams</h4>
-									</div>
-									<div class="box-body">
-										<div class="table-responsive">
-											<table id="example1"
-												class="table table-bordered table-hover display nowrap margin-top-10 w-p100"
-												style="width: 100%">
-												<thead>
-													<tr>
-														<th colspan="6">Information</th>
-													</tr>
-													<tr>
-														<th>Event</th>
-														<th>Name</th>
-														<th>Member 1</th>
-														<th>Member 2</th>
-														<th>Member 3</th>
-														<th>Member 4</th>
-													</tr>
-												</thead>
-												<tbody>
-													<c:forEach items="${teamMembersLs}" var="i">
-														<tr>
-															<td>${i.eventVO1.eventName}</td>
-															<td>${i.userProfileVO.regVO.firstname} ${i.userProfileVO.regVO.lastname}</td>
-															<th>${i.teamMember1}</th>
-															<td>${i.teamMember2}</td>
-															<td>${i.teamMember3}</td>
-															<td>${i.teamMember4}</td>
-														</tr>
-													</c:forEach>
-												</tbody>
-												<tfoot>
-													<tr>
-														<th>Event</th>
-														<th>Name</th>
-														<th>Member 1</th>
-														<th>Member 2</th>
-														<th>Member 3</th>
-														<th>Member 4</th>
+														<th>Email</th>
+														<th>Price</th>
+														<th>Collect</th>
+														<th>Remove</th>
 													</tr>
 												</tfoot>
 											</table>
