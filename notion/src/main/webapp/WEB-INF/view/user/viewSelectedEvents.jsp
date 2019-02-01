@@ -34,7 +34,13 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
-
+<script>
+	function deskPay(btn)
+	{
+		alert("You can pay total amount at registeration desk near room 109 or at 7th floor BSC Building")
+		btn.disabled=true
+	}
+</script>
 </head>
 
 <body class="hold-transition skin-light light-sidebar sidebar-mini">
@@ -67,7 +73,7 @@
 										<li class="breadcrumb-item"><a href="index.jsp"><i
 												class="mdi mdi-home-outline"></i></a></li>
 										<li class="breadcrumb-item" aria-current="page">Events</li>
-										<li class="breadcrumb-item active" aria-current="page">Select
+										<li class="breadcrumb-item active" aria-current="page">Selected
 											Events</li>
 									</ol>
 								</nav>
@@ -97,8 +103,8 @@
 													<tr>
 														<th>Name</th>
 														<th>Type</th>
-														<th>Payment</th>
 														<th>Price</th>
+														<th>Payment</th>
 														<th>Remove</th>
 													</tr>
 												</thead>
@@ -107,16 +113,65 @@
 														<tr>
 															<td>${i.eventVO1.eventName}</td>
 															<th>${i.eventVO1.eventType}</th>
-															<td>${i.paymentStatus}</td>
 															<td>${i.eventVO1.eventPrice}</td>
+															<td style="color:red">${i.paymentStatus}</td>
 															<td><a href="removeSelectedEvent?selectedEventId=${i.userEventId}"><input type="button" class="btn btn-danger" value="X Remove"/></a></td>
 														</tr>
 													</c:forEach>
 												</tbody>
 												<tfoot>
 													<tr>
-														<td colspan="3">Total</td>
-														<td colspan="2"><b>${totalPrice}</b></td>
+														<td colspan="2">Total</td>
+														<td colspan="3" style="font-weight:bolder">${totalPrice}</td>
+													</tr>
+												</tfoot>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div style="margin:0 0 30px 15px">
+								<a href="selectEvents"><input type="button" class="btn btn-primary" value="+ Add More"/></a>
+								<input type="button" style="margin:0 0 0 20px" class="btn btn-primary" value="Pay at Desk" onclick="deskPay(this)"/>
+								<input type="button" style="margin:0 0 0 20px" class="btn btn-primary" value="Pay Online"/>
+							</div>
+							<div class="col-12">
+								<div class="box">
+									<div class="box-header">
+										<h4 class="box-title">List of Registered Events</h4>
+									</div>
+									<div class="box-body">
+										<div class="table-responsive">
+											<table id="example1"
+												class="table table-bordered table-hover display nowrap margin-top-10 w-p100"
+												style="width: 100%">
+												<thead>
+													<tr>
+														<th colspan="4">Information</th>
+													</tr>
+													<tr>
+														<th>Name</th>
+														<th>Type</th>
+														<th>Price</th>
+														<th>Payment</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach items="${registeredEventsLs}" var="i">
+														<tr>
+															<td>${i.eventVO1.eventName}</td>
+															<th>${i.eventVO1.eventType}</th>
+															<td>${i.eventVO1.eventPrice}</td>
+															<td style="color:green">${i.paymentStatus}</td>
+														</tr>
+													</c:forEach>
+												</tbody>
+												<tfoot>
+													<tr>
+														<th>Name</th>
+														<th>Type</th>
+														<th>Price</th>
+														<th>Payment</th>
 													</tr>
 												</tfoot>
 											</table>
@@ -128,7 +183,6 @@
 						<!-- /.row -->
 				</section>
 				<!-- /.content -->
-				<a href="selectEvents"><input type="button" class="btn btn-primary" value="+ Add More"/></a>
 			</div>
 		</div>
 		<!-- /.content-wrapper -->

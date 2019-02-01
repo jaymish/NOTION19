@@ -119,13 +119,26 @@ public class UserEventsController {
 		userEventsVO3.setUserProfileVO(userProfileVO3);
 		
 		List<UserEventsVO> selectedEventsLs=this.userEventsService.viewUserEvents(userEventsVO3);
+		List<UserEventsVO> pendingPaymentsLs=new ArrayList<UserEventsVO>();
+		List<UserEventsVO> completedPaymentsLs=new ArrayList<UserEventsVO>();
+		for(UserEventsVO selectedEvent : selectedEventsLs)
+		{
+			if(selectedEvent.getPaymentStatus().equals("pending"))
+			{
+				pendingPaymentsLs.add(selectedEvent);
+			}
+			else if(selectedEvent.getPaymentStatus().equals("complete"))
+			{
+				completedPaymentsLs.add(selectedEvent);
+			}
+		}
 		int totalPrice=0;
-		for(UserEventsVO calcTotal : selectedEventsLs)
+		for(UserEventsVO calcTotal : pendingPaymentsLs)
 		{
 			totalPrice+=calcTotal.getEventVO1().getEventPrice();
 		}
 		
-		return new ModelAndView("/user/viewSelectedEvents","selectedEventsLs",selectedEventsLs).addObject("totalPrice", totalPrice);
+		return new ModelAndView("/user/viewSelectedEvents","selectedEventsLs",pendingPaymentsLs).addObject("totalPrice", totalPrice).addObject("registeredEventsLs", completedPaymentsLs);
 	}
 	
 	@RequestMapping(value="/user/removeSelectedEvent",method=RequestMethod.GET)
@@ -156,7 +169,7 @@ public class UserEventsController {
 		
 		for(UserEventsVO regEvent : registeredEventsLs)
 		{
-			if(regEvent.getEventVO1().getParticipationType().equals("team"))
+			if(regEvent.getEventVO1().getParticipationType().equals("Team"))
 			{
 				teamMembersLs.add(regEvent);
 			}
