@@ -27,6 +27,9 @@ public class UserProfileVO {
 	
 	@Column
 	private String contact;
+	
+	@Column
+	private String uniqueQR;
 
 	public int getProfileId() {
 		return profileId;
@@ -74,5 +77,13 @@ public class UserProfileVO {
 
 	public void setContact(String contact) {
 		this.contact = contact;
+	}
+	
+	public String getUniqueQR() {
+		return uniqueQR;
+	}
+
+	public void setUniqueQR(String uniqueQR) {
+		this.uniqueQR = uniqueQR;
 	}
 }

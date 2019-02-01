@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.notion.dao.UserEventsDAO;
 import com.notion.model.UserEventsVO;
+import com.notion.model.UserProfileVO;
 
 @Service
 public class UserEventsService {
@@ -47,7 +48,7 @@ public class UserEventsService {
 	}
 	
 	@Transactional
-	public void completePayment(UserEventsVO userEventsVO4){
-		this.userEventsDAO.completePayment(userEventsVO4);
+	public void collectPayment(UserProfileVO userProfileVO){
+		this.userEventsDAO.collectPayment(userProfileVO);
 	}
 }

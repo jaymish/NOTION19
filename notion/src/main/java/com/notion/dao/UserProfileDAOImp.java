@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.notion.model.UserEventsVO;
 import com.notion.model.UserProfileVO;
 
 @Repository
@@ -61,7 +62,7 @@ public class UserProfileDAOImp implements UserProfileDAO {
 		return profileData;
 	}
 	
-	public List<UserProfileVO> getUserProfile(UserProfileVO userProfileVO1)
+	public List<UserProfileVO> getUserProfileByReg(UserProfileVO userProfileVO1)
 	{
 		List<UserProfileVO> profileData=new ArrayList<UserProfileVO>();
 		try
@@ -76,12 +77,60 @@ public class UserProfileDAOImp implements UserProfileDAO {
 			
 			transaction.commit();
 			 
-			 session.close();
+			session.close();
 		}
 		catch(Exception ex)
 		{
 			ex.printStackTrace();
 		}
 		return profileData;
+	}
+	
+	public List<UserProfileVO> getUserProfileById(UserProfileVO userProfileVO2)
+	{
+		List<UserProfileVO> profileData=new ArrayList<UserProfileVO>();
+		try
+		{
+			Session session=sessionFactory.openSession();
+			 
+			Transaction transaction=session.beginTransaction();
+			
+			Query q=session.createQuery("from UserProfileVO where profileId = '"+userProfileVO2.getProfileId()+"'");
+			
+			profileData=q.list();
+			
+			transaction.commit();
+			 
+			session.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return profileData;
+	}
+	
+	public List<UserProfileVO> pendingPayers()
+	{
+		List<UserProfileVO> pendingPayersList=new ArrayList<UserProfileVO>();
+		try
+		{
+			Session session=sessionFactory.openSession();
+			 
+			Transaction transaction=session.beginTransaction();
+			
+			Query q=session.createQuery("from UserProfileVO where profileId IN (select userProfileVO.profileId from UserEventsVO where paymentStatus = 'pending')");
+			
+			pendingPayersList=q.list();
+			
+			transaction.commit();
+			 
+			session.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return pendingPayersList;
 	}
 }

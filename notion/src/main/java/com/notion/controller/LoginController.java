@@ -148,7 +148,7 @@ public class LoginController {
 		
 		if(regVO1.getProfileStatus().equals("complete"))
 		{
-			List<UserProfileVO> profileDetailsList=this.userProfileService.getUserProfile(userProfileVO1);
+			List<UserProfileVO> profileDetailsList=this.userProfileService.getUserProfileByReg(userProfileVO1);
 			userProfileVO1=profileDetailsList.get(0);
 			session.setAttribute("profileDetails", userProfileVO1);
 			return new ModelAndView("/user/userDashboard");

@@ -11,7 +11,7 @@
 <meta name="author" content="">
 <!-- <link rel="icon" href="../adminResources/images/favicon.ico"> -->
 
-<title>Notion Admin - Collect Payments</title>
+<title>Notion Admin - View Selected Events</title>
 
 <!-- Bootstrap 4.0-->
 <link rel="stylesheet" href="../adminResources/css/bootstrap.css">
@@ -34,7 +34,6 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
-
 </head>
 
 <body class="hold-transition skin-light light-sidebar sidebar-mini">
@@ -66,8 +65,9 @@
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="index.jsp"><i
 												class="mdi mdi-home-outline"></i></a></li>
-										<li class="breadcrumb-item" aria-current="page">Event</li>
-										<li class="breadcrumb-item active" aria-current="page">Payments</li>
+										<li class="breadcrumb-item" aria-current="page">Events</li>
+										<li class="breadcrumb-item active" aria-current="page">Selected
+											Events</li>
 									</ol>
 								</nav>
 							</div>
@@ -81,47 +81,89 @@
 							<div class="col-12">
 								<div class="box">
 									<div class="box-header">
-										<h4 class="box-title">Payment Pending</h4>
+										<h4 class="box-title">List of Selected Events</h4>
 									</div>
 									<div class="box-body">
 										<div class="table-responsive">
-											<table id="example"
+											<table id="complex_header"
 												class="table table-bordered table-hover display nowrap margin-top-10 w-p100"
 												style="width: 100%">
 												<thead>
 													<tr>
 														<th colspan="4">Information</th>
-														<th colspan="2">Action</th>
+														<th>Action</th>
 													</tr>
 													<tr>
-														<th>Event</th>
 														<th>Name</th>
-														<th>Email</th>
+														<th>Type</th>
 														<th>Price</th>
-														<th>Collect</th>
+														<th>Payment</th>
 														<th>Remove</th>
 													</tr>
 												</thead>
 												<tbody>
-													<c:forEach items="${pendingPaymentsLs}" var="i">
+													<c:forEach items="${selectedEventsLs}" var="i">
 														<tr>
 															<td>${i.eventVO1.eventName}</td>
-															<td>${i.userProfileVO.regVO.firstname} ${i.userProfileVO.regVO.lastname}</td>
-															<th>${i.userProfileVO.regVO.loginVO.username}</th>
+															<td>${i.eventVO1.eventType}</td>
 															<td>${i.eventVO1.eventPrice}</td>
-															<td><a href="collect?selectedEventId=${i.userEventId}"><input type="button" class="btn btn-success" value="Collect"/></a></td>
+															<td style="color:red">${i.paymentStatus}</td>
 															<td><a href="removeSelectedEvent?selectedEventId=${i.userEventId}"><input type="button" class="btn btn-danger" value="X Remove"/></a></td>
 														</tr>
 													</c:forEach>
 												</tbody>
 												<tfoot>
 													<tr>
-														<th>Event</th>
+														<td colspan="2">Total Pending</td>
+														<td colspan="3" style="font-weight:bolder">${totalPending}</td>
+													</tr>
+												</tfoot>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div style="margin:0 0 30px 15px">
+								<a href="collectPayment"><input type="button" class="btn btn-primary" value="Collect"/></a>
+							</div>
+							<div class="col-12">
+								<div class="box">
+									<div class="box-header">
+										<h4 class="box-title">List of Registered Events</h4>
+									</div>
+									<div class="box-body">
+										<div class="table-responsive">
+											<table id="example1"
+												class="table table-bordered table-hover display nowrap margin-top-10 w-p100"
+												style="width: 100%">
+												<thead>
+													<tr>
+														<th colspan="4">Information</th>
+														<th>Action</th>
+													</tr>
+													<tr>
 														<th>Name</th>
-														<th>Email</th>
+														<th>Type</th>
 														<th>Price</th>
-														<th>Collect</th>
+														<th>Payment</th>
 														<th>Remove</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach items="${registeredEventsLs}" var="i">
+														<tr>
+															<td>${i.eventVO1.eventName}</td>
+															<td>${i.eventVO1.eventType}</td>
+															<td>${i.eventVO1.eventPrice}</td>
+															<td style="color:green">${i.paymentStatus}</td>
+															<td><a href="removeSelectedEvent?selectedEventId=${i.userEventId}"><input type="button" class="btn btn-danger" value="X Remove"/></a></td>
+														</tr>
+													</c:forEach>
+												</tbody>
+												<tfoot>
+													<tr>
+														<td colspan="2">Total Paid</td>
+														<td colspan="3" style="font-weight:bolder">${totalPaid}</td>
 													</tr>
 												</tfoot>
 											</table>
@@ -133,7 +175,6 @@
 						<!-- /.row -->
 				</section>
 				<!-- /.content -->
-
 			</div>
 		</div>
 		<!-- /.content-wrapper -->

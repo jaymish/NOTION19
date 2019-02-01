@@ -68,7 +68,7 @@ public class UserProfileController {
 		regVO3=(RegVO)session.getAttribute("regDetails");
 		userProfileVO2.setRegVO(regVO3);
 		List<UserProfileVO> profileData=new ArrayList<UserProfileVO>();
-		profileData=this.userProfileService.getUserProfile(userProfileVO2);
+		profileData=this.userProfileService.getUserProfileByReg(userProfileVO2);
 		List<InstituteVO> instituteList=this.instituteService.viewInstitutes();
 		
 		return new ModelAndView("/user/editProfile","editProfileData",profileData.get(0)).addObject("instituteLs", instituteList);
@@ -81,5 +81,12 @@ public class UserProfileController {
 		this.userProfileService.insertUserProfile(userProfileVO3);
 		
 		return "redirect:/user/Dashboard";
+	}
+	
+	@RequestMapping(value="/admin/payments",method=RequestMethod.GET)
+	public ModelAndView loadCollectPayment()
+	{
+		List<UserProfileVO> collectPaymentLs=this.userProfileService.pendingPayers();
+		return new ModelAndView("/admin/viewPendingPayers","pendingPayersLs",collectPaymentLs);
 	}
 }

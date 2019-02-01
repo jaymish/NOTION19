@@ -29,9 +29,23 @@ public class UserProfileService {
 	}
 	
 	@Transactional
-	public List<UserProfileVO> getUserProfile(UserProfileVO userProfileVO1){
+	public List<UserProfileVO> getUserProfileByReg(UserProfileVO userProfileVO1){
 		List<UserProfileVO> profileData=new ArrayList<UserProfileVO>();
-		profileData=this.userProfileDAO.getUserProfile(userProfileVO1);
+		profileData=this.userProfileDAO.getUserProfileByReg(userProfileVO1);
 		return profileData;
+	}
+	
+	@Transactional
+	public List<UserProfileVO> getUserProfileById(UserProfileVO userProfileVO2){
+		List<UserProfileVO> profileData=new ArrayList<UserProfileVO>();
+		profileData=this.userProfileDAO.getUserProfileById(userProfileVO2);
+		return profileData;
+	}
+	
+	@Transactional
+	public List<UserProfileVO> pendingPayers(){
+		List<UserProfileVO> pendingPayersList=new ArrayList<UserProfileVO>();
+		pendingPayersList=this.userProfileDAO.pendingPayers();
+		return pendingPayersList;
 	}
 }

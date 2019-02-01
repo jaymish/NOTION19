@@ -22,9 +22,6 @@ public class UserEventsVO {
 	private String paymentStatus;
 	
 	@Column
-	private String uniqueQR;
-	
-	@Column
 	private String attendance;
 	
 	@Column
@@ -72,14 +69,6 @@ public class UserEventsVO {
 
 	public void setPaymentStatus(String paymentStatus) {
 		this.paymentStatus = paymentStatus;
-	}
-
-	public String getUniqueQR() {
-		return uniqueQR;
-	}
-
-	public void setUniqueQR(String uniqueQR) {
-		this.uniqueQR = uniqueQR;
 	}
 
 	public String getAttendance() {

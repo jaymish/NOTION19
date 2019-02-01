@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.notion.model.UserEventsVO;
+import com.notion.model.UserProfileVO;
 
 @Repository
 public class UserEventsDAOImp implements UserEventsDAO{
@@ -127,7 +128,7 @@ public class UserEventsDAOImp implements UserEventsDAO{
 		}
 		return paymentPendingList;
 	}
-	public void completePayment(UserEventsVO userEventsVO4)
+	public void collectPayment(UserProfileVO userProfileVO)
 	{
 		try
 		{
@@ -135,7 +136,7 @@ public class UserEventsDAOImp implements UserEventsDAO{
 			 
 			Transaction transaction=session.beginTransaction();
 			
-			session.createQuery("update UserEventsVO set paymentStatus = 'complete' where userEventId='"+userEventsVO4.getUserEventId()+"'").executeUpdate();
+			session.createQuery("update UserEventsVO set paymentStatus = 'complete' where userProfileVO='"+userProfileVO.getProfileId()+"'").executeUpdate();
 			
 			transaction.commit();
 			 

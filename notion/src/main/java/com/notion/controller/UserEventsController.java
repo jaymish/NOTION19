@@ -36,6 +36,9 @@ public class UserEventsController {
 	@Autowired
 	RegService regService;
 	
+	@Autowired
+	UserProfileService userProfileService;
+	
 	HttpSession session;
 	
 	@RequestMapping(value="/user/selectEvents",method=RequestMethod.GET)
@@ -132,13 +135,19 @@ public class UserEventsController {
 				completedPaymentsLs.add(selectedEvent);
 			}
 		}
-		int totalPrice=0;
-		for(UserEventsVO calcTotal : pendingPaymentsLs)
+		int totalPending=0;
+		for(UserEventsVO calcTotalPending : pendingPaymentsLs)
 		{
-			totalPrice+=calcTotal.getEventVO1().getEventPrice();
+			totalPending+=calcTotalPending.getEventVO1().getEventPrice();
 		}
 		
-		return new ModelAndView("/user/viewSelectedEvents","selectedEventsLs",pendingPaymentsLs).addObject("totalPrice", totalPrice).addObject("registeredEventsLs", completedPaymentsLs);
+		int totalPaid=0;
+		for(UserEventsVO calcTotalPaid : completedPaymentsLs)
+		{
+			totalPaid+=calcTotalPaid.getEventVO1().getEventPrice();
+		}
+		
+		return new ModelAndView("/user/viewSelectedEvents","selectedEventsLs",pendingPaymentsLs).addObject("totalPending", totalPending).addObject("registeredEventsLs", completedPaymentsLs).addObject("totalPaid", totalPaid);
 	}
 	
 	@RequestMapping(value="/user/removeSelectedEvent",method=RequestMethod.GET)
@@ -178,20 +187,51 @@ public class UserEventsController {
 		return new ModelAndView("/admin/viewEventRegistrations","paymentComplete",registeredEventsLs).addObject("teamMembersLs", teamMembersLs);
 	}
 	
-	@RequestMapping(value="/admin/collectPayments",method=RequestMethod.GET)
-	public ModelAndView loadCollectPayment()
+	@RequestMapping(value="/admin/viewUserEvents",method=RequestMethod.GET)
+	public ModelAndView viewUserEvents(HttpServletRequest request,@RequestParam("selectedProfileId") int selectedProfileId,UserProfileVO userProfileVO4,UserEventsVO userEventsVO6)
 	{
-		List<UserEventsVO> collectPaymentLs=this.userEventsService.paymentPending();
-		return new ModelAndView("/admin/collectPayments","pendingPaymentsLs",collectPaymentLs);
+		userProfileVO4.setProfileId(selectedProfileId);
+		List<UserProfileVO> profileData=new ArrayList<UserProfileVO>();
+		profileData=this.userProfileService.getUserProfileById(userProfileVO4);
+		session=request.getSession();
+		session.setAttribute("userProfile", profileData.get(0));
+		userEventsVO6.setUserProfileVO(profileData.get(0));
+		
+		List<UserEventsVO> selectedEventsLs=this.userEventsService.viewUserEvents(userEventsVO6);
+		List<UserEventsVO> pendingPaymentsLs=new ArrayList<UserEventsVO>();
+		List<UserEventsVO> completedPaymentsLs=new ArrayList<UserEventsVO>();
+		for(UserEventsVO selectedEvent : selectedEventsLs)
+		{
+			if(selectedEvent.getPaymentStatus().equals("pending"))
+			{
+				pendingPaymentsLs.add(selectedEvent);
+			}
+			else if(selectedEvent.getPaymentStatus().equals("complete"))
+			{
+				completedPaymentsLs.add(selectedEvent);
+			}
+		}
+		int totalPending=0;
+		for(UserEventsVO calcTotalPending : pendingPaymentsLs)
+		{
+			totalPending+=calcTotalPending.getEventVO1().getEventPrice();
+		}
+		
+		int totalPaid=0;
+		for(UserEventsVO calcTotalPaid : completedPaymentsLs)
+		{
+			totalPaid+=calcTotalPaid.getEventVO1().getEventPrice();
+		}
+		
+		return new ModelAndView("/admin/viewUserEvents","selectedEventsLs",pendingPaymentsLs).addObject("totalPending", totalPending).addObject("registeredEventsLs", completedPaymentsLs).addObject("totalPaid", totalPaid);
 	}
 	
-	@RequestMapping(value="/admin/collect",method=RequestMethod.GET)
-	public String updatePaymentStatus(@RequestParam("selectedEventId") int selectedEventId,UserEventsVO userEventsVO6)
+	@RequestMapping(value="/admin/collectPayment",method=RequestMethod.GET)
+	public String collectUserPayment()
 	{
-		userEventsVO6.setUserEventId(selectedEventId);
+		UserProfileVO userProfileVO5=(UserProfileVO)session.getAttribute("userProfile");
+		this.userEventsService.collectPayment(userProfileVO5);
 		
-		this.userEventsService.completePayment(userEventsVO6);
-		
-		return "redirect:/admin/collectPayments";
+		return "redirect:/admin/registeredEvents";
 	}
 }
