@@ -158,4 +158,24 @@ public class LoginController {
 			return new ModelAndView("redirect:/user/profile");
 		}
 	}
+	
+	@RequestMapping(value="/admin/blockUser",method=RequestMethod.GET)
+	public String blockUser(@RequestParam("selectedUser") String user,LoginVO loginVO4)
+	{
+		loginVO4.setUsername(user);
+		loginVO4.setEnabled(0);
+		this.loginService.changeEnabled(loginVO4);
+		
+		return "redirect:/admin/registeredUsers";
+	}
+	
+	@RequestMapping(value="/admin/unblockUser",method=RequestMethod.GET)
+	public String unblockUser(@RequestParam("selectedUser") String user,LoginVO loginVO5)
+	{
+		loginVO5.setUsername(user);
+		loginVO5.setEnabled(1);
+		this.loginService.changeEnabled(loginVO5);
+		
+		return "redirect:/admin/registeredUsers";
+	}
 }

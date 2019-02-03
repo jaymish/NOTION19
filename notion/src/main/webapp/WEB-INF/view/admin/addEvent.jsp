@@ -140,6 +140,7 @@
 															<option>Select Type</option>
 															<form:option value="Technical">Technical</form:option>
 															<form:option value="Non-Technical">Non-Technical</form:option>
+															<form:option value="Workshop">Workshop</form:option>
 														</form:select>
 													</div>
 												</div>

@@ -11,7 +11,7 @@
 <meta name="author" content="">
 <!-- <link rel="icon" href="../adminResources/images/favicon.ico"> -->
 
-<title>Notion Admin - View Selected Events</title>
+<title>Notion Admin - All Users</title>
 
 <!-- Bootstrap 4.0-->
 <link rel="stylesheet" href="../adminResources/css/bootstrap.css">
@@ -35,30 +35,6 @@
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 
-<script>
-	function removeSel(id)
-	{
-		id=parseInt(id)
-		var htp = new XMLHttpRequest();
-		htp.onreadystatechange = function() {
-			location.reload(true);
-		}
-		htp.open("GET", "removeSelectedEvent?selectedEventId=" + id, true)
-		htp.send();
-	}
-	function removeReg(id)
-	{
-		id=parseInt(id)
-		var htp = new XMLHttpRequest();
-		htp.onreadystatechange = function() {
-			location.reload(true);
-		}
-		htp.open("GET", "removeSelectedEvent?selectedEventId=" + id, true)
-		htp.send();
-		alert("Complete Refund First!!");
-	}
-</script>	
-	
 </head>
 
 <body class="hold-transition skin-light light-sidebar sidebar-mini">
@@ -84,15 +60,14 @@
 				<div class="content-header">
 					<div class="d-flex align-items-center">
 						<div class="mr-auto">
-							<h3 class="page-title">Events</h3>
+							<h3 class="page-title">Users</h3>
 							<div class="d-inline-block align-items-center">
 								<nav>
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="index.jsp"><i
 												class="mdi mdi-home-outline"></i></a></li>
-										<li class="breadcrumb-item" aria-current="page">Events</li>
-										<li class="breadcrumb-item active" aria-current="page">Selected
-											Events</li>
+										<li class="breadcrumb-item" aria-current="page">Registrations</li>
+										<li class="breadcrumb-item active" aria-current="page">All Users</li>
 									</ol>
 								</nav>
 							</div>
@@ -106,7 +81,59 @@
 							<div class="col-12">
 								<div class="box">
 									<div class="box-header">
-										<h4 class="box-title">List of Selected Events</h4>
+										<h4 class="box-title">List of Active Users</h4>
+									</div>
+									<div class="box-body">
+										<div class="table-responsive">
+											<table id="example"
+												class="table table-bordered table-hover display nowrap margin-top-10 w-p100"
+												style="width: 100%">
+												<thead>
+													<tr>
+														<th colspan="5">Information</th>
+														<th colspan="1">Action</th>
+													</tr>
+													<tr>
+														<th>Name</th>
+														<th>Email</th>
+														<th>Enrollment</th>
+														<th>Sem</th>
+														<th>Contact</th>
+														<th>Block</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach items="${activeUsers}" var="i">
+														<tr>
+															<td>${i.regVO.firstname} ${i.regVO.lastname}</td>
+															<th>${i.regVO.loginVO.username}</th>
+															<td>${i.enrollment}</td>
+															<td>${i.semester}</td>
+															<td>${i.contact}</td>
+															<td><a href="blockUser?selectedUser=${i.regVO.loginVO.username}"><input type="button" class="btn btn-warning" value="Block"/></a></td>
+														</tr>
+													</c:forEach>
+												</tbody>
+												<tfoot>
+													<tr>
+														<th>Name</th>
+														<th>Email</th>
+														<th>Enrollment</th>
+														<th>Sem</th>
+														<th>Contact</th>
+														<th>Block</th>
+													</tr>
+												</tfoot>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-12">
+								<div class="box">
+									<div class="box-header">
+										<h4 class="box-title">List of Blocked Users</h4>
 									</div>
 									<div class="box-body">
 										<div class="table-responsive">
@@ -115,80 +142,38 @@
 												style="width: 100%">
 												<thead>
 													<tr>
-														<th colspan="4">Information</th>
-														<th>Action</th>
+														<th colspan="5">Information</th>
+														<th colspan="1">Action</th>
 													</tr>
 													<tr>
 														<th>Name</th>
-														<th>Type</th>
-														<th>Price</th>
-														<th>Payment</th>
-														<th>Remove</th>
+														<th>Email</th>
+														<th>Enrollment</th>
+														<th>Sem</th>
+														<th>Contact</th>
+														<th>Unblock</th>
 													</tr>
 												</thead>
 												<tbody>
-													<c:forEach items="${selectedEventsLs}" var="i">
+													<c:forEach items="${blockedUsers}" var="i">
 														<tr>
-															<td>${i.eventVO1.eventName}</td>
-															<td>${i.eventVO1.eventType}</td>
-															<td>${i.eventVO1.eventPrice}</td>
-															<td style="color:red">${i.paymentStatus}</td>
-															<td><input type="button" class="btn btn-danger" value="X Remove" onclick="removeSel(${i.userEventId})"/></td>
+															<td>${i.regVO.firstname} ${i.regVO.lastname}</td>
+															<th>${i.regVO.loginVO.username}</th>
+															<td>${i.enrollment}</td>
+															<td>${i.semester}</td>
+															<td>${i.contact}</td>
+															<td><a href="unblockUser?selectedUser=${i.regVO.loginVO.username}"><input type="button" class="btn btn-success" value="Unblock"/></a></td>
 														</tr>
 													</c:forEach>
 												</tbody>
 												<tfoot>
 													<tr>
-														<td colspan="2">Total Pending</td>
-														<td colspan="3" style="font-weight:bolder">${totalPending}</td>
-													</tr>
-												</tfoot>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div style="margin:0 0 30px 15px">
-								<a href="collectPayment"><input type="button" class="btn btn-primary" value="Collect"/></a>
-							</div>
-							<div class="col-12">
-								<div class="box">
-									<div class="box-header">
-										<h4 class="box-title">List of Registered Events</h4>
-									</div>
-									<div class="box-body">
-										<div class="table-responsive">
-											<table id="complex_header"
-												class="table table-bordered table-hover display nowrap margin-top-10 w-p100"
-												style="width: 100%">
-												<thead>
-													<tr>
-														<th colspan="4">Information</th>
-														<th>Action</th>
-													</tr>
-													<tr>
 														<th>Name</th>
-														<th>Type</th>
-														<th>Price</th>
-														<th>Payment</th>
-														<th>Remove</th>
-													</tr>
-												</thead>
-												<tbody>
-													<c:forEach items="${registeredEventsLs}" var="i">
-														<tr>
-															<td>${i.eventVO1.eventName}</td>
-															<td>${i.eventVO1.eventType}</td>
-															<td>${i.eventVO1.eventPrice}</td>
-															<td style="color:green">${i.paymentStatus}</td>
-															<td><input type="button" class="btn btn-danger" value="X Remove" onclick="removeReg(${i.userEventId})"/></td>
-														</tr>
-													</c:forEach>
-												</tbody>
-												<tfoot>
-													<tr>
-														<td colspan="2">Total Paid</td>
-														<td colspan="3" style="font-weight:bolder">${totalPaid}</td>
+														<th>Email</th>
+														<th>Enrollment</th>
+														<th>Sem</th>
+														<th>Contact</th>
+														<th>Unblock</th>
 													</tr>
 												</tfoot>
 											</table>
@@ -200,6 +185,7 @@
 						<!-- /.row -->
 				</section>
 				<!-- /.content -->
+
 			</div>
 		</div>
 		<!-- /.content-wrapper -->

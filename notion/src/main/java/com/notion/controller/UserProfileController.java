@@ -86,7 +86,28 @@ public class UserProfileController {
 	@RequestMapping(value="/admin/payments",method=RequestMethod.GET)
 	public ModelAndView loadCollectPayment()
 	{
-		List<UserProfileVO> collectPaymentLs=this.userProfileService.pendingPayers();
-		return new ModelAndView("/admin/viewPendingPayers","pendingPayersLs",collectPaymentLs);
+		List<UserProfileVO> collectPaymentLs=this.userProfileService.getUserProfile();
+		return new ModelAndView("/admin/viewUsers","usersLs",collectPaymentLs);
+	}
+	
+	@RequestMapping(value="/admin/registeredUsers",method=RequestMethod.GET)
+	public ModelAndView loadRegisteredUsers()
+	{
+		List<UserProfileVO> allUsersLs=this.userProfileService.getUserProfile();
+		List<UserProfileVO> activeUsersLs=new ArrayList<UserProfileVO>();
+		List<UserProfileVO> blockedUsersLs=new ArrayList<UserProfileVO>();
+		
+		for(UserProfileVO user : allUsersLs)
+		{
+			if(user.getRegVO().getLoginVO().getEnabled()==1)
+			{
+				activeUsersLs.add(user);
+			}
+			else
+			{
+				blockedUsersLs.add(user);
+			}
+		}
+		return new ModelAndView("/admin/viewRegisteredUsers","activeUsers",activeUsersLs).addObject("blockedUsers", blockedUsersLs);
 	}
 }

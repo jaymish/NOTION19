@@ -43,20 +43,40 @@ public class LoginDAOImp implements LoginDAO{
 		{
 			Session session=sessionFactory.openSession();
 			 
-			 Transaction transaction=session.beginTransaction();
+			Transaction transaction=session.beginTransaction();
 			 
-			 Query q=session.createQuery("from LoginVO where username='"+loginVO.getUsername()+"'");
+			Query q=session.createQuery("from LoginVO where username='"+loginVO.getUsername()+"'");
+			
+			loginList=q.list();
 			 
-			 loginList=q.list();
+			transaction.commit();
 			 
-			 transaction.commit();
-			 
-			 session.close();
+			session.close();
 		}
 		catch(Exception ex)
 		{
 			ex.printStackTrace();
 		}
 		return loginList;
+	}
+	
+	public void changeEnabled(LoginVO loginVO1)
+	{
+		try
+		{
+			Session session=sessionFactory.openSession();
+			 
+			Transaction transaction=session.beginTransaction();
+			 
+			session.createQuery("update LoginVO set enabled='"+loginVO1.getEnabled()+"' where username='"+loginVO1.getUsername()+"'").executeUpdate();
+			 
+			transaction.commit();
+			 
+			session.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 }

@@ -59,7 +59,7 @@
 							<img src="../adminResources/images/7.jpg"
 								class="float-left rounded-circle" alt="User Image">
 							<h4 class="user-name align-self-center">
-								<span>${profileDetails.getRegVO().getFirstname()} ${profileDetails.getRegVO().getLastname()}</span> <small>${userMail}</small>
+								<span>${profileDetails.regVO.firstname} ${profileDetails.regVO.lastname}</span> <small>${userMail}</small>
 							</h4>
 						</div>
 					</li>

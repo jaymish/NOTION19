@@ -110,7 +110,7 @@
 											<div class="col-12">
 												<div class="form-group">
 													<h5>
-														Select No. of Members Other than You<span class="text-danger">*</span>
+														Select No. of Members<span class="text-danger">*</span>
 													</h5>
 													<div class="controls">
 														<select name="members" onchange="loadinputs(this)"
@@ -126,35 +126,35 @@
 												<div class="form-group" id="member1" style="display:none">
 													<h5>Name of Member 1 </h5>
 													<div class="controls">
-														<form:input type="text" name="member 1" path="teamMember1" class="form-control"
-														placeholder="Enter Name(Firstname + Lastname)" />
+														<input type="text" name="member 1" class="form-control" value="${profileDetails.regVO.firstname} ${profileDetails.regVO.lastname}"
+														placeholder="Enter Name(Firstname + Lastname)" disabled=true/>
 													</div>
 												</div>
 												<div class="form-group" id="member2" style="display:none">
 													<h5>Name of Member 2 </h5>
 													<div class="controls">
-														<form:input type="text" name="member 2" path="teamMember2" class="form-control"
+														<form:input type="text" name="member 2" path="teamMember1" class="form-control"
 														placeholder="Enter Name(Firstname + Lastname)" />
 													</div>
 												</div>
 												<div class="form-group" id="member3" style="display:none">
 													<h5>Name of Member 3 </h5>
 													<div class="controls">
-														<form:input type="text" name="member 3" path="teamMember3" class="form-control"
+														<form:input type="text" name="member 3" path="teamMember2" class="form-control"
 														placeholder="Enter Name(Firstname + Lastname)" />
 													</div>
 												</div>
 												<div class="form-group" id="member4" style="display:none">
 													<h5>Name of Member 4 </h5>
 													<div class="controls">
-														<form:input type="text" name="member 4" path="teamMember4" class="form-control"
+														<form:input type="text" name="member 4" path="teamMember3" class="form-control"
 														placeholder="Enter Name(Firstname + Lastname)" />
 													</div>
 												</div>
 												<div class="form-group" id="member5" style="display:none">
 													<h5>Name of Member 5 </h5>
 													<div class="controls">
-														<form:input type="text" name="member 5" path="teamMember5" class="form-control"
+														<form:input type="text" name="member 5" path="teamMember4" class="form-control"
 														placeholder="Enter Name(Firstname + Lastname)" />
 													</div>
 												</div>

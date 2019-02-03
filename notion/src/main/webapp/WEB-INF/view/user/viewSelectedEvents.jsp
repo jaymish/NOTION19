@@ -92,7 +92,7 @@
 									</div>
 									<div class="box-body">
 										<div class="table-responsive">
-											<table id="complex_header"
+											<table id="example1"
 												class="table table-bordered table-hover display nowrap margin-top-10 w-p100"
 												style="width: 100%">
 												<thead>
@@ -132,8 +132,8 @@
 							</div>
 							<div style="margin:0 0 30px 15px">
 								<a href="selectEvents"><input type="button" class="btn btn-primary" value="+ Add More"/></a>
-								<input type="button" style="margin:0 0 0 20px" class="btn btn-primary" value="Pay at Desk" onclick="deskPay(this)"/>
-								<input type="button" style="margin:0 0 0 20px" class="btn btn-primary" value="Pay Online"/>
+								<input type="button" style="margin:0 0 0 15px" class="btn btn-primary" value="Pay Offline" onclick="deskPay(this)"/>
+								<input type="button" style="margin:0 0 0 15px" class="btn btn-primary" value="Pay Online"/>
 							</div>
 							<div class="col-12">
 								<div class="box">
@@ -142,7 +142,7 @@
 									</div>
 									<div class="box-body">
 										<div class="table-responsive">
-											<table id="example1"
+											<table id="complex_header"
 												class="table table-bordered table-hover display nowrap margin-top-10 w-p100"
 												style="width: 100%">
 												<thead>

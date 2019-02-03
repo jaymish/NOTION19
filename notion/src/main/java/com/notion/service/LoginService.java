@@ -27,4 +27,9 @@ public class LoginService {
 		getUser=this.loginDAO.getUser(loginVO);
 		return getUser;
 	}
+	
+	@Transactional
+	public void changeEnabled(LoginVO loginVO1){
+		this.loginDAO.changeEnabled(loginVO1);
+	}
 }

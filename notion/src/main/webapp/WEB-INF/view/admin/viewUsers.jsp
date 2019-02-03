@@ -11,7 +11,7 @@
 <meta name="author" content="">
 <!-- <link rel="icon" href="../adminResources/images/favicon.ico"> -->
 
-<title>Notion Admin - Collect Payments</title>
+<title>Notion Admin - All Users</title>
 
 <!-- Bootstrap 4.0-->
 <link rel="stylesheet" href="../adminResources/css/bootstrap.css">
@@ -60,14 +60,14 @@
 				<div class="content-header">
 					<div class="d-flex align-items-center">
 						<div class="mr-auto">
-							<h3 class="page-title">Events</h3>
+							<h3 class="page-title">Users</h3>
 							<div class="d-inline-block align-items-center">
 								<nav>
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="index.jsp"><i
 												class="mdi mdi-home-outline"></i></a></li>
-										<li class="breadcrumb-item" aria-current="page">Event</li>
-										<li class="breadcrumb-item active" aria-current="page">Payments</li>
+										<li class="breadcrumb-item" aria-current="page">Payments</li>
+										<li class="breadcrumb-item active" aria-current="page">Users</li>
 									</ol>
 								</nav>
 							</div>
@@ -81,7 +81,7 @@
 							<div class="col-12">
 								<div class="box">
 									<div class="box-header">
-										<h4 class="box-title">Payment Pending</h4>
+										<h4 class="box-title">List of Users</h4>
 									</div>
 									<div class="box-body">
 										<div class="table-responsive">
@@ -101,7 +101,7 @@
 													</tr>
 												</thead>
 												<tbody>
-													<c:forEach items="${pendingPayersLs}" var="i">
+													<c:forEach items="${usersLs}" var="i">
 														<tr>
 															<td>${i.regVO.firstname} ${i.regVO.lastname}</td>
 															<th>${i.regVO.loginVO.username}</th>

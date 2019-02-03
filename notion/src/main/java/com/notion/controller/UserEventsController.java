@@ -161,13 +161,11 @@ public class UserEventsController {
 	}
 	
 	@RequestMapping(value="/admin/removeSelectedEvent",method=RequestMethod.GET)
-	public String removeSelectedEvent2(@RequestParam("selectedEventId") int selectedEventId,UserEventsVO userEventsVO5)
+	public void removeSelectedEvent2(@RequestParam("selectedEventId") int selectedEventId,UserEventsVO userEventsVO5)
 	{
 		userEventsVO5.setUserEventId(selectedEventId);
 		
 		this.userEventsService.removeUserEvent(userEventsVO5);
-		
-		return "redirect:/admin/collectPayment";
 	}
 	
 	@RequestMapping(value="/admin/registeredEvents",method=RequestMethod.GET)
@@ -232,6 +230,6 @@ public class UserEventsController {
 		UserProfileVO userProfileVO5=(UserProfileVO)session.getAttribute("userProfile");
 		this.userEventsService.collectPayment(userProfileVO5);
 		
-		return "redirect:/admin/registeredEvents";
+		return "redirect:/admin/viewUserEvents?selectedProfileId="+userProfileVO5.getProfileId();
 	}
 }
