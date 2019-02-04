@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<!-- <link rel="icon" href="../adminResources/images/favicon.ico"> -->
+<link rel="icon" href="../adminResources/images/favicon.ico">
 
 <title>Notion - User Profile</title>
 
@@ -104,12 +104,11 @@
 												</div>
 												<div class="form-group">
 													<h5>
-														Enrollment <span class="text-danger">*</span>
+														Enrollment/Roll No. <span class="text-danger">*</span>
 													</h5>
 													<div class="controls">
-														<form:input type="text" name="enrollment" class="form-control" placeholder="Enter Enrollment"
+														<form:input type="text" name="enrollment" class="form-control" placeholder="Enter Enrollment/Roll No."
 															path="enrollment" required="required" data-validation-containsnumber-regex="(\d)+"
-															minlength="12" maxlength="12"
 															data-validation-containsnumber-message="No Characters Allowed, Only Numbers" />
 													</div>
 												</div>
