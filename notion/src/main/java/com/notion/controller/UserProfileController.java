@@ -66,6 +66,8 @@ public class UserProfileController {
 		regVO2.setProfileStatus("complete");
 		this.regService.insertToRegister(regVO2);
 		
+		this.qrService.sendQRCode(email);
+		
 		return "redirect:/user/Dashboard";
 	}
 	
