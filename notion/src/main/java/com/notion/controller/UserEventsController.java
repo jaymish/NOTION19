@@ -39,6 +39,9 @@ public class UserEventsController {
 	@Autowired
 	UserProfileService userProfileService;
 	
+	@Autowired
+	QRService qrService;
+	
 	HttpSession session;
 	
 	@RequestMapping(value="/user/selectEvents",method=RequestMethod.GET)
@@ -225,8 +228,9 @@ public class UserEventsController {
 	}
 	
 	@RequestMapping(value="/admin/collectPayment",method=RequestMethod.GET)
-	public String collectUserPayment()
+	public String collectUserPayment(HttpServletRequest request)
 	{
+		session=request.getSession();
 		UserProfileVO userProfileVO5=(UserProfileVO)session.getAttribute("userProfile");
 		this.userEventsService.collectPayment(userProfileVO5);
 		

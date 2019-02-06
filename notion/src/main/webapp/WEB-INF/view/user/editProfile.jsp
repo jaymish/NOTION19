@@ -95,6 +95,7 @@
 												<form:hidden path="regVO.loginVO.loginId"/>
 												<form:hidden path="regVO.profileStatus"/>
 												<form:hidden path="profileId"/>
+												<form:hidden path="uniqueQR"/>
 												<div class="form-group">
 													<h5>
 														First Name <span class="text-danger">*</span>

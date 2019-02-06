@@ -35,6 +35,9 @@ public class UserProfileController {
 	@Autowired
 	InstituteService instituteService;
 	
+	@Autowired
+	QRService qrService;
+	
 	HttpSession session;
 	
 	@RequestMapping(value="/user/profile",method=RequestMethod.GET)
@@ -51,10 +54,15 @@ public class UserProfileController {
 	public String insertUserProfile(HttpServletRequest request,@ModelAttribute("userProfileData") UserProfileVO userProfileVO1,RegVO regVO2)
 	{
 		session=request.getSession();
-		regVO2=(RegVO)session.getAttribute("regDetails");
 		
+		String email=(String)session.getAttribute("userMail");
+		String qrmd5=this.qrService.createMd5(email);
+		userProfileVO1.setUniqueQR(qrmd5);
 		this.userProfileService.insertUserProfile(userProfileVO1);
 		
+		this.qrService.createQRcode(email, qrmd5);
+		
+		regVO2=(RegVO)session.getAttribute("regDetails");
 		regVO2.setProfileStatus("complete");
 		this.regService.insertToRegister(regVO2);
 		
