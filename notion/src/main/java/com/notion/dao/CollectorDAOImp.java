@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.notion.model.CollectorVO;
 
 @Repository
-public class CollectorDAOImp {
+public class CollectorDAOImp implements CollectorDAO{
 	@Autowired
 	SessionFactory sessionFactory;
 	
