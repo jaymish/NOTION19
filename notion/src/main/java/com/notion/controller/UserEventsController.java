@@ -2,6 +2,7 @@ package com.notion.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -38,6 +39,9 @@ public class UserEventsController {
 	
 	@Autowired
 	UserProfileService userProfileService;
+	
+	@Autowired
+	CollectorService collectorService;
 	
 	@Autowired
 	QRService qrService;
@@ -228,11 +232,20 @@ public class UserEventsController {
 	}
 	
 	@RequestMapping(value="/admin/collectPayment",method=RequestMethod.GET)
-	public String collectUserPayment(HttpServletRequest request)
+	public String collectUserPayment(HttpServletRequest request,@RequestParam(value="amount") int amount,CollectorVO collectorVO)
 	{
 		session=request.getSession();
 		UserProfileVO userProfileVO5=(UserProfileVO)session.getAttribute("userProfile");
 		this.userEventsService.collectPayment(userProfileVO5);
+		
+		String collectorUsername=(String)session.getAttribute("adminMail");
+		Date date=new Date();
+		String collectiontime=date.toString();
+		
+		collectorVO.setCollectorUsername(collectorUsername);
+		collectorVO.setTotalAmount(amount);
+		collectorVO.setTime(collectiontime);
+		this.collectorService.insertCollection(collectorVO);
 		
 		return "redirect:/admin/viewUserEvents?selectedProfileId="+userProfileVO5.getProfileId();
 	}

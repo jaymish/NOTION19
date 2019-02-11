@@ -149,7 +149,7 @@
 								</div>
 							</div>
 							<div style="margin:0 0 30px 15px">
-								<a href="collectPayment"><input type="button" class="btn btn-primary" value="Collect"/></a>
+								<a href="collectPayment?amount=${totalPending}"><input type="button" class="btn btn-primary" value="Collect"/></a>
 							</div>
 							<div class="col-12">
 								<div class="box">

@@ -129,6 +129,17 @@ public class LoginController {
 		return new ModelAndView("admin/adminDashboard");
 	}
 	
+	@RequestMapping(value="/admin/collector",method=RequestMethod.GET)
+	public String setCollectorSession(HttpServletRequest request)
+	{
+		session=request.getSession();
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String userName = user.getUsername();
+		session.setAttribute("adminMail", userName);
+		
+		return "redirect:/admin/payments";
+	}
+	
 	@RequestMapping(value="/user/Dashboard",method=RequestMethod.GET)
 	public ModelAndView loadUserDashboard(HttpServletRequest request,@ModelAttribute LoginVO loginVO3,RegVO regVO1,UserProfileVO userProfileVO1) 
 	{	

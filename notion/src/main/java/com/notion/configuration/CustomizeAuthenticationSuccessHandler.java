@@ -22,6 +22,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 
 		boolean admin = false;
 		boolean user = false;
+		boolean collector = false;
 		
 		System.out.println("AT onAuthenticationSuccess(...) function!");
 
@@ -30,6 +31,9 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 				admin = true;
 			}else if ("ROLE_USER".equals(auth.getAuthority())) {
 				user = true;
+			}
+			else if ("ROLE_COLLECTOR".equals(auth.getAuthority())) {
+				collector = true;
 			}else {
 				
 			}
@@ -41,6 +45,9 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 		} else if(user) {
 			System.out.println("user is user");
 			response.sendRedirect("/user/Dashboard");
+		} else if(collector) {
+			System.out.println("user is collector");
+			response.sendRedirect("/admin/collector");
 		}else {
 			System.out.println("user is anonymous");
 			response.sendRedirect("/403");
