@@ -64,7 +64,7 @@
 						<!-- /.col -->
 						<div class="col-6">
 							<div class="fog-pwd">
-								<a href="javascript:void(0)" class="text-dark"><i
+								<a href="forgotPassword" class="text-dark"><i
 									class="ion ion-locked"></i> Forgot password?</a><br>
 							</div>
 						</div>

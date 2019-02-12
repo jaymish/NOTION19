@@ -1,5 +1,9 @@
 package com.notion.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -31,5 +35,29 @@ public class CollectorDAOImp implements CollectorDAO{
 		{
 			ex.printStackTrace();
 		}
+	}
+	
+	public List<CollectorVO> viewCollection()
+	{
+		List<CollectorVO> collectorList=new ArrayList<CollectorVO>();
+		try
+		{	
+			Session session=sessionFactory.openSession();
+			
+			Transaction transaction=session.beginTransaction();
+			
+			Query q=session.createQuery("from CollectorVO");
+			
+			collectorList=q.list();
+			
+			transaction.commit();
+			
+			session.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return collectorList;
 	}
 }

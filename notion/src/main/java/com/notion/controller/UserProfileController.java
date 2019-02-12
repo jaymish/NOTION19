@@ -38,6 +38,9 @@ public class UserProfileController {
 	@Autowired
 	QRService qrService;
 	
+	@Autowired
+	EmailService emailService;
+	
 	HttpSession session;
 	
 	@RequestMapping(value="/user/profile",method=RequestMethod.GET)
@@ -66,7 +69,7 @@ public class UserProfileController {
 		regVO2.setProfileStatus("complete");
 		this.regService.insertToRegister(regVO2);
 		
-		this.qrService.sendQRCode(email);
+		this.emailService.sendQRCode(email);
 		
 		return "redirect:/user/Dashboard";
 	}

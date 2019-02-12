@@ -12,7 +12,7 @@
 <meta name="author" content="">
 <link rel="icon" href="adminResources/images/favicon.ico">
 
-<title>Notion Admin - Registration</title>
+<title>Notion - Registration</title>
 
 <!-- Bootstrap 4.0-->
 <link rel="stylesheet" href="adminResources/css/bootstrap.css">

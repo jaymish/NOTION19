@@ -23,10 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.notion.model.LoginVO;
 import com.notion.model.RegVO;
 import com.notion.model.UserProfileVO;
-import com.notion.service.InstituteService;
-import com.notion.service.LoginService;
-import com.notion.service.RegService;
-import com.notion.service.UserProfileService;
+import com.notion.service.*;
 
 @Controller
 public class LoginController {
@@ -43,6 +40,9 @@ public class LoginController {
 	@Autowired
 	UserProfileService userProfileService;
 	
+	@Autowired
+	EmailService emailService;
+	
 	HttpSession session;
 	
 	@RequestMapping(value="/", method = RequestMethod.GET, headers = "Accept=application/json")
@@ -55,6 +55,24 @@ public class LoginController {
 	public String loadLogin()
 	{
 		return "login";
+	}
+	
+	@RequestMapping(value="/forgotPassword",method=RequestMethod.GET)
+	public String loadForgotPassword()
+	{
+		return "forgotPassword";
+	}
+	
+	@RequestMapping(value="/resetPasswordLink",method=RequestMethod.GET)
+	public void sendPwdResetLink(@RequestParam("email") String email)
+	{
+		this.emailService.sendResetLink(email);
+	}
+	
+	@RequestMapping(value="/resetPassword",method=RequestMethod.GET)
+	public void updatePassword(@RequestParam("username") String email)
+	{
+		System.out.println(email);
 	}
 	
 	@RequestMapping(value="/logout",method=RequestMethod.GET)

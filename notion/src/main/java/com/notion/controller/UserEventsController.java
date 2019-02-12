@@ -249,4 +249,16 @@ public class UserEventsController {
 		
 		return "redirect:/admin/viewUserEvents?selectedProfileId="+userProfileVO5.getProfileId();
 	}
+	
+	@RequestMapping(value="/admin/collectors",method=RequestMethod.GET)
+	public ModelAndView viewCollectors()
+	{
+		List<CollectorVO> collectorList=this.collectorService.viewCollection();
+		int totalCollected=0;
+		for(CollectorVO calcTotal : collectorList)
+		{
+			totalCollected+=calcTotal.getTotalAmount();
+		}
+		return new ModelAndView("/admin/viewCollectors","collectorLs",collectorList).addObject("totalCollection", totalCollected);
+	}
 }

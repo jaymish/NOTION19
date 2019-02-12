@@ -46,10 +46,17 @@
 			<li><a href="registeredEvents"><i class="ti-more"></i>Events</a></li>
 		</ul>
 	</li>
-	<li>
-		<a href="payments">
-			<i class="ti-money"></i>
-			<span>Payments</span> 
+	<li class="treeview">
+		<a href="#">
+		<i class="ti-money"></i>
+		<span>Payments</span>
+		<span class="pull-right-container">
+		<i class="fa fa-angle-right pull-right"></i>
+		</span>
 		</a>
+		<ul class="treeview-menu">
+			<li><a href="payments"><i class="ti-more"></i>Payments</a></li>
+			<li><a href="collectors"><i class="ti-more"></i>Payment Collectors</a></li>
+		</ul>
 	</li>
 </ul>
