@@ -70,9 +70,20 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/resetPassword",method=RequestMethod.GET)
-	public void updatePassword(@RequestParam("username") String email)
+	public ModelAndView loadResetPassword(@RequestParam("username") String email,@ModelAttribute LoginVO loginVO)
 	{
-		System.out.println(email);
+		loginVO.setUsername(email);
+		List<LoginVO> userToReset=new ArrayList<LoginVO>();
+		userToReset=this.loginService.getUser(loginVO);
+		return new ModelAndView("/newPassword","passwordReset",userToReset.get(0));
+	}
+	
+	@RequestMapping(value="/updatePassword",method=RequestMethod.POST)
+	public String updatePassword(@ModelAttribute("passwordReset") LoginVO loginVO1)
+	{
+		this.loginService.resetPassword(loginVO1);
+		
+		return "redirect:/login";
 	}
 	
 	@RequestMapping(value="/logout",method=RequestMethod.GET)

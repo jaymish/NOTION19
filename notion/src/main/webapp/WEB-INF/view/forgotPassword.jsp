@@ -8,24 +8,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="adminResources/images/favicon.ico">
+    <link rel="icon" href="<%=request.getContextPath() %>/adminResources/images/favicon.ico">
 
     <title>Notion - Recover Password</title>
   
 	<!-- Bootstrap 4.0-->
-	<link rel="stylesheet" href="adminResources/css/bootstrap.css">
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap.css">
 	
 	<!-- Bootstrap extend-->
-	<link rel="stylesheet" href="adminResources/css/bootstrap-extend.css">
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap-extend.css">
 
 	<!-- Theme style -->
-	<link rel="stylesheet" href="adminResources/css/master_style.css">
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/master_style.css">
 
 	<!-- UltimatePro Admin skins -->
-	<link rel="stylesheet" href="adminResources/css/_all-skins.css">
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/_all-skins.css">
 	
 	<!--alerts CSS -->
-    <link href="adminResources/css/sweetalert.css" rel="stylesheet" type="text/css">	
+    <link href="<%=request.getContextPath() %>/adminResources/css/sweetalert.css" rel="stylesheet" type="text/css">	
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,7 +35,7 @@
 	<![endif]-->
 </head>
 
-<body class="hold-transition bg-img" style="background-image: url(adminResources/images/bg.jpg);" data-overlay="1">
+<body class="hold-transition bg-img" style="background-image: url(<%=request.getContextPath() %>/adminResources/images/bg.jpg);" data-overlay="1">
 	
 	<div class="container h-p100">
 		<div class="row align-items-center justify-content-md-center h-p100">
@@ -73,17 +73,16 @@
 
 
 	<!-- jQuery 3 -->
-	<script src="adminResources/js/jquery-3.3.1.js"></script>
+	<script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script>
 
 	<!-- popper -->
-	<script src="adminResources/js/popper.min.js"></script>
+	<script src="<%=request.getContextPath() %>/adminResources/js/popper.min.js"></script>
 
 	<!-- Bootstrap 4.0-->
-	<script src="adminResources/js/bootstrap.js"></script>
+	<script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script>
 	
 	 <!-- Sweet-Alert  -->
-    <script src="adminResources/js/sweetalert.min.js"></script>
-    <!-- <script src="adminResources/js/jquery.sweet-alert.custom.js"></script> -->
+    <script src="<%=request.getContextPath() %>/adminResources/js/sweetalert.min.js"></script>
     
     <script>
     $("#email").keyup(function(){

@@ -36,7 +36,7 @@ public class LoginDAOImp implements LoginDAO{
 				ex.printStackTrace();
 			} 
 	}
-	public List<LoginVO> getUser(LoginVO loginVO)
+	public List<LoginVO> getUser(LoginVO loginVO1)
 	{
 		List<LoginVO> loginList=new ArrayList<LoginVO>();
 		try
@@ -45,7 +45,7 @@ public class LoginDAOImp implements LoginDAO{
 			 
 			Transaction transaction=session.beginTransaction();
 			 
-			Query q=session.createQuery("from LoginVO where username='"+loginVO.getUsername()+"'");
+			Query q=session.createQuery("from LoginVO where username='"+loginVO1.getUsername()+"'");
 			
 			loginList=q.list();
 			 
@@ -60,7 +60,7 @@ public class LoginDAOImp implements LoginDAO{
 		return loginList;
 	}
 	
-	public void changeEnabled(LoginVO loginVO1)
+	public void changeEnabled(LoginVO loginVO2)
 	{
 		try
 		{
@@ -68,7 +68,27 @@ public class LoginDAOImp implements LoginDAO{
 			 
 			Transaction transaction=session.beginTransaction();
 			 
-			session.createQuery("update LoginVO set enabled='"+loginVO1.getEnabled()+"' where username='"+loginVO1.getUsername()+"'").executeUpdate();
+			session.createQuery("update LoginVO set enabled='"+loginVO2.getEnabled()+"' where username='"+loginVO2.getUsername()+"'").executeUpdate();
+			 
+			transaction.commit();
+			 
+			session.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+	
+	public void resetPassword(LoginVO loginVO3)
+	{
+		try
+		{
+			Session session=sessionFactory.openSession();
+			 
+			Transaction transaction=session.beginTransaction();
+			 
+			session.createQuery("update LoginVO set password='"+loginVO3.getPassword()+"' where username='"+loginVO3.getUsername()+"'").executeUpdate();
 			 
 			transaction.commit();
 			 

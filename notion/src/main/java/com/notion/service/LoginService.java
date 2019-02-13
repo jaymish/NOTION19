@@ -22,14 +22,19 @@ public class LoginService {
 	}
 	
 	@Transactional
-	public List<LoginVO> getUser(LoginVO loginVO){
+	public List<LoginVO> getUser(LoginVO loginVO1){
 		List<LoginVO> getUser=new ArrayList<LoginVO>();
-		getUser=this.loginDAO.getUser(loginVO);
+		getUser=this.loginDAO.getUser(loginVO1);
 		return getUser;
 	}
 	
 	@Transactional
-	public void changeEnabled(LoginVO loginVO1){
-		this.loginDAO.changeEnabled(loginVO1);
+	public void changeEnabled(LoginVO loginVO2){
+		this.loginDAO.changeEnabled(loginVO2);
+	}
+	
+	@Transactional
+	public void resetPassword(LoginVO loginVO3){
+		this.loginDAO.resetPassword(loginVO3);
 	}
 }

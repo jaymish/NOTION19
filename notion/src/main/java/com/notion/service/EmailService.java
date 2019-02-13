@@ -165,6 +165,7 @@ public class EmailService {
 	     // message info
 	        String mailTo = email;
 	        String subject = "Notion 2k19. Reset Password";
+	        String link = "http://192.168.29.221:9090/resetPassword?username="+email;
 	        String message="";
 	        try{
 	        	BufferedReader br=new BufferedReader(new FileReader("src/main/resources/static/adminResources/ResetPassword.html"));
