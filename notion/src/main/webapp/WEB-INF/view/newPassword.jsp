@@ -66,11 +66,6 @@
 				<form:form action="updatePassword" method="post" class="form-element"
 					modelAttribute="passwordReset">
 					<div class="form-group has-feedback controls">
-						<form:input type="email" name="email" id="email"
-							class="form-control" path="username" placeholder="Email" required="required"
-							data-validation-required-message="This field is required" disabled="true"/>
-					</div>
-					<div class="form-group has-feedback controls">
 						<form:input type="password" name="password" class="form-control"
 							path="password" id="pass" placeholder="Password"
 							required="required" data-validation-required-message="This field is required" />
