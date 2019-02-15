@@ -26,6 +26,9 @@
 <!-- UltimatePro Admin skins -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/_all-skins.css">
 
+<!--alerts CSS -->
+<link href="<%=request.getContextPath() %>/adminResources/css/sweetalert.css" rel="stylesheet" type="text/css">
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -50,26 +53,6 @@
 			matchpass.style.display = ""
 			subbtn.disabled = true
 		}
-	}
-	function checkusername() {
-		var username = document.getElementById("email")
-		var msg = document.getElementById("checkusername")
-		var htp = new XMLHttpRequest();
-		htp.onreadystatechange = function() {
-			if (htp.readyState == 4) {
-				var x = htp.responseText
-				var check = x.trim()
-				if (check == "false") {
-					msg.style.display = ""
-					username.value = ""
-					username.focus()
-				} else {
-					msg.style.display = "none"
-				}
-			}
-		}
-		htp.open("POST", "checkUser?username=" + username.value, true)
-		htp.send();
 	}
 </script>
 
@@ -102,13 +85,11 @@
 						<span class="ion ion-person form-control-feedback "></span>
 					</div>
 					<div class="form-group has-feedback controls">
-						<form:input type="email" name="email" id="email"
-							class="form-control" onblur="checkusername()"
+						<form:input type="email" name="email" id="email" class="form-control"
 							path="loginVO.username" placeholder="Email" required="required"
 							data-validation-required-message="This field is required" />
-						<span class="ion ion-email form-control-feedback "></span> <span
-							style="display: none; color: red" id="checkusername">Username
-							Already Exist!!</span>
+						<span class="ion ion-email form-control-feedback "></span> 
+						<span id="errormsg"></span>
 					</div>
 					<div class="form-group has-feedback controls">
 						<form:input type="password" name="password" class="form-control"
@@ -125,30 +106,6 @@
 							style="display: none; color: red" id="passmatch">Password
 							doesn't match!!</span>
 					</div>
-					<%-- <div class="form-group has-feedback controls">
-						<form:input type="text" name="enrollment" class="form-control"
-							path="" placeholder="Enrollment/Roll No." />
-						<!-- <span class="ion ion-person form-control-feedback "></span> -->
-					</div>
-					<div class="form-group has-feedback controls">
-						<form:select name="semester" path="" class="form-control"
-							required="required"
-							data-validation-required-message="This field is required">
-							<option>Select Semester</option>
-							<c:forEach begin="1" end="8" var="i">
-								<form:option value="${i}">${i}</form:option>
-							</c:forEach>
-						</form:select>
-						<!-- <span class="ion ion-person form-control-feedback "></span> -->
-					</div>
-					<div class="form-group has-feedback controls">
-						<form:input type="text" name="contact" class="form-control"
-							placeholder="Contact" path="" required="required"
-							data-validation-containsnumber-regex="(\d)+" minlength="10"
-							maxlength="10"
-							data-validation-containsnumber-message="No Characters Allowed, Only Numbers" />
-						<!-- <span class="ion ion-person form-control-feedback "></span> -->
-					</div> --%>
 					<div class="row">
 						<div class="col-12">
 							<div class="checkbox">
@@ -204,6 +161,36 @@
 	<!-- Form validator JavaScript -->
 	<script src="<%=request.getContextPath() %>/adminResources/js/validation.js"></script>
 	<script src="<%=request.getContextPath() %>/adminResources/js/form-validation.js"></script>
+	
+	<!-- Sweet-Alert  -->
+    <script src="<%=request.getContextPath() %>/adminResources/js/sweetalert.min.js"></script>
+	
+	<script>
+		$("#email").blur(function(){
+			$("#errormsg").html("");
+			var regex = new RegExp(
+			/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+			if (regex.test(email.value)) {
+				$.ajax({
+					url : "checkUser",
+					method : "GET",
+					data : {
+						username : $("#email").val()
+					},
+					success : function(msg){
+						if(msg=="exist"){
+							swal("Error", "This Username already Exist!!", "error");
+							$("#email").focus();
+						}
+					}
+				});
+			}
+			else {
+				$("#errormsg").html("<font color=red>Enter Proper Email ID</font>");
+				$("#email").focus();
+			}
+		});
+	</script>
 
 </body>
 </html>

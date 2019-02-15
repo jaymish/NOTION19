@@ -82,7 +82,7 @@
 	<script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script>
 	
 	 <!-- Sweet-Alert  -->
-    <script src="<%=request.getContextPath() %>/adminResources/js/sweetalert.min.js"></script>
+     <script src="<%=request.getContextPath() %>/adminResources/js/sweetalert.min.js"></script>
     
     <script>
     $("#email").keyup(function(){

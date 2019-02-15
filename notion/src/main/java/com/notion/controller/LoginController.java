@@ -1,5 +1,7 @@
 package com.notion.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.notion.model.LoginVO;
 import com.notion.model.RegVO;
 import com.notion.model.UserProfileVO;
-import com.notion.service.*;
+import com.notion.service.EmailService;
+import com.notion.service.InstituteService;
+import com.notion.service.LoginService;
+import com.notion.service.RegService;
+import com.notion.service.UserProfileService;
 
 @Controller
 public class LoginController {
@@ -117,22 +123,17 @@ public class LoginController {
 		return "redirect:/logout";
 	}
 	
-	@RequestMapping(value="checkUser",method=RequestMethod.POST)
-	public ModelAndView checkUser(@RequestParam("username") String checkuser,LoginVO loginVO)
+	@RequestMapping(value="/checkUser",method=RequestMethod.GET)
+	public void checkUser(HttpServletResponse response,@RequestParam("username") String checkuser,LoginVO loginVO) throws IOException
 	{
+		PrintWriter out=response.getWriter();
 		loginVO.setUsername(checkuser);
 		List<LoginVO> emailCheck=new ArrayList<LoginVO>();
 		emailCheck=this.loginService.getUser(loginVO);
-		Boolean reply;
-		if(emailCheck.isEmpty())
+		if(!emailCheck.isEmpty())
 		{
-			reply=true;
+			out.print("exist");
 		}
-		else
-		{
-			reply=false;
-		}
-		return new ModelAndView("checkUsername","response",reply);
 	}
 	
 	@RequestMapping(value="insertRegData",method=RequestMethod.POST)
