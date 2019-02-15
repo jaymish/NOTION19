@@ -172,14 +172,14 @@
 			/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
 			if (regex.test(email.value)) {
 				$.ajax({
-					url : "checkUser",
+					url : "${pageContext.request.contextPath}/checkUser",
 					method : "GET",
 					data : {
 						username : $("#email").val()
 					},
 					success : function(msg){
 						if(msg=="exist"){
-							swal("Error", "This Username already Exist!!", "error");
+							swal("Sorry", "This Username already Exist!!", "error");
 							$("#email").focus();
 						}
 					}

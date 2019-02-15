@@ -44,7 +44,7 @@
 				<div class="row no-gutters">
 					<div class="col-lg-4 col-md-5 col-12">
 						<div class="content-top-agile p-10">
-							<h3 class="text-white mb-0">Recover Password</h3>								
+							<h3 class="text-white mb-0">Reset Password</h3>								
 						</div>
 						<div class="p-30 content-bottom rounded box-shadowed" data-overlay="10">
 							<form action="#" method="post">
@@ -58,7 +58,7 @@
 								</div>
 								  <div class="row">
 									<div class="col-12 text-center">
-									  <button type="button" class="btn btn-info btn-block margin-top-10" id="resetbtn" disabled="true">Reset</button>
+									  <input type="button" value="Submit" class="btn btn-info btn-block margin-top-10" id="resetbtn" disabled="true" />
 									</div>
 									<!-- /.col -->
 								  </div>
@@ -105,15 +105,39 @@
 			}
     })
     $('#resetbtn').click(function(){
-    	$.ajax(
-				{
-					url : "resetPasswordLink",
-					method : "GET",
-					data : {
-						email : $("#email").val()
-					}
-				})
-        swal("Mail Sent!", "A link to reset password has been sent to this email id", "success")
+    	$('#resetbtn').val("Checking User...");
+    	$.ajax({
+			url : "${pageContext.request.contextPath}/checkUser",
+			method : "GET",
+			data : {
+				username : $("#email").val()
+			},
+			success : function(msg){
+				if(msg=="exist"){
+					$('#resetbtn').val("Sending Mail...");
+					$.ajax(
+							{
+								url : "${pageContext.request.contextPath}/resetPasswordLink",
+								method : "GET",
+								data : {
+									email : $("#email").val()
+								},
+								success : function(msg){
+									if(msg=="sent")
+									{
+										swal("Mail Sent!", "A link to reset password has been sent to this email id", "success");
+										$('#resetbtn').val("Submit");
+										$('#resetbtn').attr("disabled",true);
+									}
+								}
+							});
+				}
+				else{
+					swal("Error", "This User is not Registered!!", "error");
+					$('#resetbtn').val("Submit");
+				}
+			}
+		});
     });
     </script>
 </body>

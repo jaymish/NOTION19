@@ -70,9 +70,11 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/resetPasswordLink",method=RequestMethod.GET)
-	public void sendPwdResetLink(@RequestParam("email") String email)
+	public void sendPwdResetLink(HttpServletResponse response,@RequestParam("email") String email) throws IOException
 	{
+		PrintWriter out=response.getWriter();
 		this.emailService.sendResetLink(email);
+		out.print("sent");
 	}
 	
 	@RequestMapping(value="/resetPassword",method=RequestMethod.GET)
