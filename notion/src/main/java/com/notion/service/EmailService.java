@@ -171,6 +171,10 @@ public class EmailService {
 	        	String str;
 	        	while((str=br.readLine())!=null)
 	        	{
+	        		if(str.trim().equals("<td align=\"center\" style=\"border-radius: 3px;\" bgcolor=\"#ff4c52\"><a href=\"http://192.168.43.210:9090/resetPassword\" target=\"_blank\" style=\"font-size: 18px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 12px 50px; border-radius: 2px; border: 1px solid #ff4c52; display: inline-block;\">Reset Password</a></td>"))
+	        		{
+	        			str="<td align=\"center\" style=\"border-radius: 3px;\" bgcolor=\"#ff4c52\"><a href=\"http://192.168.43.210:9090/resetPassword?username="+email+" \"target=\"_blank\" style=\"font-size: 18px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 12px 50px; border-radius: 2px; border: 1px solid #ff4c52; display: inline-block;\">Reset Password</a></td>";
+	        		}
 	        		message+=str;
 	        	}
 	        	br.close();

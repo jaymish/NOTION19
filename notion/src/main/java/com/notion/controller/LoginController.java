@@ -64,17 +64,17 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/resetPasswordLink",method=RequestMethod.GET)
-	public void sendPwdResetLink(HttpServletRequest request,@RequestParam("email") String email)
+	public void sendPwdResetLink(@RequestParam("email") String email)
 	{
-		session=request.getSession();
-		session.setAttribute("resetMail", email);
 		this.emailService.sendResetLink(email);
 	}
 	
 	@RequestMapping(value="/resetPassword",method=RequestMethod.GET)
-	public ModelAndView loadResetPassword()
+	public ModelAndView loadResetPassword(HttpServletRequest request,@RequestParam("username") String email,@ModelAttribute LoginVO loginVO)
 	{
-		return new ModelAndView("/newPassword","passwordReset",new LoginVO());
+		session=request.getSession();
+		session.setAttribute("resetMail",email);
+		return new ModelAndView("/newPassword","passwordReset",loginVO);
 	}
 	
 	@RequestMapping(value="/updatePassword",method=RequestMethod.POST)
