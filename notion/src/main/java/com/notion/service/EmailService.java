@@ -125,6 +125,48 @@ public class EmailService {
         // sends the e-mail
         Transport.send(msg);
 	}
+	 
+	 public void sendVerificationLink(String email, String name)
+	 {
+		// SMTP info
+	        String host = "smtp.gmail.com";
+	        String port = "587";
+	        String mailFrom = "notion@ljinstitutes.edu.in";
+	        String password = "notion@2k18";
+	        
+	     // message info
+	        String mailTo = email;
+	        String subject = "Notion 2k19. Verify Email-Id";
+	        String message="";
+	        try{
+	        	BufferedReader br=new BufferedReader(new FileReader("src/main/resources/static/adminResources/VerifyUser.html"));
+	        	String str;
+	        	while((str=br.readLine())!=null)
+	        	{
+	        		/*if(str.trim().equals("<h1 style=\"font-size: 36px; font-weight: 600; margin: 0;\">Hi! Jacky</h1>"));
+	        		{
+	        			str="<h1 style=\"font-size: 36px; font-weight: 600; margin: 0;\">Hi!"+ name+"</h1>";
+	        		}*/
+	        		if(str.trim().equals("<td align=\"center\" style=\"border-radius: 3px;\" bgcolor=\"#17b3a3\"><a href=\"#\" target=\"_blank\" style=\"font-size: 18px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 12px 50px; border-radius: 2px; border: 1px solid #17b3a3; display: inline-block;\">Confirm Account</a></td>"))
+	        		{
+	        			str="<td align=\"center\" style=\"border-radius: 3px;\" bgcolor=\"#17b3a3\"><a href=\"http://192.168.29.221:9090/verifyUser?username="+email+"\" target=\"_blank\" style=\"font-size: 18px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 12px 50px; border-radius: 2px; border: 1px solid #17b3a3; display: inline-block;\">Confirm Account</a></td>";
+	        		}
+	        		message+=str;
+	        	}
+	        	br.close();
+	        }
+	        catch(IOException e){
+	        	e.printStackTrace();
+	        }
+	        try {
+	            sendEmail(host, port, mailFrom, password, mailTo,
+	                subject, message);
+	            System.out.println("Email sent.");
+	        } catch (Exception ex) {
+	            System.out.println("Could not send email.");
+	            ex.printStackTrace();
+	        }
+	 }
 	
 	 public void sendQRCode(String email)
 	 {
@@ -171,9 +213,9 @@ public class EmailService {
 	        	String str;
 	        	while((str=br.readLine())!=null)
 	        	{
-	        		if(str.trim().equals("<td align=\"center\" style=\"border-radius: 3px;\" bgcolor=\"#ff4c52\"><a href=\"http://192.168.43.210:9090/resetPassword\" target=\"_blank\" style=\"font-size: 18px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 12px 50px; border-radius: 2px; border: 1px solid #ff4c52; display: inline-block;\">Reset Password</a></td>"))
+	        		if(str.trim().equals("<td align=\"center\" style=\"border-radius: 3px;\" bgcolor=\"#ff4c52\"><a href=\"#\" target=\"_blank\" style=\"font-size: 18px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 12px 50px; border-radius: 2px; border: 1px solid #ff4c52; display: inline-block;\">Reset Password</a></td>"))
 	        		{
-	        			str="<td align=\"center\" style=\"border-radius: 3px;\" bgcolor=\"#ff4c52\"><a href=\"http://192.168.43.210:9090/resetPassword?username="+email+" \"target=\"_blank\" style=\"font-size: 18px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 12px 50px; border-radius: 2px; border: 1px solid #ff4c52; display: inline-block;\">Reset Password</a></td>";
+	        			str="<td align=\"center\" style=\"border-radius: 3px;\" bgcolor=\"#ff4c52\"><a href=\"http://192.168.43.210:9090/resetPassword?username="+email+"\" target=\"_blank\" style=\"font-size: 18px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 12px 50px; border-radius: 2px; border: 1px solid #ff4c52; display: inline-block;\">Reset Password</a></td>";
 	        		}
 	        		message+=str;
 	        	}

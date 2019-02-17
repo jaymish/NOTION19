@@ -60,7 +60,7 @@ public class LoginDAOImp implements LoginDAO{
 		return loginList;
 	}
 	
-	public void changeEnabled(LoginVO loginVO2)
+	public void verifyUser(LoginVO loginVO2)
 	{
 		try
 		{
@@ -68,7 +68,7 @@ public class LoginDAOImp implements LoginDAO{
 			 
 			Transaction transaction=session.beginTransaction();
 			 
-			session.createQuery("update LoginVO set enabled='"+loginVO2.getEnabled()+"' where username='"+loginVO2.getUsername()+"'").executeUpdate();
+			session.createQuery("update LoginVO set enabled='1' where username='"+loginVO2.getUsername()+"'").executeUpdate();
 			 
 			transaction.commit();
 			 
@@ -80,7 +80,7 @@ public class LoginDAOImp implements LoginDAO{
 		}
 	}
 	
-	public void resetPassword(LoginVO loginVO3)
+	public void changeEnabled(LoginVO loginVO3)
 	{
 		try
 		{
@@ -88,7 +88,27 @@ public class LoginDAOImp implements LoginDAO{
 			 
 			Transaction transaction=session.beginTransaction();
 			 
-			session.createQuery("update LoginVO set password='"+loginVO3.getPassword()+"' where username='"+loginVO3.getUsername()+"'").executeUpdate();
+			session.createQuery("update LoginVO set enabled='"+loginVO3.getEnabled()+"' where username='"+loginVO3.getUsername()+"'").executeUpdate();
+			 
+			transaction.commit();
+			 
+			session.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+	
+	public void resetPassword(LoginVO loginVO4)
+	{
+		try
+		{
+			Session session=sessionFactory.openSession();
+			 
+			Transaction transaction=session.beginTransaction();
+			 
+			session.createQuery("update LoginVO set password='"+loginVO4.getPassword()+"' where username='"+loginVO4.getUsername()+"'").executeUpdate();
 			 
 			transaction.commit();
 			 

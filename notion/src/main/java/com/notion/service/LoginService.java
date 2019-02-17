@@ -29,12 +29,17 @@ public class LoginService {
 	}
 	
 	@Transactional
-	public void changeEnabled(LoginVO loginVO2){
-		this.loginDAO.changeEnabled(loginVO2);
+	public void verifyUser(LoginVO loginVO2){
+		this.loginDAO.verifyUser(loginVO2);
 	}
 	
 	@Transactional
-	public void resetPassword(LoginVO loginVO3){
-		this.loginDAO.resetPassword(loginVO3);
+	public void changeEnabled(LoginVO loginVO3){
+		this.loginDAO.changeEnabled(loginVO3);
+	}
+	
+	@Transactional
+	public void resetPassword(LoginVO loginVO4){
+		this.loginDAO.resetPassword(loginVO4);
 	}
 }

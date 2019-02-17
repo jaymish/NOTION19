@@ -97,7 +97,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
-	public ModelAndView loadLogout(ModelMap model,HttpServletResponse response,HttpServletRequest request)
+	public String loadLogout(ModelMap model,HttpServletResponse response,HttpServletRequest request)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null)
@@ -109,7 +109,7 @@ public class LoginController {
             request.getSession().removeAttribute("regDetails");
             request.getSession().removeAttribute("profileDetails");
         }
-		return new ModelAndView("redirect:/login");
+		return "redirect:/login";
 	}
 	
 	@RequestMapping(value="/user/logout",method=RequestMethod.GET)
@@ -137,13 +137,19 @@ public class LoginController {
 		}
 	}
 	
+	@RequestMapping(value="/userVerification",method=RequestMethod.GET)
+	public void sendVerifyLink(@RequestParam("username") String email,@RequestParam("firstname") String name)
+	{
+		this.emailService.sendVerificationLink(email, name);
+	}
+	
 	@RequestMapping(value="insertRegData",method=RequestMethod.POST)
 	public ModelAndView insertRegData(@ModelAttribute RegVO regVO,LoginVO loginVO1)
 	{
 		loginVO1.setUsername(regVO.getLoginVO().getUsername());
 		String passwordHash=this.qrService.createMd5(regVO.getLoginVO().getPassword());
 		loginVO1.setPassword(passwordHash);
-		loginVO1.setEnabled(1);
+		loginVO1.setEnabled(0);
 		loginVO1.setRole("ROLE_USER");
 		this.loginService.insertToLogin(loginVO1);
 		
@@ -152,6 +158,14 @@ public class LoginController {
 		this.regService.insertToRegister(regVO);
 		
 		return new ModelAndView("redirect:/login");
+	}
+	
+	@RequestMapping(value="verifyUser",method=RequestMethod.GET)
+	public String verifyUser(@RequestParam("username") String email, LoginVO loginVO2)
+	{
+		loginVO2.setUsername(email);
+		this.loginService.verifyUser(loginVO2);
+		return "redirect:/login";
 	}
 	
 	@RequestMapping(value="/admin/Dashboard",method=RequestMethod.GET)

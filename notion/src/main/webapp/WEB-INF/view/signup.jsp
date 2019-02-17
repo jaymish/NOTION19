@@ -71,10 +71,10 @@
 				<p class="auth-msg">Register Yourself for Notion</p>
 
 				<form:form action="insertRegData" method="post" class="form-element"
-					modelAttribute="regData">
+					modelAttribute="regData" id="regform">
 					<div class="form-group has-feedback controls">
 						<form:input type="text" name="text" class="form-control"
-							path="firstname" placeholder="First Name" required="required"
+							path="firstname" placeholder="First Name" id="firstname" required="required"
 							data-validation-required-message="This field is required" />
 						<span class="ion ion-person form-control-feedback "></span>
 					</div>
@@ -191,6 +191,20 @@
 				$("#email").focus();
 			}
 		});
+		
+		$("#subbtn").click(function(){
+			$("#subbtn").val("Sending Mail...");
+			$("#subbtn").attr("disabled",true);
+			$.ajax({
+				url : "${pageContext.request.contextPath}/userVerification",
+				method : "GET",
+				data : {
+					username : $("#email").val(),
+					firstname : $("#firstname").val()
+				}
+			});
+			$("#regform").submit();
+		})
 	</script>
 
 </body>
