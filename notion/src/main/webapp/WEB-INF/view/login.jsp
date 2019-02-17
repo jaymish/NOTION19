@@ -51,7 +51,7 @@
 						<span class="ion ion-email form-control-feedback"></span>
 					</div>
 					<div class="form-group has-feedback">
-						<input type="password" name="password" class="form-control" placeholder="Password" required="required">
+						<input type="password" name="password" id="pass" class="form-control" placeholder="Password" required="required">
 						<span class="ion ion-locked form-control-feedback"></span>
 					</div>
 					<div class="row">
@@ -111,6 +111,16 @@
 
 	<!-- Bootstrap 4.0-->
 	<script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script>
+	
+	<!-- Crypto Js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+	<script>
+		$("#pass").blur(function(){
+			var pass=$("#pass").val();
+			var hash=CryptoJS.MD5(pass);
+			$("#pass").val(hash);
+		})
+	</script>
 
 </body>
 </html>

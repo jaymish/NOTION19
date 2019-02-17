@@ -94,7 +94,7 @@
 					<div class="form-group has-feedback controls">
 						<form:input type="password" name="password" class="form-control"
 							path="loginVO.password" id="pass" placeholder="Password"
-							required="required"
+							required="required" pattern=".{5,12}" title="Password must be of 5-12 characters!"
 							data-validation-required-message="This field is required" />
 						<span class="ion ion-locked form-control-feedback "></span><br />
 					</div>
@@ -180,13 +180,14 @@
 					success : function(msg){
 						if(msg=="exist"){
 							swal("Sorry", "This Username already Exist!!", "error");
+							$("#email").val("");
 							$("#email").focus();
 						}
 					}
 				});
 			}
 			else {
-				$("#errormsg").html("<font color=red>Enter Proper Email ID</font>");
+				$("#errormsg").html("<font color=red>Enter Another Email ID</font>");
 				$("#email").focus();
 			}
 		});

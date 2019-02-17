@@ -5,7 +5,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   
-  <parent>
+  	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.3.RELEASE</version>
@@ -56,8 +56,11 @@
 		    <groupId>javax.mail</groupId>
 		    <artifactId>mail</artifactId>
 		    <version>1.4</version>
-		</dependency>
-		
+		</dependency>	
 	</dependencies>
+	
+	<build>
+		<finalName>notion</finalName>
+	</build>
 
 </project>

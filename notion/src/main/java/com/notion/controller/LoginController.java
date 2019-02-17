@@ -25,11 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.notion.model.LoginVO;
 import com.notion.model.RegVO;
 import com.notion.model.UserProfileVO;
-import com.notion.service.EmailService;
-import com.notion.service.InstituteService;
-import com.notion.service.LoginService;
-import com.notion.service.RegService;
-import com.notion.service.UserProfileService;
+import com.notion.service.*;
 
 @Controller
 public class LoginController {
@@ -45,6 +41,9 @@ public class LoginController {
 	
 	@Autowired
 	UserProfileService userProfileService;
+	
+	@Autowired
+	QRService qrService;
 	
 	@Autowired
 	EmailService emailService;
@@ -142,7 +141,8 @@ public class LoginController {
 	public ModelAndView insertRegData(@ModelAttribute RegVO regVO,LoginVO loginVO1)
 	{
 		loginVO1.setUsername(regVO.getLoginVO().getUsername());
-		loginVO1.setPassword(regVO.getLoginVO().getPassword());
+		String passwordHash=this.qrService.createMd5(regVO.getLoginVO().getPassword());
+		loginVO1.setPassword(passwordHash);
 		loginVO1.setEnabled(1);
 		loginVO1.setRole("ROLE_USER");
 		this.loginService.insertToLogin(loginVO1);

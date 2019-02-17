@@ -23,7 +23,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 @Service
 public class QRService {
-	public String createMd5(String email)
+	public String createMd5(String msg)
 	{
 		try
 		{
@@ -32,7 +32,7 @@ public class QRService {
             
             // digest() method is called to calculate message digest 
             //  of an input digest() return array of byte 
-            byte[] messageDigest = md.digest(email.getBytes());
+            byte[] messageDigest = md.digest(msg.getBytes());
             
             // Convert byte array into signum representation 
             BigInteger no = new BigInteger(1, messageDigest);
