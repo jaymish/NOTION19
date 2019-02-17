@@ -41,13 +41,13 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 
 		if (admin) {
 			System.out.println("user is admin");
-			response.sendRedirect("/admin/Dashboard");
+			response.sendRedirect(request.getContextPath()+"/admin/Dashboard");
 		} else if(user) {
 			System.out.println("user is user");
-			response.sendRedirect("/user/Dashboard");
+			response.sendRedirect(request.getContextPath()+"/user/Dashboard");
 		} else if(collector) {
 			System.out.println("user is collector");
-			response.sendRedirect("/admin/collector");
+			response.sendRedirect(request.getContextPath()+"/admin/collector");
 		}else {
 			System.out.println("user is anonymous");
 			response.sendRedirect("/403");
