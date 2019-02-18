@@ -29,13 +29,6 @@
 <!--alerts CSS -->
 <link href="<%=request.getContextPath() %>/adminResources/css/sweetalert.css" rel="stylesheet" type="text/css">
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-
 <script>
 	function validatedata() {
 		var pass = document.getElementById("pass")
@@ -117,8 +110,8 @@
 						</div>
 						<!-- /.col -->
 						<div class="col-12 text-center">
-							<button type="submit" class="btn btn-block mt-10 btn-success"
-								id="subbtn" disabled=true>SIGN UP</button>
+							<input type="submit" value="Submit" class="btn btn-block mt-10 btn-success"
+								id="subbtn" disabled="true"/>
 						</div>
 						<!-- /.col -->
 					</div>
@@ -193,14 +186,19 @@
 		});
 		
 		$("#subbtn").click(function(){
-			$("#subbtn").val("Sending Mail...");
 			$("#subbtn").attr("disabled",true);
+			$("#subbtn").val("Sending Mail...");
 			$.ajax({
 				url : "${pageContext.request.contextPath}/userVerification",
 				method : "GET",
 				data : {
 					username : $("#email").val(),
 					firstname : $("#firstname").val()
+				},
+				success : function(msg){
+					if(msg=="sent"){
+						swal("Link Sent", "An account verification link has been sent to your email id. You need to verify your email id before logging in", "Success");
+					}
 				}
 			});
 			$("#regform").submit();

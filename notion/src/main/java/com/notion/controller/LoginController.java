@@ -69,18 +69,23 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/resetPasswordLink",method=RequestMethod.GET)
-	public void sendPwdResetLink(HttpServletResponse response,@RequestParam("email") String email) throws IOException
+	public void sendPwdResetLink(HttpServletResponse response,@RequestParam("email") String email,LoginVO loginVO) throws IOException
 	{
 		PrintWriter out=response.getWriter();
-		this.emailService.sendResetLink(email);
+		loginVO.setUsername(email);
+		List<LoginVO> getToken = new ArrayList<LoginVO>();
+		getToken=this.loginService.getUser(loginVO);
+		String token=getToken.get(0).getPassword();
+		this.emailService.sendResetLink(email,token);
 		out.print("sent");
 	}
 	
 	@RequestMapping(value="/resetPassword",method=RequestMethod.GET)
-	public ModelAndView loadResetPassword(HttpServletRequest request,@RequestParam("username") String email,@ModelAttribute LoginVO loginVO)
+	public ModelAndView loadResetPassword(HttpServletRequest request,@RequestParam("username") String email,@RequestParam("token") String token,@ModelAttribute LoginVO loginVO)
 	{
 		session=request.getSession();
 		session.setAttribute("resetMail",email);
+		session.setAttribute("resetToken", token);
 		return new ModelAndView("/newPassword","passwordReset",loginVO);
 	}
 	
@@ -89,9 +94,18 @@ public class LoginController {
 	{
 		session=request.getSession();
 		String email=(String)session.getAttribute("resetMail");
+		String token=(String)session.getAttribute("resetToken");
+		String PasswordHash=this.qrService.createMd5(loginVO1.getPassword());
+		List<LoginVO> comparePass=new ArrayList<LoginVO>();
 		loginVO1.setUsername(email);
-		this.loginService.resetPassword(loginVO1);
+		comparePass=this.loginService.getUser(loginVO1);
+		if(token.equals(comparePass.get(0).getPassword()))
+		{
+			loginVO1.setPassword(PasswordHash);
+			this.loginService.resetPassword(loginVO1);
+		}
 		session.removeAttribute("resetMail");
+		session.removeAttribute("resetToken");
 		
 		return "redirect:/login";
 	}
@@ -138,9 +152,11 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/userVerification",method=RequestMethod.GET)
-	public void sendVerifyLink(@RequestParam("username") String email,@RequestParam("firstname") String name)
+	public void sendVerifyLink(HttpServletResponse response,@RequestParam("username") String email,@RequestParam("firstname") String name) throws IOException
 	{
+		PrintWriter out=response.getWriter();
 		this.emailService.sendVerificationLink(email, name);
+		out.print("sent");
 	}
 	
 	@RequestMapping(value="insertRegData",method=RequestMethod.POST)

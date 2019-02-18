@@ -68,6 +68,7 @@
 					<div class="form-group has-feedback controls">
 						<form:input type="password" name="password" class="form-control"
 							path="password" id="pass" placeholder="Password"
+							pattern=".{5,12}" title="Password must be of 5-12 characters!"
 							required="required" data-validation-required-message="This field is required" />
 						<span class="ion ion-locked form-control-feedback "></span><br />
 					</div>

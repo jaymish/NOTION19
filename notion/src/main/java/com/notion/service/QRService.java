@@ -53,7 +53,8 @@ public class QRService {
 	{
 		try
 		{
-			String filePath = "../webapps/notion/WEB-INF/classes/static/qr/"+email+".png";
+			/*Web Path: ../webapps/notion/WEB-INF/classes/static/qr/*/
+			String filePath = "src/main/resources/static/qr/"+email+".png";
 			int size = 250;
 			String fileType = "png";
 			File qrFile = new File(filePath);
