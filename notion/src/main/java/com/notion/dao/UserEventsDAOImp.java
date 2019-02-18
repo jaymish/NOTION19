@@ -147,4 +147,27 @@ public class UserEventsDAOImp implements UserEventsDAO{
 			ex.printStackTrace();
 		}
 	}
+	public List<UserEventsVO> viewPresence()
+	{
+		List<UserEventsVO> presentList=new ArrayList<UserEventsVO>();
+		try
+		{
+			 Session session=sessionFactory.openSession();
+			 
+			 Transaction transaction=session.beginTransaction();
+			 
+			 Query q=session.createQuery("from UserEventsVO where attendance = 'present'");
+			 
+			 presentList=q.list();
+			 
+			 transaction.commit();
+			 
+			 session.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return presentList;
+	}
 }

@@ -261,4 +261,32 @@ public class UserEventsController {
 		}
 		return new ModelAndView("/admin/viewCollectors","collectorLs",collectorList).addObject("totalCollection", totalCollected);
 	}
+	
+	@RequestMapping(value="/admin/viewPresence",method=RequestMethod.GET)
+	public ModelAndView loadViewPresence(@RequestParam("type") String participation)
+	{
+		List<UserEventsVO> presenceList=this.userEventsService.viewPresence();
+		List<UserEventsVO> individualPresence=new ArrayList<UserEventsVO>();
+		List<UserEventsVO> teamPresence=new ArrayList<UserEventsVO>();
+		for(UserEventsVO eventType : presenceList)
+		{
+			if(eventType.getEventVO1().getParticipationType().equals("Individual"))
+			{
+				individualPresence.add(eventType);
+			}
+			else if(eventType.getEventVO1().getParticipationType().equals("Team"))
+			{
+				teamPresence.add(eventType);
+			}
+		}
+		
+		if(participation.equals("individual"))
+		{
+			return new ModelAndView("/admin/viewIndividualPresence","individualPresenceLs",individualPresence);
+		}
+		else
+		{
+			return new ModelAndView("/admin/viewTeamPresence","teamPresenceLs",teamPresence);
+		}
+	}
 }

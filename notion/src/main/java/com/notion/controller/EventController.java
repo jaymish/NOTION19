@@ -42,6 +42,7 @@ public class EventController {
 		List<EventVO> viewEventsList=this.eventService.viewEvents();
 		List<EventVO> techEventsList=new ArrayList<EventVO>();
 		List<EventVO> nontechEventsList=new ArrayList<EventVO>();
+		List<EventVO> workshopsList=new ArrayList<EventVO>();
 		List<EventVO> inactiveEventsList=new ArrayList<EventVO>();
 		for(EventVO eventLS : viewEventsList)
 		{
@@ -55,13 +56,17 @@ public class EventController {
 				{
 					nontechEventsList.add(eventLS);
 				}
+				else if(eventLS.getEventType().equals("Workshop"))
+				{
+					workshopsList.add(eventLS);
+				}	
 			}
 			else if(eventLS.getStatus().equals("inactive"))
 			{
 				inactiveEventsList.add(eventLS);
 			}
 		}
-		return new ModelAndView("admin/viewEvents","techeventslist",techEventsList).addObject("nontecheventslist", nontechEventsList).addObject("inactiveeventslist",inactiveEventsList);
+		return new ModelAndView("/admin/viewEvents","techeventslist",techEventsList).addObject("nontecheventslist", nontechEventsList).addObject("workshopslist", workshopsList).addObject("inactiveeventslist",inactiveEventsList);
 	}
 	
 	@RequestMapping(value="/admin/editEvent",method=RequestMethod.GET)

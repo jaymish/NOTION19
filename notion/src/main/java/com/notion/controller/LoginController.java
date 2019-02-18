@@ -165,7 +165,7 @@ public class LoginController {
 		loginVO1.setUsername(regVO.getLoginVO().getUsername());
 		String passwordHash=this.qrService.createMd5(regVO.getLoginVO().getPassword());
 		loginVO1.setPassword(passwordHash);
-		loginVO1.setEnabled(1);
+		loginVO1.setEnabled(0);
 		loginVO1.setRole("ROLE_USER");
 		this.loginService.insertToLogin(loginVO1);
 		

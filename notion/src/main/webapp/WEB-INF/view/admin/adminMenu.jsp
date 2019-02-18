@@ -59,4 +59,17 @@
 			<li><a href="collectors"><i class="ti-more"></i>Payment Collectors</a></li>
 		</ul>
 	</li>
+	<li class="treeview">
+		<a href="#">
+		<i class="ti-files"></i>
+		<span>Presence</span>
+		<span class="pull-right-container">
+		<i class="fa fa-angle-right pull-right"></i>
+		</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="viewPresence?type=individual"><i class="ti-more"></i>Individual Events</a></li>
+			<li><a href="viewPresence?type=team"><i class="ti-more"></i>Team Events</a></li>
+		</ul>
+	</li>
 </ul>

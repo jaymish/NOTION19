@@ -51,4 +51,11 @@ public class UserEventsService {
 	public void collectPayment(UserProfileVO userProfileVO){
 		this.userEventsDAO.collectPayment(userProfileVO);
 	}
+	
+	@Transactional
+	public List<UserEventsVO> viewPresence(){
+		List<UserEventsVO> presentList=new ArrayList<UserEventsVO>();
+		presentList=this.userEventsDAO.viewPresence();
+		return presentList;
+	}
 }

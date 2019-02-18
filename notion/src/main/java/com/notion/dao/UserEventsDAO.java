@@ -12,4 +12,5 @@ public interface UserEventsDAO {
 	public List<UserEventsVO> paymentComplete();
 	public List<UserEventsVO> paymentPending();
 	public void collectPayment(UserProfileVO userProfileVO);
+	public List<UserEventsVO> viewPresence();
 }
