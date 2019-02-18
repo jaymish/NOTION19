@@ -125,7 +125,7 @@
 														<form:select name="institute" path="instituteVO.instituteId"
 															class="form-control" required="required"
 															data-validation-required-message="This field is required">
-															<option>Select Institute</option>
+															<option selected="true" disabled="disabled">Select Institute</option>
 															<c:forEach items="${instituteLs}" var="j">
 																<form:option value="${j.instituteId}">${j.instituteName}</form:option>
 															</c:forEach>

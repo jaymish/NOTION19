@@ -139,7 +139,7 @@ public class EmailService {
 	        String subject = "Notion 2k19. Verify Email-Id";
 	        String message="";
 	        try{
-	        	BufferedReader br=new BufferedReader(new FileReader("src/main/resources/static/adminResources/VerifyUser.html"));
+	        	BufferedReader br=new BufferedReader(new FileReader("../webapps/notion/WEB-INF/classes/static/adminResources/VerifyUser.html"));
 	        	String str;
 	        	while((str=br.readLine())!=null)
 	        	{
@@ -183,7 +183,7 @@ public class EmailService {
 	 
 	        // attachments
 	        String[] attachFiles = new String[1];
-	        attachFiles[0]="src/main/resources/static/qr/"+email+".png";
+	        attachFiles[0]="../webapps/notion/WEB-INF/classes/static/qr/"+email+".png";
 	        
 	 
 	        try {
@@ -209,7 +209,7 @@ public class EmailService {
 	        String subject = "Notion 2k19. Reset Password";
 	        String message="";
 	        try{
-	        	BufferedReader br=new BufferedReader(new FileReader("src/main/resources/static/adminResources/ResetPassword.html"));
+	        	BufferedReader br=new BufferedReader(new FileReader("../webapps/notion/WEB-INF/classes/static/adminResources/ResetPassword.html"));
 	        	String str;
 	        	while((str=br.readLine())!=null)
 	        	{
