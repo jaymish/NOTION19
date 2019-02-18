@@ -28,13 +28,9 @@
 <!-- Data Table-->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/adminResources/datatables.min.css" />
 
-<script>
-	function deskPay(btn)
-	{
-		alert("You can pay total amount at registeration desk near room 109 or at 7th floor BSC Building")
-		btn.disabled=true
-	}
-</script>
+<!--alerts CSS -->
+<link href="<%=request.getContextPath() %>/adminResources/css/sweetalert.css" rel="stylesheet" type="text/css">
+
 </head>
 
 <body class="hold-transition skin-light light-sidebar sidebar-mini">
@@ -126,8 +122,8 @@
 							</div>
 							<div style="margin:0 0 30px 15px">
 								<a href="selectEvents"><input type="button" class="btn btn-primary" value="+ Add More"/></a>
-								<input type="button" style="margin:0 0 0 15px" class="btn btn-primary" value="Pay Offline" onclick="deskPay(this)"/>
-								<input type="button" style="margin:0 0 0 15px" class="btn btn-primary" value="Pay Online"/>
+								<input type="button" style="margin:0 0 0 15px" class="btn btn-primary" value="Pay Offline" id="payoffline"/>
+								<input type="button" style="margin:0 0 0 15px" class="btn btn-primary" value="Pay Online" id="payonline"/>
 							</div>
 							<div class="col-12">
 								<div class="box">
@@ -216,6 +212,18 @@
 	<!-- Form validator JavaScript -->
 	<script src="<%=request.getContextPath() %>/adminResources/js/validation.js"></script>
 	<script src="<%=request.getContextPath() %>/adminResources/js/form-validation.js"></script>
+	
+	<!-- Sweet-Alert  -->
+    <script src="<%=request.getContextPath() %>/adminResources/js/sweetalert.min.js"></script>
+	
+	<script>
+		$("#payoffline").click(function(){
+			swal("Submitted","Pay total amount at desk near room 109 in break or after 1:30 to confirm participation","success");
+		})
+		$("#payonline").click(function(){
+			swal("Under Construction","Online payment is not available yet. Please try later or pay offline");
+		})
+	</script>
 
 </body>
 </html>

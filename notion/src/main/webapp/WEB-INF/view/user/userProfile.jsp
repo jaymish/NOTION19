@@ -26,6 +26,9 @@
 <!-- UltimatePro Admin skins -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/_all-skins.css">
 
+<!--alerts CSS -->
+<link href="<%=request.getContextPath() %>/adminResources/css/sweetalert.css" rel="stylesheet" type="text/css">
+
 </head>
 <body class="hold-transition skin-light light-sidebar sidebar-mini">
 	<div class="wrapper">
@@ -66,7 +69,7 @@
 							<div class="row">
 								<div class="col">
 									<form:form novalidate="novalidate" action="insertUserProfile"
-										modelAttribute="userProfileData" method="POST">
+										modelAttribute="userProfileData" id="profileForm" method="POST">
 										<div class="row">
 											<div class="col-12">
 												<form:hidden path="regVO.registrationId"/>
@@ -108,7 +111,7 @@
 													</h5>
 													<div class="controls">
 														<form:select name="semester" path="semester"
-															class="form-control" required="required"
+															class="form-control" required="required" id="sem"
 															data-validation-required-message="This field is required">
 															<option>Select Semester</option>
 															<c:forEach begin="1" end="8" var="i">
@@ -123,9 +126,9 @@
 													</h5>
 													<div class="controls">
 														<form:select name="institute" path="instituteVO.instituteId"
-															class="form-control" required="required"
+															class="form-control" required="required" id="institute"
 															data-validation-required-message="This field is required">
-															<option selected="true" disabled="disabled">Select Institute</option>
+															<option>Select Institute</option>
 															<c:forEach items="${instituteLs}" var="j">
 																<form:option value="${j.instituteId}">${j.instituteName}</form:option>
 															</c:forEach>
@@ -146,7 +149,7 @@
 											</div>
 										</div>
 										<div class="text-xs-right">
-											<button type="submit" class="btn btn-info">Submit</button>
+											<input type="submit" value="Submit" id="subbtn" class="btn btn-info"/>
 											<button type="reset" class="btn btn-info">Reset</button>
 										</div>
 									</form:form>
@@ -195,6 +198,32 @@
 	<!-- Form validator JavaScript -->
 	<script src="<%=request.getContextPath() %>/adminResources/js/validation.js"></script>
 	<script src="<%=request.getContextPath() %>/adminResources/js/form-validation.js"></script>
+	
+	<!-- Sweet-Alert  -->
+    <script src="<%=request.getContextPath() %>/adminResources/js/sweetalert.min.js"></script>
+	
+	<script>
+		$("#subbtn").click(function(){
+			$("#subbtn").val("Submit");
+			var semvalue = $("#sem :selected").text();
+			var instvalue = $("#institute :selected").text();
+			if(semvalue == "Select Semester"){
+				$("#sem :selected").text("")
+				swal("Error","Please select the semester","error");
+				$("#sem").focus();
+			}
+			else if(instvalue == "Select Institute"){
+				$("#institute :selected").text("");
+				swal("Error","Please select an institute","error");
+				$("#institute").focus();
+			}
+			else{
+				$("#subbtn").val("Generating QR...").delay(500);
+				$("#subbtn").val("Sending Mail...");
+				$("#profileForm").submit();
+			}
+		})
+	</script>
 
 </body>
 </html>
