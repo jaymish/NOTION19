@@ -18,7 +18,7 @@
 	<div>
 		<a href="#" class="sidebar-toggle" data-toggle="push-menu"
 			role="button"> <i class="ti-align-left"></i>
-		</a> <a id="toggle_res_search" data-toggle="collapse"
+		</a> <!-- <a id="toggle_res_search" data-toggle="collapse"
 			data-target="#search_form" class="res-only-view"
 			href="javascript:void(0);"><i class="mdi mdi-magnify"></i></a>
 		<form id="search_form" role="search"
@@ -33,7 +33,7 @@
 					</button>
 				</span>
 			</div>
-		</form>
+		</form> -->
 	</div>
 
 	<div class="navbar-custom-menu r-side">

@@ -21,14 +21,8 @@
 <!-- theme style -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/master_style.css">
 
-<!-- UltimatePro Admin skins -->
+<!-- skins -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/_all-skins.css">
-
-<!-- c3 CSS -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/adminResources/css/c3.min.css">
-
-<!-- daterange picker -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/daterangepicker.css">
 
 </head>
 
@@ -78,41 +72,11 @@
 	<!-- jQuery 3 -->
 	<script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script>
 
-	<!-- popper -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/popper.min.js"></script>
-
 	<!-- Bootstrap 4.0-->
 	<script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script>
 
-	<!-- Slimscroll -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/jquery.slimscroll.js"></script>
-
-	<!-- date-range-picker -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/moment.min.js"></script>
-	<script src="<%=request.getContextPath() %>/adminResources/js/daterangepicker.js"></script>
-
-	<!-- Sparkline -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/jquery.sparkline.min.js"></script>
-
-	<!-- C3 Plugins -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/d3.min.js"></script>
-	<script src="<%=request.getContextPath() %>/adminResources/js/c3.min.js"></script>
-
-	<!-- eChart Plugins -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/echarts-en.min.js"></script>
-
-	<!-- FastClick -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/fastclick.js"></script>
-
 	<!-- UltimatePro Admin App -->
 	<script src="<%=request.getContextPath() %>/adminResources/js/template.js"></script>
-
-	<!-- UltimatePro Admin dashboard demo (This is only for demo purposes) -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/dashboard3.js"></script>
-	<script src="<%=request.getContextPath() %>/adminResources/js/chart-dash3-int.js"></script>
-
-	<!-- UltimatePro Admin for demo purposes -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/demo.js"></script>
 
 
 </body>
