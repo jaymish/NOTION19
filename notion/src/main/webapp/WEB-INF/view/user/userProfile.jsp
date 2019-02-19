@@ -203,8 +203,10 @@
     <script src="<%=request.getContextPath() %>/adminResources/js/sweetalert.min.js"></script>
 	
 	<script>
-		$("#subbtn").click(function(){
+		$(document).ready(function(){
 			$("#subbtn").val("Submit");
+		})
+		$("#subbtn").click(function(){
 			var semvalue = $("#sem :selected").text();
 			var instvalue = $("#institute :selected").text();
 			if(semvalue == "Select Semester"){

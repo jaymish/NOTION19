@@ -21,8 +21,11 @@
 <!-- theme style -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/master_style.css">
 
-<!-- UltimatePro Admin skins -->
+<!-- skins -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/_all-skins.css">
+
+<!--alerts CSS -->
+<link href="<%=request.getContextPath() %>/adminResources/css/sweetalert.css" rel="stylesheet" type="text/css">
 
 </head>
 <body class="hold-transition bg-img"
@@ -69,6 +72,7 @@
 						<!-- /.col -->
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+					<input type="hidden" value="${errormsg}" id="err"/>
 				</form>
 
 				<!-- <div class="text-center text-dark">
@@ -99,19 +103,26 @@
 	<!-- jQuery 3 -->
 	<script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script>
 
-	<!-- popper -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/popper.min.js"></script>
-
 	<!-- Bootstrap 4.0-->
 	<script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script>
 	
 	<!-- Crypto Js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+	
+	<!-- Sweet-Alert  -->
+    <script src="<%=request.getContextPath() %>/adminResources/js/sweetalert.min.js"></script>
+    
 	<script>
 		$("#pass").blur(function(){
 			var pass=$("#pass").val();
 			var hash=CryptoJS.MD5(pass);
 			$("#pass").val(hash);
+		})
+		$(document).ready(function(){
+			var err=$("#err").val();
+			if(err=="true"){
+				swal("Error","Either incorrect Username/Password or you are not verified. Please check your email for account verification","error");
+			}
 		})
 	</script>
 

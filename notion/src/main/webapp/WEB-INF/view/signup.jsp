@@ -87,7 +87,7 @@
 					<div class="form-group has-feedback controls">
 						<form:input type="password" name="password" class="form-control"
 							path="loginVO.password" id="pass" placeholder="Password"
-							required="required" pattern=".{5,12}" title="Password must be of 5-12 characters!"
+							required="required" pattern=".{5,12}" title="Password Must be 5-12 characters long!"
 							data-validation-required-message="This field is required" />
 						<span class="ion ion-locked form-control-feedback "></span><br />
 					</div>
@@ -176,6 +176,9 @@
 							$("#email").val("");
 							$("#email").focus();
 						}
+						else{
+							swal("Notice","An email for verification will be sent to this email id, You won't be able to sign in until verification is complete","warning");
+						}
 					}
 				});
 			}
@@ -185,9 +188,11 @@
 			}
 		});
 		
+		/* $("#pass").keyup(function(){
+			
+		}) */
+		
 		$("#subbtn").click(function(){
-			$("#subbtn").attr("disabled",true);
-			$("#subbtn").val("Sending Mail...");
 			$.ajax({
 				url : "${pageContext.request.contextPath}/userVerification",
 				method : "GET",

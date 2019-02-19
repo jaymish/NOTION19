@@ -57,9 +57,9 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.GET)
-	public String loadLogin()
+	public ModelAndView loadLogin(@RequestParam(value="error",required=false)String error) throws IOException
 	{
-		return "login";
+		return new ModelAndView("login","errormsg",error);
 	}
 	
 	@RequestMapping(value="/forgotPassword",method=RequestMethod.GET)
