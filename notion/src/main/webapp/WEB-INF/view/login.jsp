@@ -13,7 +13,9 @@
 <title>Notion - Log in</title>
 
 <!-- Bootstrap 4.0-->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap.css">
+<%-- <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap.css"> --%>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <!-- Bootstrap extend-->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap-extend.css">
@@ -101,10 +103,14 @@
 
 
 	<!-- jQuery 3 -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script>
+	<%-- <script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script> --%>
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 	<!-- Bootstrap 4.0-->
-	<script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script>
+	<%-- <script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script> --%>
+	
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	
 	<!-- Crypto Js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
@@ -118,7 +124,7 @@
 			var hash=CryptoJS.MD5(pass);
 			$("#pass").val(hash);
 		})
-		$(document).ready(function(e){
+		$(document).keypress(function(e){
 			if(e.which == 13){
 				var pass=$("#pass").val();
 				var hash=CryptoJS.MD5(pass);

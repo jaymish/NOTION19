@@ -13,7 +13,9 @@
 <title>Notion User - Dashboard</title>
 
 <!-- Bootstrap 4.0-->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap.css">
+<%-- <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap.css"> --%>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <!-- Bootstrap extend-->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap-extend.css">
@@ -55,6 +57,9 @@
 					<div Style="margin: 15px 0 15px 0;padding: 4px 12px;background-color: #ffffcc;border-left: 6px solid #ffeb3b">
   						<p><strong>Note:</strong> This QR will be activated after you select and complete payment of at least 1 event.</p>
 					</div>
+					<div>
+						<h5><a href="selectEvents">CLICK HERE</a> to select events</h5>
+					</div>
 				</section>
 				<!-- /.content -->
 			</div>
@@ -70,10 +75,14 @@
 
 
 	<!-- jQuery 3 -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script>
+	<%-- <script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script> --%>
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 	<!-- Bootstrap 4.0-->
-	<script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script>
+	<%-- <script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script> --%>
+	
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 	<!-- UltimatePro Admin App -->
 	<script src="<%=request.getContextPath() %>/adminResources/js/template.js"></script>

@@ -15,7 +15,9 @@
 <title>Notion - Reset Password</title>
 
 <!-- Bootstrap 4.0-->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap.css">
+<%-- <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap.css"> --%>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <!-- Bootstrap extend-->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap-extend.css">
@@ -23,15 +25,8 @@
 <!-- theme style -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/master_style.css">
 
-<!-- UltimatePro Admin skins -->
+<!-- skins -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/_all-skins.css">
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
 
 <script>
 	function validatedata() {
@@ -101,17 +96,14 @@
 
 
 	<!-- jQuery 3 -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script>
-
-	<!-- popper -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/popper.min.js"></script>
+	<%-- <script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script> --%>
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 	<!-- Bootstrap 4.0-->
-	<script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script>
-
-	<!-- Form validator JavaScript -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/validation.js"></script>
-	<script src="<%=request.getContextPath() %>/adminResources/js/form-validation.js"></script>
+	<%-- <script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script> --%>
+	
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>

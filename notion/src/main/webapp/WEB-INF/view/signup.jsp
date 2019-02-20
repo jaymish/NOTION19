@@ -15,7 +15,9 @@
 <title>Notion - Registration</title>
 
 <!-- Bootstrap 4.0-->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap.css">
+<%-- <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap.css"> --%>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <!-- Bootstrap extend-->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap-extend.css">
@@ -23,7 +25,7 @@
 <!-- theme style -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/master_style.css">
 
-<!-- UltimatePro Admin skins -->
+<!-- skins -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/_all-skins.css">
 
 <!--alerts CSS -->
@@ -143,10 +145,14 @@
 
 
 	<!-- jQuery 3 -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script>
+	<%-- <script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script> --%>
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 	<!-- Bootstrap 4.0-->
-	<script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script>
+	<%-- <script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script> --%>
+	
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	
 	<!-- Sweet-Alert  -->
     <script src="<%=request.getContextPath() %>/adminResources/js/sweetalert.min.js"></script>
