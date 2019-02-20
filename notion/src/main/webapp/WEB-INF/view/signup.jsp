@@ -145,15 +145,8 @@
 	<!-- jQuery 3 -->
 	<script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script>
 
-	<!-- popper -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/popper.min.js"></script>
-
 	<!-- Bootstrap 4.0-->
 	<script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script>
-
-	<!-- Form validator JavaScript -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/validation.js"></script>
-	<script src="<%=request.getContextPath() %>/adminResources/js/form-validation.js"></script>
 	
 	<!-- Sweet-Alert  -->
     <script src="<%=request.getContextPath() %>/adminResources/js/sweetalert.min.js"></script>

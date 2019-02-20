@@ -118,6 +118,13 @@
 			var hash=CryptoJS.MD5(pass);
 			$("#pass").val(hash);
 		})
+		$(document).ready(function(e){
+			if(e.which == 13){
+				var pass=$("#pass").val();
+				var hash=CryptoJS.MD5(pass);
+				$("#pass").val(hash);
+			}
+		})
 		$(document).ready(function(){
 			var err=$("#err").val();
 			if(err=="true"){
