@@ -38,10 +38,10 @@
 		var chkbox = document.getElementById("basic_checkbox_1")
 		var subbtn = document.getElementById("subbtn")
 		var matchpass = document.getElementById("passmatch")
-		if (pass.value == pass2.value && chkbox.checked) {
+		if (pass.value == pass2.value && chkbox.checked && pass.value.trim()!="") {
 			matchpass.style.display = "none"
 			subbtn.disabled = false
-		} else if (pass.value == pass2.value && !chkbox.checked) {
+		} else if (pass.value == pass2.value && !chkbox.checked && pass.value.trim()!="") {
 			matchpass.style.display = "none"
 			subbtn.disabled = true
 		} else {
@@ -117,6 +117,7 @@
 						</div>
 						<!-- /.col -->
 					</div>
+					<input type="hidden" value="${mailmsg}" id="msg"/>
 				</form:form>
 
 				<!-- <div class="text-center text-dark">
@@ -187,11 +188,16 @@
 			}
 		});
 		
-		/* $("#pass").keyup(function(){
-			
-		}) */
+		$("document").ready(function(){
+			$("#subbtn").val("Submit");
+			var msg=$("#msg").val();
+			if(msg=="sent"){
+				swal("Link Sent", "An account verification link has been sent to your email id. You need to verify your email id before logging in", "Success");
+			}
+		})
 		
 		$("#subbtn").click(function(){
+			$("#subbtn").val("Sending Mail...");
 			$.ajax({
 				url : "${pageContext.request.contextPath}/userVerification",
 				method : "GET",
@@ -201,11 +207,15 @@
 				},
 				success : function(msg){
 					if(msg=="sent"){
-						swal("Link Sent", "An account verification link has been sent to your email id. You need to verify your email id before logging in", "Success");
+						$("#subbtn").submit();
+					}
+					else if(msg=="notsent"){
+						swal("Error", "Could not send email. Please check your email id or contact us for support.", "error");
+						$("#subbtn").val("Submit");
 					}
 				}
 			});
-			$("#regform").submit();
+			
 		})
 	</script>
 

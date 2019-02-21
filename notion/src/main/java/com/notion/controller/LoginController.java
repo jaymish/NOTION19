@@ -57,7 +57,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.GET)
-	public ModelAndView loadLogin(@RequestParam(value="error",required=false)String error) throws IOException
+	public ModelAndView loadLogin(@RequestParam(value="error",required=false)String error)
 	{
 		return new ModelAndView("login","errormsg",error);
 	}
@@ -155,12 +155,19 @@ public class LoginController {
 	public void sendVerifyLink(HttpServletResponse response,@RequestParam("username") String email,@RequestParam("firstname") String name) throws IOException
 	{
 		PrintWriter out=response.getWriter();
-		this.emailService.sendVerificationLink(email, name);
-		out.print("sent");
+		String msg=this.emailService.sendVerificationLink(email, name);
+		if(msg=="sent")
+		{
+			out.print("sent");
+		}
+		else
+		{
+			out.print("notsent");
+		}
 	}
 	
-	@RequestMapping(value="insertRegData",method=RequestMethod.POST)
-	public ModelAndView insertRegData(@ModelAttribute RegVO regVO,LoginVO loginVO1)
+	@RequestMapping(value="/insertRegData",method=RequestMethod.POST)
+	public String insertRegData(@ModelAttribute RegVO regVO,LoginVO loginVO1)
 	{
 		loginVO1.setUsername(regVO.getLoginVO().getUsername());
 		String passwordHash=this.qrService.createMd5(regVO.getLoginVO().getPassword());
@@ -173,7 +180,7 @@ public class LoginController {
 		regVO.setProfileStatus("empty");
 		this.regService.insertToRegister(regVO);
 		
-		return new ModelAndView("redirect:/login");
+		return "redirect:/signup?mail=sent";
 	}
 	
 	@RequestMapping(value="verifyUser",method=RequestMethod.GET)

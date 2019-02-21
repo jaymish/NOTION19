@@ -126,7 +126,7 @@ public class EmailService {
         Transport.send(msg);
 	}
 	 
-	 public void sendVerificationLink(String email, String name)
+	 public String sendVerificationLink(String email, String name)
 	 {
 		// SMTP info
 	        String host = "smtp.gmail.com";
@@ -144,10 +144,12 @@ public class EmailService {
 	        try {
 	            sendEmail(host, port, mailFrom, password, mailTo,
 	                subject, message);
-	            System.out.println("Email sent.");
+	            System.out.println("Email Sent");
+	            return "sent";
 	        } catch (Exception ex) {
-	            System.out.println("Could not send email.");
-	            ex.printStackTrace();
+	        	System.out.println("Email not Sent");
+	        	ex.printStackTrace();
+	            return "notsent";
 	        }
 	 }
 	
