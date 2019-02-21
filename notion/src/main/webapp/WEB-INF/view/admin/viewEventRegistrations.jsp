@@ -14,7 +14,8 @@
 <title>Notion Admin - Event Registrations</title>
 
 <!-- Bootstrap 4.0-->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap.css">
+<%-- <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap.css"> --%>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <!-- Bootstrap extend-->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap-extend.css">
@@ -134,7 +135,7 @@
 												style="width: 100%">
 												<thead>
 													<tr>
-														<th colspan="6">Information</th>
+														<th colspan="7">Information</th>
 													</tr>
 													<tr>
 														<th>Event</th>
@@ -143,6 +144,7 @@
 														<th>Member 2</th>
 														<th>Member 3</th>
 														<th>Member 4</th>
+														<th>Member 5</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -154,6 +156,7 @@
 															<td>${i.teamMember2}</td>
 															<td>${i.teamMember3}</td>
 															<td>${i.teamMember4}</td>
+															<td>${i.teamMember5}</td>
 														</tr>
 													</c:forEach>
 												</tbody>
@@ -165,6 +168,7 @@
 														<th>Member 2</th>
 														<th>Member 3</th>
 														<th>Member 4</th>
+														<th>Member 5</th>
 													</tr>
 												</tfoot>
 											</table>
@@ -172,6 +176,58 @@
 									</div>
 								</div>
 							</div>
+							
+							<div class="col-12">
+								<div class="box">
+									<div class="box-header">
+										<h4 class="box-title">Payment Pending</h4>
+									</div>
+									<div class="box-body">
+										<div class="table-responsive">
+											<table id="example6"
+												class="table table-bordered table-hover display nowrap margin-top-10 w-p100"
+												style="width: 100%">
+												<thead>
+													<tr>
+														<th colspan="6">Information</th>
+													</tr>
+													<tr>
+														<th>Event</th>
+														<th>Name</th>
+														<th>Enrollment</th>
+														<th>Semester</th>
+														<th>Institute</th>
+														<th>Contact</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach items="${paymentPending}" var="i">
+														<tr>
+															<td>${i.eventVO1.eventName}</td>
+															<td>${i.userProfileVO.regVO.firstname} ${i.userProfileVO.regVO.lastname}</td>
+															<th>${i.userProfileVO.enrollment}</th>
+															<td>${i.userProfileVO.semester}</td>
+															<td>${i.userProfileVO.instituteVO.instituteName}</td>
+															<td>${i.userProfileVO.contact}</td>
+														</tr>
+													</c:forEach>
+												</tbody>
+												<tfoot>
+													<tr>
+														<th>Event</th>
+														<th>Name</th>
+														<th>Enrollment</th>
+														<th>Semester</th>
+														<th>Institute</th>
+														<th>Contact</th>
+													</tr>
+												</tfoot>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							
 						</div>
 						<!-- /.row -->
 				</section>
@@ -189,13 +245,12 @@
 	<!-- ./wrapper -->
 
 	<!-- jQuery 3 -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script>
-
-	<!-- popper -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/popper.min.js"></script>
+	<%-- <script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script> --%>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 	<!-- Bootstrap 4.0-->
-	<script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script>
+	<%-- <script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script> --%>	
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 	<!-- Slimscroll -->
 	<script src="<%=request.getContextPath() %>/adminResources/js/jquery.slimscroll.js"></script>

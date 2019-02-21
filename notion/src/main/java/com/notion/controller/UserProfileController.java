@@ -109,6 +109,7 @@ public class UserProfileController {
 		List<UserProfileVO> allUsersLs=this.userProfileService.getUserProfile();
 		List<UserProfileVO> activeUsersLs=new ArrayList<UserProfileVO>();
 		List<UserProfileVO> blockedUsersLs=new ArrayList<UserProfileVO>();
+		List<UserProfileVO> noEventsSelectedLs=this.userProfileService.noEventsSelected();
 		
 		for(UserProfileVO user : allUsersLs)
 		{
@@ -121,6 +122,6 @@ public class UserProfileController {
 				blockedUsersLs.add(user);
 			}
 		}
-		return new ModelAndView("/admin/viewRegisteredUsers","activeUsers",activeUsersLs).addObject("blockedUsers", blockedUsersLs);
+		return new ModelAndView("/admin/viewRegisteredUsers","activeUsers",activeUsersLs).addObject("blockedUsers", blockedUsersLs).addObject("noEventsSelected", noEventsSelectedLs);
 	}
 }

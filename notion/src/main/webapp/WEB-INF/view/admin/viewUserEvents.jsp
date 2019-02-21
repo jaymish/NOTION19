@@ -14,7 +14,8 @@
 <title>Notion Admin - View Selected Events</title>
 
 <!-- Bootstrap 4.0-->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap.css">
+<%-- <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap.css"> --%>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <!-- Bootstrap extend-->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap-extend.css">
@@ -28,6 +29,9 @@
 <!-- Data Table-->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/adminResources/datatables.min.css" />
 
+<!--alerts CSS -->
+<link href="<%=request.getContextPath() %>/adminResources/css/sweetalert.css" rel="stylesheet" type="text/css">
+
 <script>
 	function removeSel(id)
 	{
@@ -39,16 +43,16 @@
 		htp.open("GET", "removeSelectedEvent?selectedEventId=" + id, true)
 		htp.send();
 	}
-	function removeReg(id)
+	function removeReg(id,amount)
 	{
 		id=parseInt(id)
 		var htp = new XMLHttpRequest();
 		htp.onreadystatechange = function() {
 			location.reload(true);
 		}
-		htp.open("GET", "removeSelectedEvent?selectedEventId=" + id, true)
+		htp.open("GET", "removeRegisteredEvent?selectedEventId="+id+"&amount="+amount, true)
 		htp.send();
-		alert("Complete Refund First!!");
+		swal("Warning","Complete Refund First!!","warning");
 	}
 </script>	
 	
@@ -174,7 +178,7 @@
 															<td>${i.eventVO1.eventType}</td>
 															<td>${i.eventVO1.eventPrice}</td>
 															<td style="color:green">${i.paymentStatus}</td>
-															<td><input type="button" class="btn btn-danger" value="X Remove" onclick="removeReg(${i.userEventId})"/></td>
+															<td><input type="button" class="btn btn-danger" value="X Remove" onclick="removeReg(${i.userEventId},${totalPaid})"/></td>
 														</tr>
 													</c:forEach>
 												</tbody>
@@ -205,13 +209,12 @@
 	<!-- ./wrapper -->
 
 	<!-- jQuery 3 -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script>
-
-	<!-- popper -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/popper.min.js"></script>
+	<%-- <script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script> --%>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 	<!-- Bootstrap 4.0-->
-	<script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script>
+	<%-- <script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script> --%>	
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 	<!-- Slimscroll -->
 	<script src="<%=request.getContextPath() %>/adminResources/js/jquery.slimscroll.js"></script>
@@ -234,6 +237,9 @@
 	<!-- Form validator JavaScript -->
 	<script src="<%=request.getContextPath() %>/adminResources/js/validation.js"></script>
 	<script src="<%=request.getContextPath() %>/adminResources/js/form-validation.js"></script>
+	
+	<!-- Sweet-Alert  -->
+    <script src="<%=request.getContextPath() %>/adminResources/js/sweetalert.min.js"></script>
 
 </body>
 </html>

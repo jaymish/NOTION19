@@ -43,6 +43,13 @@ public class UserProfileService {
 	}
 	
 	@Transactional
+	public List<UserProfileVO> noEventsSelected(){
+		List<UserProfileVO> eventsNotSelectedList=new ArrayList<UserProfileVO>();
+		eventsNotSelectedList=this.userProfileDAO.noEventsSelected();
+		return eventsNotSelectedList;
+	}
+	
+	@Transactional
 	public List<UserProfileVO> pendingPayers(){
 		List<UserProfileVO> pendingPayersList=new ArrayList<UserProfileVO>();
 		pendingPayersList=this.userProfileDAO.pendingPayers();

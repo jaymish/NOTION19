@@ -14,7 +14,8 @@
 <title>Notion Admin - Team Events Presence</title>
 
 <!-- Bootstrap 4.0-->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap.css">
+<%-- <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap.css"> --%>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <!-- Bootstrap extend-->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap-extend.css">
@@ -83,7 +84,7 @@
 												style="width: 100%">
 												<thead>
 													<tr>
-														<th colspan="7">Information</th>
+														<th colspan="8">Information</th>
 													</tr>
 													<tr>
 														<th>Event</th>
@@ -93,6 +94,7 @@
 														<th>Member 2</th>
 														<th>Member 3</th>
 														<th>Member 4</th>
+														<th>Member 5</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -105,6 +107,7 @@
 															<td>${i.teamMember2}</td>
 															<td>${i.teamMember3}</td>
 															<td>${i.teamMember4}</td>
+															<td>${i.teamMember5}</td>
 														</tr>
 													</c:forEach>
 												</tbody>
@@ -117,6 +120,7 @@
 														<th>Member 2</th>
 														<th>Member 3</th>
 														<th>Member 4</th>
+														<th>Member 5</th>
 													</tr>
 												</tfoot>
 											</table>
@@ -141,13 +145,12 @@
 	<!-- ./wrapper -->
 
 	<!-- jQuery 3 -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script>
-
-	<!-- popper -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/popper.min.js"></script>
+	<%-- <script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script> --%>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 	<!-- Bootstrap 4.0-->
-	<script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script>
+	<%-- <script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script> --%>	
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 	<!-- Slimscroll -->
 	<script src="<%=request.getContextPath() %>/adminResources/js/jquery.slimscroll.js"></script>

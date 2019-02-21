@@ -24,10 +24,10 @@ public class InstituteController {
 	}
 	
 	@RequestMapping(value="/admin/insertInstitute",method=RequestMethod.POST)
-	public ModelAndView insertState(@ModelAttribute InstituteVO instituteVO)
+	public String insertInstitute(@ModelAttribute InstituteVO instituteVO)
 	{
 		this.instituteService.insertInstitute(instituteVO);
-		return new ModelAndView("redirect:/admin/viewInstitutes");
+		return "redirect:/admin/addInstitute";
 	}
 	
 	@RequestMapping(value="/admin/viewInstitutes",method=RequestMethod.GET)

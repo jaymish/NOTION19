@@ -14,7 +14,8 @@
 <title>Notion Admin - All Users</title>
 
 <!-- Bootstrap 4.0-->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap.css">
+<%-- <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap.css"> --%>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <!-- Bootstrap extend-->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/adminResources/css/bootstrap-extend.css">
@@ -71,6 +72,59 @@
 				<!-- Main content -->
 				<section class="content">
 						<div class="row">
+							
+							<div class="col-12">
+								<div class="box">
+									<div class="box-header">
+										<h4 class="box-title">List of Users who did not select any Event</h4>
+									</div>
+									<div class="box-body">
+										<div class="table-responsive">
+											<table id="example6"
+												class="table table-bordered table-hover display nowrap margin-top-10 w-p100"
+												style="width: 100%">
+												<thead>
+													<tr>
+														<th colspan="5">Information</th>
+														<th colspan="1">Action</th>
+													</tr>
+													<tr>
+														<th>Name</th>
+														<th>Email</th>
+														<th>Enrollment</th>
+														<th>Sem</th>
+														<th>Contact</th>
+														<th>Block</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach items="${noEventsSelected}" var="i">
+														<tr>
+															<td>${i.regVO.firstname} ${i.regVO.lastname}</td>
+															<th>${i.regVO.loginVO.username}</th>
+															<td>${i.enrollment}</td>
+															<td>${i.semester}</td>
+															<td>${i.contact}</td>
+															<td><a href="blockUser?selectedUser=${i.regVO.loginVO.username}"><input type="button" class="btn btn-warning" value="Block"/></a></td>
+														</tr>
+													</c:forEach>
+												</tbody>
+												<tfoot>
+													<tr>
+														<th>Name</th>
+														<th>Email</th>
+														<th>Enrollment</th>
+														<th>Sem</th>
+														<th>Contact</th>
+														<th>Block</th>
+													</tr>
+												</tfoot>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							
 							<div class="col-12">
 								<div class="box">
 									<div class="box-header">
@@ -191,13 +245,12 @@
 	<!-- ./wrapper -->
 
 	<!-- jQuery 3 -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script>
-
-	<!-- popper -->
-	<script src="<%=request.getContextPath() %>/adminResources/js/popper.min.js"></script>
+	<%-- <script src="<%=request.getContextPath() %>/adminResources/js/jquery-3.3.1.js"></script> --%>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 	<!-- Bootstrap 4.0-->
-	<script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script>
+	<%-- <script src="<%=request.getContextPath() %>/adminResources/js/bootstrap.js"></script> --%>	
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 	<!-- Slimscroll -->
 	<script src="<%=request.getContextPath() %>/adminResources/js/jquery.slimscroll.js"></script>

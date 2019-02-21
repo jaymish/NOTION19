@@ -58,7 +58,7 @@
   						<p><strong>Note:</strong> This QR will be activated after you select and complete payment of at least 1 event.</p>
 					</div>
 					<div>
-						<h5><a href="selectEvents">CLICK HERE</a> to select events</h5>
+						<h5><a href="selectEvents"><input type="button" class="btn btn-primary" value="CLICK HERE"/></a> to select events</h5>
 					</div>
 				</section>
 				<!-- /.content -->

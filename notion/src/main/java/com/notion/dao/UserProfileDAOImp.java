@@ -110,6 +110,30 @@ public class UserProfileDAOImp implements UserProfileDAO {
 		return profileData;
 	}
 	
+	public List<UserProfileVO> noEventsSelected()
+	{
+		List<UserProfileVO> eventsNotSelectedList=new ArrayList<UserProfileVO>();
+		try
+		{
+			Session session=sessionFactory.openSession();
+			 
+			Transaction transaction=session.beginTransaction();
+			
+			Query q=session.createQuery("from UserProfileVO where profileId NOT IN(select userProfileVO.profileId from UserEventsVO)");
+			
+			eventsNotSelectedList=q.list();
+			
+			transaction.commit();
+			 
+			session.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return eventsNotSelectedList;
+	}
+	
 	public List<UserProfileVO> pendingPayers()
 	{
 		List<UserProfileVO> pendingPayersList=new ArrayList<UserProfileVO>();

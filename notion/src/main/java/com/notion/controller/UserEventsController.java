@@ -175,10 +175,32 @@ public class UserEventsController {
 		this.userEventsService.removeUserEvent(userEventsVO5);
 	}
 	
+	@RequestMapping(value="/admin/removeRegisteredEvent",method=RequestMethod.GET)
+	public void removeRegisteredEvent(HttpServletRequest request,@RequestParam("selectedEventId") int selectedEventId,@RequestParam("amount") int amount,UserEventsVO userEventsVO6,CollectorVO collectorVO)
+	{
+		userEventsVO6.setUserEventId(selectedEventId);
+		this.userEventsService.removeUserEvent(userEventsVO6);
+		
+		session=request.getSession();
+		UserProfileVO userProfileVO6=(UserProfileVO)session.getAttribute("userProfile");
+		this.userEventsService.collectPayment(userProfileVO6);
+		
+		String collectorUsername=(String)session.getAttribute("adminMail");
+		Date date=new Date();
+		String collectiontime=date.toString();
+		amount = -amount;
+		
+		collectorVO.setCollectorUsername(collectorUsername);
+		collectorVO.setTotalAmount(amount);
+		collectorVO.setTime(collectiontime);
+		this.collectorService.insertCollection(collectorVO);
+	}
+	
 	@RequestMapping(value="/admin/registeredEvents",method=RequestMethod.GET)
 	public ModelAndView viewEventRegistrations()
 	{
 		List<UserEventsVO> registeredEventsLs=this.userEventsService.paymentComplete();
+		List<UserEventsVO> selectedEventsLs=this.userEventsService.paymentPending();
 		List<UserEventsVO> teamMembersLs=new ArrayList<UserEventsVO>();
 		
 		for(UserEventsVO regEvent : registeredEventsLs)
@@ -189,7 +211,7 @@ public class UserEventsController {
 			}
 		}
 		
-		return new ModelAndView("/admin/viewEventRegistrations","paymentComplete",registeredEventsLs).addObject("teamMembersLs", teamMembersLs);
+		return new ModelAndView("/admin/viewEventRegistrations","paymentComplete",registeredEventsLs).addObject("teamMembersLs", teamMembersLs).addObject("paymentPending", selectedEventsLs);
 	}
 	
 	@RequestMapping(value="/admin/viewUserEvents",method=RequestMethod.GET)

@@ -9,5 +9,6 @@ public interface UserProfileDAO {
 	public List<UserProfileVO> getUserProfile();
 	public List<UserProfileVO> getUserProfileByReg(UserProfileVO userProfileVO1);
 	public List<UserProfileVO> getUserProfileById(UserProfileVO userProfileVO2);
+	public List<UserProfileVO> noEventsSelected();
 	public List<UserProfileVO> pendingPayers();
 }
