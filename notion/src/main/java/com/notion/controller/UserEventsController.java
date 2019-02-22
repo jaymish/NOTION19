@@ -191,6 +191,8 @@ public class UserEventsController {
 		amount = -amount;
 		
 		collectorVO.setCollectorUsername(collectorUsername);
+		String nameOfUser = userProfileVO6.getRegVO().getFirstname()+" "+userProfileVO6.getRegVO().getLastname();
+		collectorVO.setNameOfUser(nameOfUser);
 		collectorVO.setTotalAmount(amount);
 		collectorVO.setTime(collectiontime);
 		this.collectorService.insertCollection(collectorVO);
@@ -265,6 +267,8 @@ public class UserEventsController {
 		String collectiontime=date.toString();
 		
 		collectorVO.setCollectorUsername(collectorUsername);
+		String nameOfUser = userProfileVO5.getRegVO().getFirstname()+" "+userProfileVO5.getRegVO().getLastname();
+		collectorVO.setNameOfUser(nameOfUser);
 		collectorVO.setTotalAmount(amount);
 		collectorVO.setTime(collectiontime);
 		this.collectorService.insertCollection(collectorVO);

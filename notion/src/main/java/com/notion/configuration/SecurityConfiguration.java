@@ -58,7 +58,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         http.authorizeRequests().antMatchers("/user/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
         
         //For Payment Collector
-        http.authorizeRequests().antMatchers("/admin/collector", "/admin/payments", "/admin/viewUserEvents", "/admin/removeSelectedEvent", "/admin/collectPayment", "/admin/logout").access("hasAnyRole('ROLE_COLLECTOR', 'ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/admin/collector", "/admin/payments", "/admin/viewUserEvents", "/admin/removeSelectedEvent", "/admin/collectPayment", "/admin/removeRegisteredEvent", "/admin/logout").access("hasAnyRole('ROLE_COLLECTOR', 'ROLE_ADMIN')");
  
         // For ADMIN only.
         http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");

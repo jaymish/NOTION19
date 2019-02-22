@@ -140,8 +140,8 @@
 				</div>
 
 			</div>
+			<div><font color="red">* Check your email after submitting for account verification mail. If you don't receive email within 10 minutes contact us at notion@ljinstitutes.edu.in</font></div>
 		</div>
-
 	</div>
 
 
@@ -176,9 +176,9 @@
 							$("#email").val("");
 							$("#email").focus();
 						}
-						else{
+						/* else{
 							swal("Notice","An email for verification will be sent to this email id, You won't be able to sign in until verification is complete","warning");
-						}
+						} */
 					}
 				});
 			}

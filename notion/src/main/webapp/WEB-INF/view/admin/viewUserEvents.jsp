@@ -178,7 +178,7 @@
 															<td>${i.eventVO1.eventType}</td>
 															<td>${i.eventVO1.eventPrice}</td>
 															<td style="color:green">${i.paymentStatus}</td>
-															<td><input type="button" class="btn btn-danger" value="X Remove" onclick="removeReg(${i.userEventId},${totalPaid})"/></td>
+															<td><input type="button" class="btn btn-danger" value="X Remove" onclick="removeReg(${i.userEventId},${i.eventVO1.eventPrice})"/></td>
 														</tr>
 													</c:forEach>
 												</tbody>

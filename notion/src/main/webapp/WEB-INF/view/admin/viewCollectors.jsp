@@ -84,10 +84,11 @@
 												style="width: 100%">
 												<thead>
 													<tr>
-														<th colspan="3">Information</th>
+														<th colspan="4">Information</th>
 													</tr>
 													<tr>
-														<th>Username</th>
+														<th>Collector</th>
+														<th>Name</th>
 														<th>Time</th>
 														<th>Amount</th>
 													</tr>
@@ -96,6 +97,7 @@
 													<c:forEach items="${collectorLs}" var="i">
 														<tr>
 															<td>${i.collectorUsername}</td>
+															<td>${i.nameOfUser}</td>
 															<td>${i.time}</td>
 															<th>${i.totalAmount}</th>
 														</tr>

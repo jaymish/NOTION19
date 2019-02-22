@@ -15,6 +15,9 @@ public class CollectorVO {
 	private String collectorUsername;
 	
 	@Column
+	private String nameOfUser;
+	
+	@Column
 	private int totalAmount;
 	
 	@Column
@@ -34,6 +37,14 @@ public class CollectorVO {
 
 	public void setCollectorUsername(String collectorUsername) {
 		this.collectorUsername = collectorUsername;
+	}
+
+	public String getNameOfUser() {
+		return nameOfUser;
+	}
+
+	public void setNameOfUser(String nameOfUser) {
+		this.nameOfUser = nameOfUser;
 	}
 
 	public int getTotalAmount() {
