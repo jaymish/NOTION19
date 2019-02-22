@@ -60,4 +60,28 @@ public class RegDAOImp implements RegDAO {
 		}
 		return regList;
 	}
+	
+	public List<RegVO> unverifiedUsers()
+	{
+		List<RegVO> unverifiedUsersList=new ArrayList<RegVO>();
+		try
+		{
+			Session session=sessionFactory.openSession();
+			 
+			 Transaction transaction=session.beginTransaction();
+			 
+			 Query q=session.createQuery("from RegVO where loginVO.username in(select username from LoginVO where enabled='0')");
+			 
+			 unverifiedUsersList=q.list();
+			 
+			 transaction.commit();
+			 
+			 session.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return unverifiedUsersList;
+	}
 }

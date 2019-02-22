@@ -27,4 +27,11 @@ public class RegService {
 		getDetails=this.regDAO.getRegDetails(regVO1);
 		return getDetails;
 	}
+	
+	@Transactional
+	public List<RegVO> unverifiedUsers(){
+		List<RegVO> unverifiedUsersList=new ArrayList<RegVO>();
+		unverifiedUsersList=this.regDAO.unverifiedUsers();
+		return unverifiedUsersList;
+	}
 }

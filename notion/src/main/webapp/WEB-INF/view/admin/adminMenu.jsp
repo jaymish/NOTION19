@@ -72,4 +72,10 @@
 			<li><a href="viewPresence?type=team"><i class="ti-more"></i>Team Events</a></li>
 		</ul>
 	</li>
+	<li>
+		<a href="unverified">
+			<i class="ti-files"></i>
+			<span>Unverified Users</span> 
+		</a>
+	</li>
 </ul>
