@@ -105,7 +105,7 @@
 												</tbody>
 												<tfoot>
 													<tr>
-														<th colspan="2">Total Collection</th>
+														<th colspan="3">Total Collection</th>
 														<th>${totalCollection}</th>
 													</tr>
 												</tfoot>
