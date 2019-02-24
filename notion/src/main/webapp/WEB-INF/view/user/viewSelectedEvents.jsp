@@ -125,7 +125,7 @@
 							<div style="margin:0 0 30px 15px">
 								<a href="selectEvents"><input type="button" class="btn btn-primary" value="+ Add More"/></a>
 								<input type="button" style="margin:0 0 0 15px" class="btn btn-primary" value="Pay Offline" id="payoffline"/>
-								<a href="payonline?txn_amount=${totalPending}"><input type="button" style="margin:0 0 0 15px" class="btn btn-primary" value="Pay Online" id="payonline"/></a>
+								<a href="payonline?txn_amount=${totalPending}"><input type="button" style="margin:0 0 0 15px" class="btn btn-primary" value="Pay Online"/></a>
 							</div>
 							<div class="col-12">
 								<div class="box">
@@ -226,9 +226,9 @@
 		$("#payoffline").click(function(){
 			swal("Submitted","Pay total amount at desk near room 109 in break or after 1:30 to confirm participation","success");
 		})
-		$("#payonline").click(function(){
+		/* $("#payonline").click(function(){
 			swal("Under Construction","Online payment is not available yet. Please pay offline");
-		})
+		}) */
 	</script>
 
 </body>
