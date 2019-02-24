@@ -125,7 +125,7 @@
 							<div style="margin:0 0 30px 15px">
 								<a href="selectEvents"><input type="button" class="btn btn-primary" value="+ Add More"/></a>
 								<input type="button" style="margin:0 0 0 15px" class="btn btn-primary" value="Pay Offline" id="payoffline"/>
-								<input type="button" style="margin:0 0 0 15px" class="btn btn-primary" value="Pay Online" id="payonline"/>
+								<a href="payonline?txn_amount=${totalPending}"><input type="button" style="margin:0 0 0 15px" class="btn btn-primary" value="Pay Online" id="payonline"/></a>
 							</div>
 							<div class="col-12">
 								<div class="box">

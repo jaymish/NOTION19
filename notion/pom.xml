@@ -56,7 +56,15 @@
 		    <groupId>javax.mail</groupId>
 		    <artifactId>mail</artifactId>
 		    <version>1.4</version>
-		</dependency>	
+		</dependency>
+		<dependency>
+		    <groupId>com.paytm.pg</groupId>
+		    <artifactId>merchant</artifactId>
+		    <version>2.0.0</version>
+		    <scope>system</scope>
+		    <systemPath>D:\My Documents\gitRepository\notion\notion\notion\lib\checksum_2.0.0.jar</systemPath>
+		</dependency>
+			
 	</dependencies>
 	
 	<build>
