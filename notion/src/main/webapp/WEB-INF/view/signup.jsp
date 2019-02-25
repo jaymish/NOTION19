@@ -188,7 +188,7 @@
 			}
 		});
 		
-		$("document").ready(function(){
+		$(document).ready(function(){
 			$("#subbtn").val("Submit");
 			var msg=$("#msg").val();
 			if(msg=="sent"){

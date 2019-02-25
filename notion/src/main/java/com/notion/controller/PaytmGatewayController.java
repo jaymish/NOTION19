@@ -1,6 +1,7 @@
 package com.notion.controller;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
@@ -14,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.notion.model.CollectorVO;
 import com.notion.model.UserProfileVO;
-import com.notion.service.QRService;
-import com.notion.service.UserProfileService;
+import com.notion.service.*;
 import com.paytm.pg.merchant.CheckSumServiceHelper;
 
 @Controller
@@ -24,6 +25,12 @@ public class PaytmGatewayController {
 	
 	@Autowired
 	UserProfileService userProfileService;
+	
+	@Autowired
+	UserEventsService userEventsService;
+	
+	@Autowired
+	CollectorService collectorService;
 	
 	@Autowired
 	QRService qrService;
@@ -56,7 +63,7 @@ public class PaytmGatewayController {
 		// This is the staging value. Production value is available in your dashboard
 		String industryTypeId = "Retail";
 		// This is the staging value. Production value is available in your dashboard
-		String callbackUrl = "http://notion.ljinstitutes.org/";
+		String callbackUrl = "http://192.168.43.210:9090/user/paytmResponse/";
 		ModelAndView modelAndView = new ModelAndView("redirect:https://securegw-stage.paytm.in/theia/processTransaction");
 		TreeMap<String, String> paytmParams = new TreeMap<String, String>();
 		paytmParams.put("MID",merchantMid);
@@ -75,8 +82,8 @@ public class PaytmGatewayController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="http://192.168.29.221:9090/paytmResponse",method=RequestMethod.POST)
-	public String paytmResponse(HttpServletRequest request) throws Exception
+	@RequestMapping(value="/user/paytmResponse",method=RequestMethod.POST)
+	public String paytmResponse(HttpServletRequest request,UserProfileVO userProfileVO,CollectorVO collectorVO) throws Exception
 	{
 		final String merchantKey = "ZZx#w@SvQQEISJJw";
 		String paytmChecksum = null;
@@ -94,10 +101,27 @@ public class PaytmGatewayController {
 		boolean isValidChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().verifycheckSum(merchantKey, paytmParams, paytmChecksum);
 		// If isValidChecksum is false, then checksum is not valid
 		if(isValidChecksum){
-			System.out.append("Checksum Matched");
+			System.out.println("Checksum Matched");
+			session = request.getSession();
+			userProfileVO = (UserProfileVO)session.getAttribute("profileDetails");
+			 this.userEventsService.collectPayment(userProfileVO);
+			
+			String txn_date=paytmParams.get("TXNDATE");
+			System.out.println(paytmParams.get("TXNAMOUNT"));
+			int amount=(int)Float.parseFloat(paytmParams.get("TXNAMOUNT"));
+			System.out.println(amount);
+			List<UserProfileVO> profileData=this.userProfileService.getUserProfileById(userProfileVO);
+			String nameOfUser=profileData.get(0).getRegVO().getFirstname()+" "+profileData.get(0).getRegVO().getLastname();
+			collectorVO.setCollectorUsername("PayTM");
+			collectorVO.setNameOfUser(nameOfUser);
+			collectorVO.setTotalAmount(amount);
+			collectorVO.setTime(txn_date);
+			this.collectorService.insertCollection(collectorVO);
+			
+			return "redirect:/user/viewEvents?payment=received";
 		}else{
-			System.out.append("Checksum MisMatch");
+			System.out.println("Checksum MisMatch");
+			return "redirect:/user/viewEvents?payment=notreceived";
 		}
-		return "redirect:/login";
 	}
 }

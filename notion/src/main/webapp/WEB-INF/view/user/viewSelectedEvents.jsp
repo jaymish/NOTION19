@@ -170,6 +170,7 @@
 								</div>
 							</div>
 						</div>
+						<input type="text" value="${payment}" id="paymsg">
 						<!-- /.row -->
 				</section>
 				<!-- /.content -->
@@ -223,6 +224,12 @@
     <script src="<%=request.getContextPath() %>/adminResources/js/sweetalert.min.js"></script>
 	
 	<script>
+		$(document).on('load',function(){
+			var msg=$("#paymsg").val();
+			if(msg=="received"){
+				swal("Recieved","Payment received successfully","Success");
+			}
+		})
 		$("#payoffline").click(function(){
 			swal("Submitted","Pay total amount at desk near room 109 in break or after 1:30 to confirm participation","success");
 		})

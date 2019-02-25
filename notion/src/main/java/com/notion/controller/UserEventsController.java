@@ -122,7 +122,7 @@ public class UserEventsController {
 	}
 	
 	@RequestMapping(value="/user/viewEvents",method=RequestMethod.GET)
-	public ModelAndView viewSelectedEvents(HttpServletRequest request,UserEventsVO userEventsVO3,UserProfileVO userProfileVO3)
+	public ModelAndView viewSelectedEvents(HttpServletRequest request,UserEventsVO userEventsVO3,UserProfileVO userProfileVO3,@RequestParam(value="payment",required=false)String payment)
 	{
 		session=request.getSession();
 		userProfileVO3=(UserProfileVO)session.getAttribute("profileDetails");
@@ -154,7 +154,7 @@ public class UserEventsController {
 			totalPaid+=calcTotalPaid.getEventVO1().getEventPrice();
 		}
 		
-		return new ModelAndView("/user/viewSelectedEvents","selectedEventsLs",pendingPaymentsLs).addObject("totalPending", totalPending).addObject("registeredEventsLs", completedPaymentsLs).addObject("totalPaid", totalPaid);
+		return new ModelAndView("/user/viewSelectedEvents","selectedEventsLs",pendingPaymentsLs).addObject("totalPending", totalPending).addObject("registeredEventsLs", completedPaymentsLs).addObject("totalPaid", totalPaid).addObject("payment",payment);
 	}
 	
 	@RequestMapping(value="/user/removeSelectedEvent",method=RequestMethod.GET)
