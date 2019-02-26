@@ -75,6 +75,7 @@
 				</div>
 
 				<!-- Main content -->
+				<input type="hidden" value="${payment}" id="paymsg">
 				<section class="content">
 						<div class="row">
 							<div class="col-12">
@@ -170,7 +171,6 @@
 								</div>
 							</div>
 						</div>
-						<input type="text" value="${payment}" id="paymsg">
 						<!-- /.row -->
 				</section>
 				<!-- /.content -->
@@ -224,7 +224,7 @@
     <script src="<%=request.getContextPath() %>/adminResources/js/sweetalert.min.js"></script>
 	
 	<script>
-		$(document).on('load',function(){
+		$(document).ready(function(){
 			var msg=$("#paymsg").val();
 			if(msg=="received"){
 				swal("Recieved","Payment received successfully","Success");

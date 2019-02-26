@@ -17,7 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.notion.model.CollectorVO;
 import com.notion.model.UserProfileVO;
-import com.notion.service.*;
+import com.notion.service.CollectorService;
+import com.notion.service.QRService;
+import com.notion.service.UserEventsService;
+import com.notion.service.UserProfileService;
 import com.paytm.pg.merchant.CheckSumServiceHelper;
 
 @Controller
@@ -63,7 +66,7 @@ public class PaytmGatewayController {
 		// This is the staging value. Production value is available in your dashboard
 		String industryTypeId = "Retail";
 		// This is the staging value. Production value is available in your dashboard
-		String callbackUrl = "http://192.168.43.210:9090/user/paytmResponse/";
+		String callbackUrl = "http://notion.ljinstitutes.org/notionpaytmtest/user/paytmResponse/";
 		ModelAndView modelAndView = new ModelAndView("redirect:https://securegw-stage.paytm.in/theia/processTransaction");
 		TreeMap<String, String> paytmParams = new TreeMap<String, String>();
 		paytmParams.put("MID",merchantMid);
