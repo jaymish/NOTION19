@@ -315,4 +315,29 @@ public class UserEventsController {
 			return new ModelAndView("/admin/viewTeamPresence","teamPresenceLs",teamPresence);
 		}
 	}
+	
+	@RequestMapping(value="/attendance",method=RequestMethod.POST)
+	public void markAttendance(@RequestParam("eventId") int eventId,@RequestParam("qr") String uniqueQR,UserEventsVO userEventsVO7,UserProfileVO userProfileVO6,EventVO eventVO2)
+	{
+		userProfileVO6.setUniqueQR(uniqueQR);
+		List<UserProfileVO> userProfilebyQR = new ArrayList<UserProfileVO>();
+		userProfilebyQR=this.userProfileService.getUserProfileByQR(userProfileVO6);
+		
+		eventVO2.setEventId(eventId);
+		List<EventVO> forEventId=new ArrayList<EventVO>();
+		forEventId=this.eventService.editEvent(eventVO2);
+		
+		userEventsVO7.setEventVO1(forEventId.get(0));
+		userEventsVO7.setUserProfileVO(userProfilebyQR.get(0));
+		int rows=this.userEventsService.markAttendance(userEventsVO7);
+		
+		if(rows==1)
+		{
+			System.out.println(rows+": Success");
+		}
+		else
+		{
+			System.out.println(rows+": Failure");
+		}
+	}
 }

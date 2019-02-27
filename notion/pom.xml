@@ -74,7 +74,7 @@
 	</dependencies>
 	
 	<build>
-		<finalName>notionpaytmtest</finalName>
+		<finalName>notion</finalName>
 	</build>
 
 </project>

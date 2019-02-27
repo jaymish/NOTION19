@@ -11,4 +11,5 @@ public interface UserProfileDAO {
 	public List<UserProfileVO> getUserProfileById(UserProfileVO userProfileVO2);
 	public List<UserProfileVO> noEventsSelected();
 	public List<UserProfileVO> pendingPayers();
+	public List<UserProfileVO> getUserProfileByQR(UserProfileVO userProfileVO3);
 }

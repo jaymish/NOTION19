@@ -170,4 +170,25 @@ public class UserEventsDAOImp implements UserEventsDAO{
 		}
 		return presentList;
 	}
+	public int markAttendance(UserEventsVO userEventsVO2)
+	{
+		int rows = 0;
+		try
+		{
+			Session session=sessionFactory.openSession();
+			 
+			Transaction transaction=session.beginTransaction();
+			
+			rows = session.createQuery("update UserEventsVO set attendance = 'present' where paymentStatus ='complete' and userProfileVO = '"+userEventsVO2.getUserProfileVO()+"' and eventVO1 = '"+userEventsVO2.getEventVO1()+"'").executeUpdate();
+			
+			transaction.commit();
+			 
+			session.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return rows;
+	}
 }

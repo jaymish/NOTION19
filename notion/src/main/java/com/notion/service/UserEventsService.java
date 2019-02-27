@@ -58,4 +58,10 @@ public class UserEventsService {
 		presentList=this.userEventsDAO.viewPresence();
 		return presentList;
 	}
+	
+	@Transactional
+	public int markAttendance(UserEventsVO userEventsVO2){
+		int rows=this.markAttendance(userEventsVO2);
+		return rows;
+	}
 }

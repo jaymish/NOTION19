@@ -157,4 +157,28 @@ public class UserProfileDAOImp implements UserProfileDAO {
 		}
 		return pendingPayersList;
 	}
+	
+	public List<UserProfileVO> getUserProfileByQR(UserProfileVO userProfileVO3)
+	{
+		List<UserProfileVO> userByQR = new ArrayList<UserProfileVO>();
+		try
+		{
+			Session session=sessionFactory.openSession();
+			 
+			Transaction transaction=session.beginTransaction();
+			
+			Query q=session.createQuery("from UserProfileVO where uniqueQR='"+userProfileVO3.getUniqueQR()+"'");
+			
+			userByQR=q.list();
+			
+			transaction.commit();
+			 
+			session.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return userByQR;
+	}
 }

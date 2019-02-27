@@ -55,4 +55,11 @@ public class UserProfileService {
 		pendingPayersList=this.userProfileDAO.pendingPayers();
 		return pendingPayersList;
 	}
+	
+	@Transactional
+	public List<UserProfileVO> getUserProfileByQR(UserProfileVO userProfileVO3){
+		List<UserProfileVO> userByQR = new ArrayList<UserProfileVO>();
+		userByQR=this.userProfileDAO.getUserProfileByQR(userProfileVO3);
+		return userByQR;
+	}
 }
