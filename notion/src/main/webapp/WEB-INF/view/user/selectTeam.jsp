@@ -153,6 +153,13 @@
 														placeholder="Enter Name(Firstname + Lastname)" />
 													</div>
 												</div>
+												<div class="form-group" id="member6" style="display:none">
+													<h5>Name of Member 6 </h5>
+													<div class="controls">
+														<form:input type="text" name="member 6" path="teamMember5" class="form-control"
+														placeholder="Enter Name(Firstname + Lastname)" />
+													</div>
+												</div>
 											</div>
 										</div>
 										<div class="text-xs-right">
