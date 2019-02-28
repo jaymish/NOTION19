@@ -227,7 +227,7 @@
 		$(document).ready(function(){
 			var msg=$("#paymsg").val();
 			if(msg=="received"){
-				swal("Recieved","Payment received successfully","Success");
+				swal("Recieved","Payment received successfully","success");
 			}
 		})
 		$("#payoffline").click(function(){
@@ -235,7 +235,7 @@
 		})
 		$("#payonline").click(function(){
 			swal("Under Construction","Online payment is not available yet. Please pay offline");
-		}
+		})
 	</script>
 
 </body>
